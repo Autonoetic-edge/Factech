@@ -28,12 +28,12 @@ export function createCameraOwner({ mediaDevices, video, onEnded, constraints })
 
   async function open() {
     if (live()) return;
-    if (!mediaDevices?.getUserMedia) throw Object.assign(new Error('no camera API'), { cameraError: 'nocamera' });
+    if (!mediaDevices?.getUserMedia) throw Object.assign(new Error('no camera API'), { cameraError: 'CAMERA_UNAVAILABLE' });
     let s;
     try {
       s = await mediaDevices.getUserMedia(constraints);
     } catch (e) {
-      throw Object.assign(new Error('camera failed'), { cameraError: DENIED.has(e?.name) ? 'denied' : 'nocamera' });
+      throw Object.assign(new Error('camera failed'), { cameraError: DENIED.has(e?.name) ? 'CAMERA_DENIED' : 'CAMERA_UNAVAILABLE' });
     }
     stream = s;
     for (const t of s.getTracks()) t.addEventListener('ended', ended);
@@ -51,7 +51,7 @@ export function createCameraOwner({ mediaDevices, video, onEnded, constraints })
   // Given to the SDK as env.getUserMedia. Hands over a clone of the open stream; if the
   // stream died in the meantime, opens a new one first (permission is already granted).
   async function handoff() {
-    if (!live()) { stream = null; await open().catch((e) => { throw Object.assign(new Error('camera'), { name: e.cameraError === 'denied' ? 'NotAllowedError' : 'NotFoundError' }); }); }
+    if (!live()) { stream = null; await open().catch((e) => { throw Object.assign(new Error('camera'), { name: e.cameraError === 'CAMERA_DENIED' ? 'NotAllowedError' : 'NotFoundError' }); }); }
     return stream.clone(); // the SDK stops the clone; the page's own tracks stay live
   }
 

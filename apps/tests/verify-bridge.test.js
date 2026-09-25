@@ -20,10 +20,11 @@ const VERIFIED = {
 };
 
 async function rig() {
-  const { CAMERA_CONSTRAINTS, createFaceSession } = await import("../../packages/face-sdk/src/index.ts");
+  const { CAMERA_CONSTRAINTS, createFaceSession, ERROR_CODES } = await import("../../packages/face-sdk/src/index.ts");
   const { testEnv } = await import("../../packages/face-sdk/tests/helpers.ts");
   const { createBridge, createCameraOwner } = await import("../verify/bridge.js");
-  const { classifyReply } = await import("../verify/outcome.js");
+  const { classifyReply, useErrorCodes } = await import("../verify/outcome.js");
+  useErrorCodes(ERROR_CODES); // as main.js does
   const { poseOf } = await import("../verify/cues.js");
 
   const t = testEnv();

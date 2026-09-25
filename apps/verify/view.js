@@ -69,10 +69,11 @@ const SINGLE_CADENCE_S = 0.5;
 // Everything behind the full-screen camera. Inert while it is up, so focus stays on it.
 const BEHIND = '.skip,.sidebar,.topbar,.page-heading,.experience-top,#screen,#steps,.under-card,.footer';
 
+// Keyed by the SDK's shared camera codes (ERROR_CODES stage 'camera').
 const CAMERA_NOTICE = {
-  denied: 'Camera access is off. Allow the camera for this site in your browser settings, then try again. On iPhone: Settings > Safari > Camera. No check has started.',
-  nocamera: 'We could not open a camera. Close other apps or tabs that may be using it, check that one is connected, then try again.',
-  cameralost: 'The camera stopped before the check was sent. Nothing was submitted. Enable it again when you are ready.',
+  CAMERA_DENIED: 'Camera access is off. Allow the camera for this site in your browser settings, then try again. On iPhone: Settings > Safari > Camera. No check has started.',
+  CAMERA_UNAVAILABLE: 'We could not open a camera. Close other apps or tabs that may be using it, check that one is connected, then try again.',
+  CAMERA_ENDED: 'The camera stopped before the check was sent. Nothing was submitted. Enable it again when you are ready.',
 };
 
 // outcome -> [title, lead, button]

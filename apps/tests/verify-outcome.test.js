@@ -5,7 +5,12 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
-const load = () => import("../verify/outcome.js");
+const load = async () => {
+  const mod = await import("../verify/outcome.js");
+  const { ERROR_CODES } = await import("../../packages/face-sdk/src/index.ts");
+  mod.useErrorCodes(ERROR_CODES); // as main.js does, from /sdk/index.js
+  return mod;
+};
 const refused = (classifyReply, message, error = "LIVENESS_FAIL") =>
   classifyReply("verify", { status: 422, body: { error, message, request_id: "r1" } });
 

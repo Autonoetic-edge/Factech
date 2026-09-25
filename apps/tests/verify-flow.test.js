@@ -6,7 +6,14 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const load = (name) => import("../verify/" + name);
+const load = async (name) => {
+  const mod = await import("../verify/" + name);
+  if (name === "outcome.js") {
+    const { ERROR_CODES } = await import("../../packages/face-sdk/src/index.ts");
+    mod.useErrorCodes(ERROR_CODES); // as main.js does, from /sdk/index.js
+  }
+  return mod;
+};
 
 function run(flow, events, state = flow.initial()) {
   const effects = [];
@@ -177,12 +184,12 @@ test("recovery actions: success leaves, expired signs in, failures go back to Pr
 
 test("camera failures return to Prepare with the reason, not to a result", async () => {
   const flow = await load("flow.js");
-  for (const o of ["denied", "nocamera", "cameralost"]) {
+  for (const o of ["CAMERA_DENIED", "CAMERA_UNAVAILABLE", "CAMERA_ENDED"]) {
     const s = run(flow, [...toCamera, P, READY, { type: "RESULT", outcome: o }]).state;
     assert.deepEqual([s.view, s.cameraError, s.cameraLive], ["ready", o, false]);
   }
-  const denied = run(flow, [{ type: "LOADED", mode: "verify" }, P, { type: "CAMERA_FAILED", error: "denied" }]).state;
-  assert.deepEqual([denied.view, denied.cameraError, denied.busy], ["ready", "denied", null]);
+  const denied = run(flow, [{ type: "LOADED", mode: "verify" }, P, { type: "CAMERA_FAILED", error: "CAMERA_DENIED" }]).state;
+  assert.deepEqual([denied.view, denied.cameraError, denied.busy], ["ready", "CAMERA_DENIED", null]);
 });
 
 // ---- server-authoritative results -------------------------------------------------
@@ -367,7 +374,7 @@ test("a busy result waits out the server's Retry-After before Try again works", 
 test("participant copy: Part 2 wording is pinned and the retired strings are gone", async () => {
   const { COPY } = await load("view.js");
   assert.equal(COPY.OUTCOMES.expired[1], "Your sign-in timed out. Sign in again to continue; your progress is safe.");
-  assert.match(COPY.CAMERA_NOTICE.denied, /Settings > Safari > Camera/);
+  assert.match(COPY.CAMERA_NOTICE.CAMERA_DENIED, /Settings > Safari > Camera/);
   assert.equal(COPY.STAGE_CUE.good, "Good.<br> Hold still."); // the check starts itself (auto-start)
   for (const [, lead] of Object.values(COPY.OUTCOMES)) assert.doesNotMatch(lead, /server/i, lead); // no developer words
   const src = (f) => fs.readFileSync(path.join(__dirname, "../verify", f), "utf8");

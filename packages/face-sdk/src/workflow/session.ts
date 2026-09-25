@@ -7,6 +7,7 @@ import { CAPTURE_SPAN_MS, captureFrames, encodeFrames, releaseFrames } from '../
 import type { RawFrame } from '../camera/capture.ts';
 import { openCamera } from '../camera/camera.ts';
 import { packScan } from '../encoding/scan.ts';
+import { sdkCode, serverCode } from '../errors.ts';
 import {
   canonicalUserId, getChallenge, isValidUserId, postScan, resolveGatewayUrl,
 } from '../transport/gateway.ts';
@@ -227,19 +228,6 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
   };
 }
 
-const ENGINE_RETRYABLE = new Set([
-  'NO_FACE', 'MULTI_FACE', 'LIVENESS_FAIL', 'CHALLENGE_FAIL', 'LOW_QUALITY', 'BUSY',
-  'ENGINE_UNREACHABLE',
-]);
-const ENGINE_COUNTS_AS_ATTEMPT = new Set([
-  'NO_FACE', 'MULTI_FACE', 'LIVENESS_FAIL', 'CHALLENGE_FAIL',
-]);
-
-const SDK_RETRYABLE: ReadonlySet<FailureCode> = new Set<FailureCode>([
-  'CAMERA_ENDED', 'FACE_LOST', 'CHALLENGE_UNAVAILABLE', 'CHALLENGE_EXPIRED',
-  'NETWORK', 'TIMEOUT', 'SCAN_TOO_LARGE',
-]);
-
 function fail(
   op: Operation,
   code: FailureCode,
@@ -249,8 +237,8 @@ function fail(
   const engineCode = extra?.engineCode ?? null;
   return {
     ok: false, op, code, message,
-    retryable: engineCode !== null ? ENGINE_RETRYABLE.has(engineCode) : SDK_RETRYABLE.has(code),
-    countsAsAttempt: engineCode !== null && ENGINE_COUNTS_AS_ATTEMPT.has(engineCode),
+    retryable: engineCode !== null ? serverCode(engineCode)?.retry === true : sdkCode(code).retry,
+    countsAsAttempt: engineCode !== null && serverCode(engineCode)?.attempt === true,
     engineCode,
     httpStatus: extra?.httpStatus ?? null,
     retryAfterMs: extra?.retryAfterMs ?? null,

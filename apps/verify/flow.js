@@ -12,7 +12,7 @@
 //  - 'success' can only arrive in a RESULT event, which main.js builds from the server's reply;
 //  - a hidden tab cancels a capture that has not been sent, and never touches one that has.
 
-export const CAMERA_ERRORS = new Set(['denied', 'nocamera', 'cameralost']);
+export const CAMERA_ERRORS = new Set(['CAMERA_DENIED', 'CAMERA_UNAVAILABLE', 'CAMERA_ENDED']); // the SDK's shared codes
 
 export function initial() {
   return {
@@ -22,7 +22,7 @@ export function initial() {
     name: null,
     busy: null,           // 'consent' | 'camera' | 'scan' | 'recheck' | 'leaving'
     cameraLive: false,
-    cameraError: null,    // 'denied' | 'nocamera' | 'cameralost'
+    cameraError: null,    // 'CAMERA_DENIED' | 'CAMERA_UNAVAILABLE' | 'CAMERA_ENDED'
     preparing: false,
     framing: null,        // the steady line from framing.js while the camera waits: find | one | closer | back | centre | hold | good
     guideOff: false,      // the face guide could not load or run: the fixed oval is used instead
@@ -128,7 +128,7 @@ export function step(state, e) {
       if (e.type === 'PREPARED' && state.preparing && state.cameraLive && !state.guideOff) {
         return to(state, { view: 'capture', preparing: false, busy: 'scan', ...FRESH, notice: null }, 'startScan');
       }
-      if (e.type === 'CAMERA_ENDED') return to(state, { view: 'ready', cameraLive: false, cameraError: 'cameralost' });
+      if (e.type === 'CAMERA_ENDED') return to(state, { view: 'ready', cameraLive: false, cameraError: 'CAMERA_ENDED' });
       if (e.type === 'STOP' || e.type === 'HIDDEN') return to(state, { view: 'ready', cameraLive: false, preparing: false }, 'stopCamera');
       return same(state);
 

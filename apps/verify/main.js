@@ -1,6 +1,6 @@
 // Wires the flow (flow.js) to the real world: the signed-in account, the /v2 gateway,
 // the camera and the capture SDK. Every effect named by flow.js is performed here.
-import { CAMERA_CONSTRAINTS, createFaceSession, LUMA_MIN, SHARP_MIN } from '/sdk/index.js';
+import { CAMERA_CONSTRAINTS, createFaceSession, ERROR_CODES, LUMA_MIN, SHARP_MIN } from '/sdk/index.js';
 import { createBridge, createCameraOwner } from './bridge.js';
 import { poseOf, poseOfAction, POSE_ORDER, TURN_SIGN } from './cues.js';
 import { initial, step } from './flow.js';
@@ -9,11 +9,13 @@ import { createPreparation, sampleOf } from './framing.js';
 import { createTurnMeter, turnStep, yawOf } from './framing.js';
 import { glowColour, reducedGlowColour } from './glow.js';
 import { createHeadGuide } from './head-guide.js';
-import { classifyReply, decide, errorOutcome } from './outcome.js';
+import { classifyReply, decide, errorOutcome, useErrorCodes } from './outcome.js';
 import { icon, render, renderMotion } from './view.js';
 
 // The agreement text on this page is this version. If the server has moved on it
 // refuses the grant (CONSENT_VERSION_REQUIRED) instead of recording the wrong text.
+useErrorCodes(ERROR_CODES); // outcome.js keys page outcomes by the SDK's shared codes
+
 const CONSENT_TEXT_VERSION = 'template-authentication-v1';
 const WORKSPACE = '/workspace';
 
@@ -188,7 +190,7 @@ const effects = {
       if (seq !== cameraOpenSeq || document.hidden) { camera.stop(); return; }
       dispatch({ type: 'CAMERA_OK' });
     } catch (e) {
-      if (seq === cameraOpenSeq) dispatch({ type: 'CAMERA_FAILED', error: e.cameraError ?? 'nocamera' });
+      if (seq === cameraOpenSeq) dispatch({ type: 'CAMERA_FAILED', error: e.cameraError ?? 'CAMERA_UNAVAILABLE' });
     }
   },
 

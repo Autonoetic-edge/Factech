@@ -79,33 +79,29 @@ function recordingStatus(r) {
   return 'failed';
 }
 
-const BY_CODE = {
-  AUTHENTICATION_REQUIRED: 'expired',
-  CSRF_REQUIRED: 'expired',
-  RECENT_LOGIN_REQUIRED: 'reauth',
-  CONSENT_REQUIRED: 'consent',
-  CONSENT_CHANGED: 'consent',
-  CONSENT_VERSION_REQUIRED: 'consent',
-  NO_FACE: 'quality',
-  MULTI_FACE: 'quality',
-  LOW_QUALITY: 'quality',
-  LIVENESS_FAIL: 'liveness',
-  CHALLENGE_FAIL: 'liveness',
-  CHALLENGE_INVALID: 'retry',
-  OPERATION_EXPIRED: 'retry',
-  USER_NOT_FOUND: 'notenrolled',
-  TEMPLATE_EXPIRED: 'notenrolled',
-  BUSY: 'busy',
-  DEPENDENCY_UNAVAILABLE: 'busy',
-  OPERATION_IN_PROGRESS: 'pending',
-  OPERATION_INTERRUPTED: 'retry',
-  CAPACITY_EXCEEDED: 'already',
-  ROUND_CLOSED: 'closed',
-  ROUND_UNCONFIGURED: 'closed',
+// Server codes come from the SDK's shared ERROR_CODES (packages/face-sdk/src/errors.ts);
+// main.js imports the map from /sdk/index.js and hands it in with useErrorCodes(). The page
+// keys its outcome by each code's shared stage; the wording for it stays in view.js.
+let errorCodes = null;
+export function useErrorCodes(map) { errorCodes = map ?? null; }
+
+const BY_STAGE = {
+  session: 'expired', reauth: 'reauth', consent: 'consent',
+  capture: 'quality', liveness: 'liveness', attempt: 'retry',
+  enrolment: 'notenrolled', enrolled: 'already', capacity: 'busy',
+  pending: 'pending', round: 'closed',
 };
 
+function serverStage(code) {
+  if (!errorCodes) throw new Error('outcome.js needs the SDK ERROR_CODES (useErrorCodes)');
+  if (typeof code !== 'string' || !Object.hasOwn(errorCodes, code)) return null;
+  const info = errorCodes[code];
+  return info.origin === 'sdk' ? null : info.stage; // SDK codes never come from a server
+}
+
 export function errorOutcome(code, status) {
-  if (typeof code === 'string' && BY_CODE[code]) return BY_CODE[code];
+  const stage = serverStage(code);
+  if (stage && BY_STAGE[stage]) return BY_STAGE[stage];
   if (status === 401) return 'expired';
   if (status === 429 || status === 503) return 'busy';
   return 'server';
@@ -114,9 +110,9 @@ export function errorOutcome(code, status) {
 /** SDK-side failures that never reached a server decision. */
 export function sdkFailureOutcome(code) {
   switch (code) {
-    case 'CAMERA_DENIED': return 'denied';
-    case 'CAMERA_UNAVAILABLE': return 'nocamera';
-    case 'CAMERA_ENDED': return 'cameralost';
+    case 'CAMERA_DENIED':
+    case 'CAMERA_UNAVAILABLE':
+    case 'CAMERA_ENDED': return code; // the camera notice is keyed by the shared code (view.js)
     case 'CANCELLED': return 'cancelled';
     case 'FACE_LOST': return 'quality';
     case 'SCAN_TOO_LARGE': return 'quality';

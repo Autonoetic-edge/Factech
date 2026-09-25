@@ -157,6 +157,22 @@ Coded failures use `{"error":{"code":"CODE","message":"description"}}`. Request-
 
 `MODEL_UNAVAILABLE` means the engine responded without the necessary model. `ENGINE_UNREACHABLE` means the gateway did not receive a usable engine response. `CHALLENGE_FAIL` is a nonce/protocol failure; `LIVENESS_FAIL` is a signal failure. Use a new challenge when capturing again.
 
+### 3.3 Shared error-code map
+
+`ERROR_CODES` in `packages/face-sdk/src/errors.ts` (exported by the SDK) is the one map of every code the engine, face-auth and the SDK itself produce: code → `origin`, `http`, `retry` (the SDK's `Failure.retryable`), `attempt` (`Failure.countsAsAttempt`) and `stage`, a coarse UI-neutral category (`session`, `reauth`, `consent`, `request`, `conflict`, `rate-limit`, `registration`, `capture`, `liveness`, `attempt`, `enrolment`, `enrolled`, `capacity`, `pending`, `round`, `service`, `camera`, `transport`, `cancelled`). `ERROR_TEXT` holds the default sentence for each engine and SDK code. The SDK's retry sets and the verify page's outcome table read from it; `tests-contract/test_sdk_error_codes.py` checks it against `engine/app/errors.py`, §3.1, every face-auth emitter and the SDK's `FailureCode` union. `apps/shared/messages.js` still carries its own `ENGINE_TEXT`/`SDK_TEXT` (its protected test keeps it import-free); the same contract test holds that copy equal to `ERROR_TEXT`.
+
+The codes whose meaning disagreed between the old copies, and how the map settles them. No retry, attempt or page outcome changed; each row records today's behaviour as the intended one.
+
+| Code | Origin | HTTP | Retry | Attempt | Stage | Resolution |
+|---|---|---|---|---|---|---|
+| `LOW_QUALITY` | engine | 422 | yes | no | capture | Too little usable evidence (settle window, or PAD `insufficient_evidence`). Capture again; it does not count as a failed attempt because the person did nothing wrong. The page shows its "clearer view" screen. |
+| `CHALLENGE_FAIL` | engine | 422 | yes | yes | liveness | Covers both a missing/expired/spent/mismatched nonce (§3.2) and a failed movement challenge (`challenge check failed: <reason>`). The second is the common case, so it counts as an attempt and the page shows its liveness screen. The default text ("timed out or was already used") describes only the first; rewording it is a copy change left to `messages.js`'s own review. |
+| `PAYLOAD_TOO_LARGE` | engine | 413 | no | no | request | The same scan would be refused again, so it is not retried. The SDK refuses an oversize scan before sending it (`SCAN_TOO_LARGE`, retryable). face-auth sends the same code and status. The page falls back to its server screen. |
+| `MODEL_UNAVAILABLE` | engine | 503 | no | no | service | An operator fault, not a capacity one, so the SDK does not retry it. The page's 503 fallback still shows its "busy" screen. |
+| `UNAUTHORIZED` | engine | 401 | no | no | service | The engine key is missing or wrong: a deployment fault, not the participant's sign-in. The page's 401 fallback still shows "sign in again"; a screen of its own is a UX change for Phase 4. |
+| `ENGINE_UNREACHABLE` | gateway | 502 | yes | no | service | Legacy gateway origin with no in-repo emitter. face-auth reports the same situation as `DEPENDENCY_UNAVAILABLE` (503, stage `capacity`). Retryable. The page falls back to its server screen. |
+| `CHALLENGE_INVALID` | face-auth | 409 | no | no | attempt | face-auth's code for a challenge it cannot accept. It is not a §3.1 row (that table is the engine's). The SDK does not retry by itself; the page's "took too long" screen starts a fresh attempt with a new challenge. |
+
 ## Tests
 
 Run from the root unless a working directory is shown:
