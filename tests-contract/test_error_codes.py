@@ -38,9 +38,10 @@ ACTIVE = frozenset(c for c, r in TABLE.items() if r["status"] == "active")
 RESERVED = CANONICAL - ACTIVE
 BY_ORIGIN = {"engine": frozenset(c for c, r in TABLE.items() if r["origin"] == "engine")}
 
-# mock-gateway (the only "gateway"-origin emitter this repo ever had) is gone; the
-# production gateway is packages/face-auth, which declares no equivalent code (its
-# own DEPENDENCY_UNAVAILABLE is a different vocabulary, not part of this contract).
+# The legacy dev-only gateway (the only "gateway"-origin emitter this repo ever had)
+# is gone; the production gateway is packages/face-auth, which declares no equivalent
+# code (its own DEPENDENCY_UNAVAILABLE is a different vocabulary, not part of this
+# contract).
 # "gateway"-origin rows (currently just ENGINE_UNREACHABLE) are documented and may
 # still be client-handled, but this file can no longer verify an in-repo emitter or
 # HTTP-status mapping for them.

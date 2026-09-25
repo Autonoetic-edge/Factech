@@ -1,5 +1,5 @@
 {
-  "status": "prospective contract; legacy routes are not protected by this file. mock-gateway (its /engine-status, /capture-status, catch-all /v1/{path:path} proxy and evaluation.py's /review* routes) and its /console and /integration static mounts were removed from the repository; only the engine's own explicit routes remain below.",
+  "status": "prospective contract; legacy routes are not protected by this file. The legacy dev-only gateway (its /engine-status, /capture-status, catch-all /v1/{path:path} proxy and its /review* evaluation routes) and its /console and /integration static mounts were removed from the repository; only the engine's own explicit routes remain below.",
   "explicit_routes": [
     {
       "source": "engine/app/main.py",
@@ -88,7 +88,7 @@
   },
   "static_mounts": {
     "paths": [],
-    "policy": "removed with mock-gateway: its / (integration-demo), /console, /integration, /sdk, /shared and /vendor/mediapipe mounts no longer exist. The hardened service's own static routes (AMFATEC_PAGE_ROOT / AMFATEC_SDK_BUNDLE, serving apps/verify and packages/face-sdk/dist) are separate and out of scope for this legacy file."
+    "policy": "removed with the legacy dev-only gateway: its / (integration-demo), /console, /integration, /sdk, /shared and /vendor/mediapipe mounts no longer exist. The hardened service's own static routes (AMFATEC_PAGE_ROOT / AMFATEC_SDK_BUNDLE, serving apps/verify and packages/face-sdk/dist) are separate and out of scope for this legacy file."
   },
   "future_routes": {
     "paths": [
