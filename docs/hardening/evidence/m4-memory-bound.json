@@ -1,0 +1,31 @@
+{
+  "measurement": "S01 peak Python heap held while an oversized chunked upload is refused",
+  "method": "tracemalloc around one in-process ASGI call; no Content-Length declared",
+  "python": "3.12.14",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "body_limit_bytes": 481964,
+  "measurements": [
+    {
+      "upload_mb": 1,
+      "status": 413,
+      "peak_bytes": 620875,
+      "peak_over_cap": 1.29,
+      "resident_after_bytes": 95896
+    },
+    {
+      "upload_mb": 15,
+      "status": 413,
+      "peak_bytes": 618844,
+      "peak_over_cap": 1.28,
+      "resident_after_bytes": 93664
+    },
+    {
+      "upload_mb": 64,
+      "status": 413,
+      "peak_bytes": 616822,
+      "peak_over_cap": 1.28,
+      "resident_after_bytes": 91114
+    }
+  ],
+  "note": "Peak is flat across upload sizes: the cap, not the client, bounds memory."
+}

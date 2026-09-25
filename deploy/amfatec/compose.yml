@@ -1,0 +1,94 @@
+# AmFatec preview stack. Own project, own network, own volume; shares nothing with
+# facetech-demo. Only two loopback ports are published, for Traefik on the host.
+# Every service has a hard memory cap with swap disabled (memswap = mem).
+name: amfatec
+
+x-app: &app
+  image: amfatec:current   # rollback = retag an older amfatec:<release> as current
+  env_file: .env
+  restart: unless-stopped
+  volumes:
+    - ./certs:/certs:ro
+  security_opt: ["no-new-privileges:true"]
+  cap_drop: [ALL]
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: amfatec
+      POSTGRES_PASSWORD: ${AMFATEC_DB_PASSWORD}
+      POSTGRES_DB: amfatec
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "amfatec"]
+      interval: 10s
+      retries: 12
+    mem_limit: 256m
+    memswap_limit: 256m
+    cpus: 0.5
+
+  auth:
+    image: quay.io/keycloak/keycloak:26.7.4
+    restart: unless-stopped
+    depends_on:
+      db: {condition: service_healthy}
+    command:
+      - start
+      - --import-realm
+      - --hostname=https://${AUTH_HOST}
+      - --http-enabled=true
+      - --proxy-headers=xforwarded
+      - --cache=local
+      - --db-pool-min-size=1
+      - --db-pool-max-size=5
+      - --log-level=warn
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://db:5432/keycloak
+      KC_DB_USERNAME: amfatec
+      KC_DB_PASSWORD: ${AMFATEC_DB_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: amfatec-admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      JAVA_OPTS_KC_HEAP: -Xms128m -Xmx512m
+    volumes:
+      - ./realm.json:/opt/keycloak/data/import/realm.json:ro
+    security_opt: ["no-new-privileges:true"]
+    ports: ["127.0.0.1:18443:8080"]
+    mem_limit: 800m
+    memswap_limit: 800m
+    cpus: 1.0
+
+  engine:
+    <<: *app
+    command: engine
+    depends_on:
+      db: {condition: service_healthy}
+    environment:
+      AMFATEC_PORT: "8443"
+      AMFATEC_ENGINE_ROOT: /app
+    mem_limit: 1g
+    memswap_limit: 1g
+    cpus: 1.0
+
+  gateway:
+    <<: *app
+    command: gateway
+    depends_on:
+      db: {condition: service_healthy}
+    environment:
+      AMFATEC_PORT: "8443"
+      AMFATEC_SELF_REGISTRATION: ${AMFATEC_SELF_REGISTRATION:-false}
+      AMFATEC_PAGE_ROOT: /srv/page
+      AMFATEC_SDK_BUNDLE: /srv/sdk/index.js
+    ports: ["127.0.0.1:18444:8443"]
+    mem_limit: 256m
+    memswap_limit: 256m
+    cpus: 0.5
+
+volumes:
+  db:

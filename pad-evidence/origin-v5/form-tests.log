@@ -1,0 +1,33 @@
+✔ wrong backend origin redirects before checking storage or enabling capture: https://192.168.1.5:8443 (42.9603ms)
+✔ wrong backend origin redirects before checking storage or enabling capture: http://localhost:8080 (3.7968ms)
+✔ wrong backend origin redirects before checking storage or enabling capture: http://facetech.31.97.186.120.sslip.io (3.6742ms)
+✔ canonical origin stays on the page and diagnostics identify the actual origin (49.0895ms)
+✔ only consented recording is offered and checkbox remains unchecked initially (5.9328ms)
+✔ selected consent supplies metadata and a fresh credentialed no-store status request (5.047ms)
+✔ subject is validated before recording (5.1892ms)
+✔ fails closed for disabled (3.5164ms)
+✔ fails closed for missing evaluation flag (3.7371ms)
+✔ fails closed for string booleans (5.06ms)
+✔ fails closed for unknown consent (2.965ms)
+✔ fails closed for missing retention (2.2723ms)
+✔ fails closed for null (2.2156ms)
+✔ fails closed for array (2.6654ms)
+✔ disabled initial response recovers on retry without reselecting consent (2.8128ms)
+✔ fresh start catches storage disabled after initial ready response (3.0896ms)
+✔ reports auth failure then recovers (5.1114ms)
+✔ reports HTML failure then recovers (2.6063ms)
+✔ reports network failure then recovers (2.545ms)
+✔ reports bad JSON failure then recovers (2.1774ms)
+✔ timeout is bounded and a later retry recovers (4.4945ms)
+✔ pending checks are coalesced and withdrawn consent cannot proceed (2.6194ms)
+✔ phone photo/video labels remain distinct with explicit glasses metadata (3.6429ms)
+✔ consent reset preserves tester ID and requires a new selection (2.2584ms)
+✔ receipt distinguishes stored diagnostics from failed storage (3.0008ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 548.9583

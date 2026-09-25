@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Face check · AmFatec</title>
+<link rel="icon" href="logo.png">
+<link rel="stylesheet" href="verify.css">
+</head>
+<body>
+<a class="skip" href="#screen">Skip to face check</a>
+<div class="shell">
+<aside class="sidebar" aria-label="Workspace context">
+<div class="wordmark" aria-label="AmFatec">
+<span class="brand-symbol" aria-hidden="true">
+<img src="logo.png" alt="" width="256" height="256">
+</span>
+<span>AmFatec</span>
+</div>
+<div class="nav-label">AMFATEC</div>
+<div class="nav-current">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<rect x="3" y="3" width="18" height="18" rx="5"/>
+<circle cx="12" cy="9" r="3"/>
+<path d="M6 19c0-6 12-6 12 0"/>
+</svg>
+<span>Face check</span>
+</div>
+<p class="workspace-note">Face check for your AmFatec account.</p>
+<div class="sidebar-bottom">
+<div class="account">
+<div>
+<strong>Your account</strong>
+<small id="account-line">Checking sign-in</small>
+</div>
+</div>
+</div>
+</aside>
+<div class="app">
+<header class="topbar">
+<div class="compact-brand">
+<span class="brand-symbol" aria-hidden="true">
+<img src="logo.png" alt="" width="256" height="256">
+</span>
+<span>AmFatec</span>
+</div>
+<div class="breadcrumbs">AmFatec <span class="slash">/</span>
+<strong>Face check</strong>
+</div>
+<button class="signout" id="signout" type="button" hidden>Sign out</button>
+</header>
+<main class="main">
+<div class="page-heading">
+<div>
+<h1 id="page-title">Face check</h1>
+<p>A guided check, with you in control.</p>
+</div>
+<button class="text-button" id="help">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="9"/>
+<path d="M9.5 8.5a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16h.01"/>
+</svg>
+<span>How it works</span>
+</button>
+</div>
+<section class="experience" aria-label="Guided face check">
+<div class="experience-top">
+<div class="section-label">
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M9 9v2m6-2v2m-6 4q3 3 6 0"/>
+</svg>YOUR FACE CHECK</div>
+<span class="time-note" id="time-note">
+</span>
+</div>
+<div class="experience-body" id="experience-body">
+<div class="copy" id="screen" tabindex="-1">
+</div>
+<div class="visual-wrap">
+<div class="visual" id="visual">
+<div class="visual-header">
+<span id="visual-label">POSITION GUIDE</span>
+<span class="visual-state">
+<i>
+</i>
+<span id="visual-state">Camera off</span>
+</span>
+</div>
+<div class="canvas-area">
+<video id="preview" playsinline muted autoplay hidden aria-label="Your camera preview"></video>
+<div class="guide"><canvas id="face" aria-hidden="true"></canvas></div>
+<div id="preparation-art" aria-hidden="true">
+<svg viewBox="0 0 320 340" fill="none">
+<rect x="56" y="29" width="208" height="272" rx="30" stroke="#c8beab" stroke-opacity=".28"/>
+<path d="M76 65V49h16M228 49h16v16M76 265v16h16M228 281h16v-16" stroke="#e1d5c1" stroke-width="2"/>
+<path d="M160 90c-34 0-53 25-53 61s21 70 53 70 53-34 53-70-19-61-53-61Z" stroke="#d8cbb5" stroke-width="1.5" stroke-dasharray="4 6"/>
+<path d="M99 263c6-24 28-37 61-37s55 13 61 37" stroke="#d8cbb5" stroke-opacity=".55" stroke-width="1.5"/>
+<path d="M160 54v14M160 275v12M81 165h14M225 165h14" stroke="#b9ab95" stroke-opacity=".5"/>
+<circle cx="160" cy="165" r="3" fill="#c9bba4"/>
+<path d="M152 165h-5m26 0h-5m-8-8v-5m0 26v-5" stroke="#c9bba4" stroke-opacity=".5"/>
+<rect x="112" y="17" width="96" height="24" rx="12" fill="#272720"/>
+<text x="160" y="33" text-anchor="middle" fill="#c9bea9" font-size="9" font-family="Segoe UI,Arial,sans-serif" letter-spacing="1.4">YOUR FRAME</text>
+</svg>
+</div>
+</div>
+<span class="frame-corner tl" aria-hidden="true">
+</span>
+<span class="frame-corner tr" aria-hidden="true">
+</span>
+<span class="frame-corner bl" aria-hidden="true">
+</span>
+<span class="frame-corner br" aria-hidden="true">
+</span>
+<div class="completion-mark" id="completion-mark" hidden>
+<div>
+<svg viewBox="0 0 48 48" aria-hidden="true">
+<path d="m12 25 8 8 17-18"/>
+</svg>
+</div>
+</div>
+<div class="visual-caption">
+<div class="pose-track" id="pose-track" role="group" aria-label="Practise head movements">
+<button type="button" class="active" aria-label="Preview facing forward" aria-pressed="true">Forward</button>
+<button type="button" aria-label="Preview turning left" aria-pressed="false">Left</button>
+<button type="button" aria-label="Preview turning right" aria-pressed="false">Right</button>
+</div>
+<p id="visual-cue">Small movements. Clear guidance.</p>
+<small id="visual-note">Face forward, then follow each gentle turn.</small>
+</div>
+<button class="motion-toggle" id="motion" aria-label="Pause illustration" title="Pause illustration">
+</button>
+<div class="stage-ui" id="stage-ui" hidden>
+<div class="stage-oval" aria-hidden="true"><svg class="stage-ring" viewBox="0 0 300 400"><path class="ring-track" pathLength="12" stroke-dasharray=".82 .18" d="M150 2A148 198 0 1 1 149.9 2"/><path class="ring-fill" id="stage-ring" pathLength="12" stroke-dasharray="0 12" d="M150 2A148 198 0 1 1 149.9 2"/></svg></div>
+<i class="stage-bar" aria-hidden="true"></i>
+<svg class="stage-arrow" id="stage-arrow" viewBox="0 0 48 48" aria-hidden="true" hidden><path d="M30 10 16 24l14 14"/></svg>
+<div class="turn-meter" id="turn-meter" aria-hidden="true" hidden><i></i></div>
+<button class="stage-x" id="stop" type="button" aria-label="Stop face check"></button>
+<p class="stage-cue" id="stage-cue" tabindex="-1"></p>
+<div class="stage-actions" id="stage-actions"></div>
+</div>
+</div>
+</div>
+</div>
+<ol class="steps" id="steps" aria-label="Progress">
+</ol>
+</section>
+<div class="under-card">
+<span>
+<svg viewBox="0 0 24 24" aria-hidden="true">
+<rect x="5" y="10" width="14" height="11" rx="2"/>
+<path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+</svg>Your camera is used only during the check. No recording is kept.</span>
+<span id="linked-note">Linked to the account you are signed in with</span>
+</div>
+<footer class="footer">
+<span>AmFatec / Participant experience</span>
+<span>Face check</span>
+</footer>
+</main>
+</div>
+</div>
+<dialog class="dialog" id="privacy-dialog" aria-labelledby="privacy-title">
+<div class="dialog-head">
+<h2 id="privacy-title">Your privacy choices</h2>
+<button class="close" data-close aria-label="Close privacy choices">
+</button>
+</div>
+<h3>Face template</h3>
+<p>When you agree, a numerical representation of your face is saved, encrypted, against your own account and used only to compare with your later face checks. It is not a photo and cannot be viewed as one.</p>
+<h3>Camera images</h3>
+<p>Images from your camera are sent once, over a secure connection, to make the decision. This page does not ask to keep a recording, so none is stored.</p>
+<h3>Your choices</h3>
+<p>You can stop before anything is submitted. You can withdraw your agreement and have your template deleted; ask your workspace administrator.</p>
+<button class="primary" data-close>Close <span aria-hidden="true">→</span>
+</button>
+</dialog>
+<dialog class="dialog" id="help-dialog" aria-labelledby="help-title">
+<div class="dialog-head">
+<h2 id="help-title">One check. Three stages.</h2>
+<button class="close" data-close aria-label="Close instructions">
+</button>
+</div>
+<ol>
+<li>
+<strong>Prepare.</strong> Review your privacy choices and allow camera access when ready.</li>
+<li>
+<strong>Follow the guide.</strong> Face forward, then make each small head turn when prompted. Keep both eyes visible.</li>
+<li>
+<strong>Get your result.</strong> The camera turns off after capture. You will see the outcome and one next action.</li>
+</ol>
+<p>You can stop before submission. If the connection drops after submission, check the existing result before starting again.</p>
+<p>The small head figure is guidance only. The decision is made by the server, never by this page.</p>
+<button class="primary" data-close>Got it <span aria-hidden="true">→</span>
+</button>
+</dialog>
+<div class="sr-only" id="announcement" role="status" aria-live="polite" aria-atomic="true">
+</div>
+<noscript>
+<p class="noscript">JavaScript is needed for the face check.</p>
+</noscript>
+<script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "apps/integration-demo/evaluation-form.js": "5a76f9ac4962e3d1f4d097beae8ba5dd0c9db2d937669e48305296f3df11b593",
+  "apps/integration-demo/index.html": "b355da713b45d262700eedae0d9c9406365f2e010d1829a17fadc7bd8cc0badf",
+  "apps/integration-demo/page.js": "6c91e2a38b99d15e379de0f067ce47fafd0783b4a56adf9ec77ccf6ef53f1b60",
+  "apps/tests/evaluation-form.test.js": "1a1449acd45543bc0ae60a459298ebc9ce68e9b1046228ba062168a36652de04",
+  "apps/tests/page-harness.js": "cf6b8affe3f8a4ba60bd4887d9432c0adeae189ce05edb566e81a58c3ea2e257",
+  "apps/tests/guided-page.test.js": "95d07d0fff2df1b681f9dcce437f2811f3bef742bfa48f9a67113e5c2a6b1841"
+}

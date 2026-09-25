@@ -1,0 +1,242 @@
+[
+  {
+    "path": "E:\\Factech\\engine\\Dockerfile",
+    "sha256": "3c174d4ed470128a111bac0cb0dbb0a137e2ee6507c3be2046cbb9096e2cf0fa",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\requirements.txt",
+    "sha256": "c8f02d400f5f26a6eb5f59ce1f99e3880fe86a883e6b74a41b395ae929404721",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\mock-gateway\\app.py",
+    "sha256": "8bbca2ba22724a96b950d088592e858e5a7f9e3790d1dfb8aede9cc41f541354",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\mock-gateway\\capture_store.py",
+    "sha256": "ec97fb65f4746e6392ec3e783463c0b5a10c5aec8be06d4fef2135254117abce",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\mock-gateway\\review.html",
+    "sha256": "ed2475d60228dce76e826f9422d556bbc0c700862a58ca42edc4cbb9839794a7",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\apps\\integration-demo\\evaluation-form.js",
+    "sha256": "c06304e25a50e462952429be2342bf01d5fda9500f73c69c37ebb3ea5cab41cd",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\apps\\integration-demo\\index.html",
+    "sha256": "8ff62d7918cc662768ff1cedd54f9103b1131ee025c751837ca82682f1653165",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\apps\\integration-demo\\page.js",
+    "sha256": "1b380e6709c92f137c72877d2e0b399e5a51ff65df87e11aa402921f9bbb76e0",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\challenge.py",
+    "sha256": "dd268a0794604158ffeb7353bd5f77f8e283b9bdf84728c939494147707393ff",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\detect.py",
+    "sha256": "df588b533236f08d79f9edf8cefdca237a4a13835bd1a16ec7e7aab773be3e8a",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\liveness.py",
+    "sha256": "6714b3b6a991e57f0acbe89dd36d3ff622e8678fcae9dfd02fc44be4d62f0df1",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\main.py",
+    "sha256": "a147a667211bbe978bec189a0a7243c6f4870bc8380e8525b604e70390c72afd",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\trace.py",
+    "sha256": "cb42f51e4e5936c5b0fdddef46a5cdac49e8a1603b337391bdfd6c71bc58d92e",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\model_guard.py",
+    "sha256": "43ddc06f6193e78e148e8b4a2d44460f3e1f2b9d852f04843f0af096f5291f0b",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_auth.py",
+    "sha256": "1cea5486bd7d0642df11a4bb05eb1d9896d127c1ef2795d7571de7dc477dbb09",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_challenge.py",
+    "sha256": "bae434bc08f0a0bdd66b46c5fdd1800342e53ae3b3c9f51f23477e45e3a59964",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_decision_trace.py",
+    "sha256": "7fc451afea181c4e35b54f264932ae08477d992848b86a8e6b29adfbe4d0b5d9",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_enroll_verify.py",
+    "sha256": "ffa3c77e15290d5b2192ee0563d71c7dc558c7cd2c267a81a61a847bdd3c1ca6",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_health.py",
+    "sha256": "2415fa2f01ad4303d62c107c4056c69d2620d51fb58f36ef0642d423671f97ba",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_liveness.py",
+    "sha256": "00f9b8350d1376542b6250f9f209d2c6e1edb6dbbe4da200d79f4bd0552c27a9",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_review_fixes.py",
+    "sha256": "43b4840f8f4105c7e56e1f86ca7f9fd537b6ddbb16acba0eb8217d340da78881",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_revoke.py",
+    "sha256": "2526c44fc25509fbbbfdd0aaf8a33de1343c77cb5a2fb155469ba1b0c78c17d1",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_transport.py",
+    "sha256": "3bec34438b4ed3291c51795735815965fee376a3e063c9eaf204e81fc948d69c",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_warmup.py",
+    "sha256": "29e07dc49dfeb3fd7ed47242d40cf8f14a2c1742924b0dac005272a5319f336e",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\mock-gateway\\tests\\test_evaluation.py",
+    "sha256": "c40f48d0a9d1a84ee860d07756abfc86b85d6399f93dcf69344d02564d86e8e9",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\mock-gateway\\tests\\test_gateway.py",
+    "sha256": "62ac00a5b2b1b3c2043e3a7157f7271035be45c74530374389448f8eb731fc17",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\src\\types.ts",
+    "sha256": "f51894bc98c5c35fc96b982921b3b5b8849aa4bbb4d17ea14186141034012937",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\src\\camera\\capture.ts",
+    "sha256": "5cea681f64c1ac4e8b57b437127306a91465b7cc3f6b410638f67afff489ce57",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\src\\transport\\gateway.ts",
+    "sha256": "0fd62eb427e05c698931ad3259108b54d4711e0ee71859d5c278ed48909d34ed",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\src\\workflow\\session.ts",
+    "sha256": "6da42947bff886b0f04d55db2cb7d12018591eace8d3263fff893a9f65318394",
+    "kind": "modified"
+  },
+  {
+    "path": "E:\\Factech\\README.md",
+    "sha256": "b012774f747c8032a4236468b89eadbc50237c98d1ff15446ac2faadc62919ed",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\.dockerignore",
+    "sha256": "dfda16e914393aea20746d4d5803afb6653549db96e2954f958f97129a655e71",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\anti_spoof.py",
+    "sha256": "5e596479ff83d2bb60cb0e8aa3d68a1c38bf7116b3035eadfe3360c2471f8db6",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\app\\head_sequence.py",
+    "sha256": "86c67e27e01c5ab697d5ec83c1c2e3fc4a0549f544561ba3bee85828e4e058a6",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\scripts\\convert_pad.py",
+    "sha256": "fc1456b06aa974cd24181ed62ab088e059c3502f2e3b34254d407caa0cc6d137",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\scripts\\benchmark_pad.py",
+    "sha256": "95309f72753686785559fd5687b66be91ed143e939f806c33c0db7e253a394ec",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\tests\\test_secure_pad.py",
+    "sha256": "f7aa3eff65666bc8816fcfae0a0f98527cc7c0faca7bae47e803621e3885c0ae",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\models\\anti_spoof\\manifest.json",
+    "sha256": "c8274623d794d716e522d22b76ebeac39d0e68f70b50fe1c78112ed283c7a67d",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\models\\anti_spoof\\POLICY.md",
+    "sha256": "d20dbdf595ee1015c15866b9418847b6e5ae906c0040b539d4ff93dd325a4de0",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\models\\anti_spoof\\LICENSE",
+    "sha256": "0d39db56795a38b7b8ab28ac4d9354bb786f4f3db639849b33b95e50b2aee549",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\tests\\session.test.ts",
+    "sha256": "9dd8f8bd84da34f3077a18dc644ed5f24ddde0ef5ad3ffbd723f325532cc5328",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\tests\\helpers.ts",
+    "sha256": "163bcab8f22c665c88547a7c02fe4200af8c50e3e554635832a3d71ecc7c2efc",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\dist\\index.js",
+    "sha256": "43a0e3af733c676339414d1724889a7a4bc9d667eee0e0dd707e2ff1c84205bf",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\dist\\internal.js",
+    "sha256": "3a299ca73f369b5bf7df6b7b04dd2ce126d10da62bd248bcaccfa029244408da",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\dist\\index.js.map",
+    "sha256": "97b22e809c106d787869c0bb3e7f0eda5ee8a03c0e15bcd884511a3037a88c62",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\packages\\face-sdk\\dist\\internal.js.map",
+    "sha256": "281088460e9e88ec55b42db57c0113b5bca3b5e8735b9f5c7eb6eda3e99b1b06",
+    "kind": "added_or_modified"
+  },
+  {
+    "path": "E:\\Factech\\engine\\models\\anti_spoof\\2.7_80x80_MiniFASNetV2.onnx",
+    "sha256": "6f27a4194ecaf355b5ee43afca868e271ddeff1535f65824d1cf14ebad748257",
+    "kind": "converted_official_model"
+  },
+  {
+    "path": "E:\\Factech\\engine\\models\\anti_spoof\\4_0_0_80x80_MiniFASNetV1SE.onnx",
+    "sha256": "6f2e77cb8aca3789a1ecdae0cf647937a2c24aac2040aea367c6a0c61d04e0f7",
+    "kind": "converted_official_model"
+  }
+]

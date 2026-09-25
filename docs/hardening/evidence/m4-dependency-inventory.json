@@ -1,0 +1,151 @@
+{
+  "assets": {
+    "browser_face_guide": {
+      "permission": "UNREVIEWED here: JS, WASM and tflite weights each need their own notice",
+      "pins": "apps/vendor/fetch.sh",
+      "upstream": "MediaPipe tasks-vision 0.10.14 + blaze_face_short_range"
+    },
+    "fonts": {
+      "files": [
+        "Archivo-400.woff2",
+        "Archivo-600.woff2",
+        "Archivo-700.woff2",
+        "IBMPlexMono-400.woff2",
+        "IBMPlexMono-500.woff2",
+        "IBMPlexMono-600.woff2",
+        "IBMPlexSans-300.woff2",
+        "IBMPlexSans-400.woff2",
+        "IBMPlexSans-500.woff2",
+        "IBMPlexSans-600.woff2"
+      ],
+      "notices": [
+        "OFL-Archivo.txt",
+        "OFL-IBMPlex.txt"
+      ],
+      "permission": "OK: SIL Open Font License 1.1 text is shipped alongside"
+    },
+    "presentation_attack_detection": {
+      "permission": "UNRESOLVED: the repository's Apache-2.0 notice is not separately reviewed checkpoint rights",
+      "pins": "engine/models/anti_spoof/manifest.json",
+      "present": true
+    },
+    "recognition_and_detection": {
+      "permission": "UNRESOLVED: MIT source code, separate pretrained model terms including noncommercial research restrictions",
+      "pins": "engine/scripts/download_models.py",
+      "upstream": "InsightFace"
+    }
+  },
+  "declared": {
+    "engine/requirements.txt": {
+      "pinned": {
+        "fastapi": "0.141.1",
+        "msgpack": "1.2.2",
+        "numpy": "2.5.3",
+        "onnxruntime": "1.30.0",
+        "opencv-python-headless": "4.11.0.86",
+        "pydantic": "2.13.5",
+        "uvicorn[standard]": "0.53.0"
+      },
+      "unpinned": []
+    },
+    "packages/face-auth/pyproject.toml": {
+      "pinned": {
+        "Authlib": "1.8.0",
+        "SQLAlchemy": "2.0.54",
+        "alembic": "1.20.0",
+        "cryptography": "50.0.1",
+        "httpx": "0.28.1",
+        "joserfc": "1.7.5",
+        "msgpack": "1.2.2",
+        "psycopg[binary]": "3.3.6",
+        "starlette": "1.6.0"
+      },
+      "unpinned": []
+    },
+    "packages/face-auth/requirements-local.txt": {
+      "pinned": {
+        "Authlib": "1.8.0",
+        "Mako": "1.4.1",
+        "MarkupSafe": "3.0.3",
+        "SQLAlchemy": "2.0.54",
+        "alembic": "1.20.0",
+        "cffi": "2.1.1",
+        "cryptography": "50.0.1",
+        "greenlet": "3.5.6",
+        "joserfc": "1.7.5",
+        "psycopg": "3.3.6",
+        "psycopg-binary": "3.3.6",
+        "pycparser": "3.0",
+        "typing-extensions": "4.16.0",
+        "tzdata": "2026.4"
+      },
+      "unpinned": []
+    }
+  },
+  "images": {
+    "deploy/amfatec/Dockerfile": [
+      {
+        "digest_pinned": true,
+        "reference": "python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea"
+      }
+    ],
+    "deploy/amfatec/compose.yml": [
+      {
+        "digest_pinned": false,
+        "reference": "amfatec:current"
+      },
+      {
+        "digest_pinned": false,
+        "reference": "postgres:16-alpine"
+      },
+      {
+        "digest_pinned": false,
+        "reference": "quay.io/keycloak/keycloak:26.7.4"
+      }
+    ]
+  },
+  "installed_runtime": {
+    "Authlib": null,
+    "SQLAlchemy": null,
+    "alembic": null,
+    "anyio": "4.15.1",
+    "certifi": "2026.7.22",
+    "click": "8.5.0",
+    "cryptography": null,
+    "h11": "0.16.0",
+    "httpx": "0.28.1",
+    "idna": "3.20",
+    "joserfc": null,
+    "msgpack": "1.2.2",
+    "numpy": "2.5.3",
+    "onnxruntime": "1.30.0",
+    "opencv-python-headless": "4.11.0.86",
+    "psycopg": null,
+    "starlette": "1.6.0",
+    "uvicorn": "0.53.0"
+  },
+  "mounts": {
+    "deploy/amfatec/compose.yml": [
+      {
+        "mount": "./certs:/certs:ro",
+        "read_only": true
+      },
+      {
+        "mount": "db:/var/lib/postgresql/data",
+        "read_only": false
+      },
+      {
+        "mount": "./initdb.sql:/docker-entrypoint-initdb.d/initdb.sql:ro",
+        "read_only": true
+      },
+      {
+        "mount": "./realm.json:/opt/keycloak/data/import/realm.json:ro",
+        "read_only": true
+      }
+    ]
+  },
+  "scan": {
+    "performed": false,
+    "reason": "No vulnerability database and no network access in this workspace; pip-audit/trivy are not installed. A scan is a separate approved step before the next cutover."
+  }
+}

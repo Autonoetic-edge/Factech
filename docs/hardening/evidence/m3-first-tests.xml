@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="26" time="24.680" timestamp="2026-09-19T22:36:07.096226+05:30" hostname="DESKTOP-L08AN4E"><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_required_optional_and_old_versions_are_independent" time="3.732"><failure message="assert (404 == 200)&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">tests-hardening\test_privacy_lifecycle.py:122: in test_p01_required_optional_and_old_versions_are_independent
+    run(scenario())
+tests-hardening\auth_fixtures.py:22: in run
+    return asyncio.run(awaitable)
+           ^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests-hardening\test_privacy_lifecycle.py:110: in scenario
+    assert owner.status_code == 200 and owner.json() == {
+E   assert (404 == 200)
+E    +  where 404 = &lt;Response [404 Not Found]&gt;.status_code</failure></testcase><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_others_cannot_grant_or_withdraw[bob]" time="0.475" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_others_cannot_grant_or_withdraw[carol]" time="0.495" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_others_cannot_grant_or_withdraw[reviewer]" time="0.545" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_others_cannot_grant_or_withdraw[admin]" time="0.457" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p01_others_cannot_grant_or_withdraw[operator]" time="0.550" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p02_withdrawal_serializes_and_regrant_does_not_revive[analysis]" time="1.621" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p02_withdrawal_serializes_and_regrant_does_not_revive[after_write]" time="1.411" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p02_withdrawal_serializes_and_regrant_does_not_revive[after_commit]" time="1.636" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p02_real_concurrent_grants_withdrawals_and_recording" time="1.160"><failure message="AssertionError: assert not [{'tenant': 'df9f59eb80bf43b8-a', 'kind': 'capture', 'id': 'capture-bob', 'owner_actor_id': '4b9705abfd85d5e722f9ea3368654ff9', ...}]&#10; +  where [{'tenant': 'df9f59eb80bf43b8-a', 'kind': 'capture', 'id': 'capture-bob', 'owner_actor_id': '4b9705abfd85d5e722f9ea3368654ff9', ...}] = rows(&lt;facetech_auth.postgres.PostgresRepository object at 0x00000297B003C4A0&gt;, Table('resources', MetaData(), Column('tenant', Text(), table=&lt;resources&gt;, primary_key=True, nullable=False), Column('...olean(), table=&lt;resources&gt;, nullable=False), Column('expires_at', BigInteger(), table=&lt;resources&gt;), schema='face_auth'), tenant='df9f59eb80bf43b8-a', kind='capture', active=True)&#10; +    where &lt;facetech_auth.postgres.PostgresRepository object at 0x00000297B003C4A0&gt; = &lt;postgres_fixtures.PersistentHarness object at 0x00000297B01E3260&gt;.repo&#10; +    and   Table('resources', MetaData(), Column('tenant', Text(), table=&lt;resources&gt;, primary_key=True, nullable=False), Column('...olean(), table=&lt;resources&gt;, nullable=False), Column('expires_at', BigInteger(), table=&lt;resources&gt;), schema='face_auth') = s.resources&#10; +    and   'df9f59eb80bf43b8-a' = Actor(id='25f0ce54d7c94030aa11440cf305c2c2', issuer='https://identity.test/realms/df9f59eb80bf43b8', sub='alice', tenant='df9f59eb80bf43b8-a', roles=frozenset({&lt;Role.PARTICIPANT: 'participant'&gt;}), epoch=0, active=True).tenant">tests-hardening\test_privacy_lifecycle.py:208: in test_p02_real_concurrent_grants_withdrawals_and_recording
+    run(scenario())
+tests-hardening\auth_fixtures.py:22: in run
+    return asyncio.run(awaitable)
+           ^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests-hardening\test_privacy_lifecycle.py:200: in scenario
+    assert not rows(
+E   AssertionError: assert not [{'tenant': 'df9f59eb80bf43b8-a', 'kind': 'capture', 'id': 'capture-bob', 'owner_actor_id': '4b9705abfd85d5e722f9ea3368654ff9', ...}]
+E    +  where [{'tenant': 'df9f59eb80bf43b8-a', 'kind': 'capture', 'id': 'capture-bob', 'owner_actor_id': '4b9705abfd85d5e722f9ea3368654ff9', ...}] = rows(&lt;facetech_auth.postgres.PostgresRepository object at 0x00000297B003C4A0&gt;, Table('resources', MetaData(), Column('tenant', Text(), table=&lt;resources&gt;, primary_key=True, nullable=False), Column('...olean(), table=&lt;resources&gt;, nullable=False), Column('expires_at', BigInteger(), table=&lt;resources&gt;), schema='face_auth'), tenant='df9f59eb80bf43b8-a', kind='capture', active=True)
+E    +    where &lt;facetech_auth.postgres.PostgresRepository object at 0x00000297B003C4A0&gt; = &lt;postgres_fixtures.PersistentHarness object at 0x00000297B01E3260&gt;.repo
+E    +    and   Table('resources', MetaData(), Column('tenant', Text(), table=&lt;resources&gt;, primary_key=True, nullable=False), Column('...olean(), table=&lt;resources&gt;, nullable=False), Column('expires_at', BigInteger(), table=&lt;resources&gt;), schema='face_auth') = s.resources
+E    +    and   'df9f59eb80bf43b8-a' = Actor(id='25f0ce54d7c94030aa11440cf305c2c2', issuer='https://identity.test/realms/df9f59eb80bf43b8', sub='alice', tenant='df9f59eb80bf43b8-a', roles=frozenset({&lt;Role.PARTICIPANT: 'participant'&gt;}), epoch=0, active=True).tenant</failure></testcase><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p02_template_withdrawal_revokes_and_blocks_inflight_commit" time="1.377" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[tenant]" time="0.002" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[id]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[kind]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[ciphertext]" time="0.003" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[wrapped]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[version]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[schema]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[missing]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p03_authenticated_envelopes_fail_closed[plaintext]" time="0.001" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p04_rotation_rewrap_and_missing_key_recovery" time="0.002" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p05_self_deletion_removes_links_ciphertext_and_wrapped_key" time="1.300"><failure message="assert 404 == 200&#10; +  where 404 = &lt;Response [404 Not Found]&gt;.status_code">tests-hardening\test_privacy_lifecycle.py:321: in test_p05_self_deletion_removes_links_ciphertext_and_wrapped_key
+    run(scenario())
+tests-hardening\auth_fixtures.py:22: in run
+    return asyncio.run(awaitable)
+           ^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests-hardening\test_privacy_lifecycle.py:308: in scenario
+    assert (
+E   assert 404 == 200
+E    +  where 404 = &lt;Response [404 Not Found]&gt;.status_code</failure></testcase><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p06_disk_full_and_bounded_purge_retries_deny_reads" time="4.643"><failure message="IndexError: list index out of range">tests-hardening\test_privacy_lifecycle.py:360: in test_p06_disk_full_and_bounded_purge_retries_deny_reads
+    run(scenario())
+tests-hardening\auth_fixtures.py:22: in run
+    return asyncio.run(awaitable)
+           ^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\hp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+tests-hardening\test_privacy_lifecycle.py:352: in scenario
+    job = rows(h.repo, s.purge_jobs, id=identity)[0]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range</failure></testcase><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p07_missing_stale_ledger_and_template_expiry_quarantine" time="1.426" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p07_backup_scope_excludes_raw_sessions_tokens_and_receipts" time="0.464" /><testcase classname="tests-hardening.test_privacy_lifecycle" name="test_p08_export_has_no_enabled_route" time="0.657" /></testsuite></testsuites>

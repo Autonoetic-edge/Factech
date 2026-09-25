@@ -1,0 +1,138 @@
+name: interop
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - "engine/**"
+      - "docker-compose.test.yml"
+      - "tests-integration/**"
+      - ".github/workflows/interop.yml"
+      - ".github/actions/models/action.yml"
+  pull_request:
+    paths:
+      - "engine/**"
+      - "docker-compose.test.yml"
+      - "tests-integration/**"
+      - ".github/workflows/interop.yml"
+      - ".github/actions/models/action.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      crypto_available: ${{ steps.check.outputs.crypto_available }}
+    steps:
+      - id: check
+        env:
+          CRYPTO_IMAGE: ${{ vars.CRYPTO_IMAGE }}
+          GHCR_USER: ${{ secrets.GHCR_PACKAGES_READ_USER }}
+          GHCR_TOKEN: ${{ secrets.GHCR_PACKAGES_READ }}
+        run: |
+          if [[ -n "$CRYPTO_IMAGE" && -n "$GHCR_USER" && -n "$GHCR_TOKEN" ]]; then
+            echo "crypto_available=true" >> "$GITHUB_OUTPUT"
+            echo "Crypto image configured - the interop gates will run."
+          else
+            echo "crypto_available=false" >> "$GITHUB_OUTPUT"
+            have() { if [[ -n "$1" ]]; then echo yes; else echo no; fi; }
+            {
+              echo "### interop gates: SKIPPED (by design)"
+              echo
+              echo "The crypto team's gateway image is a private cross-org package."
+              echo "This run has no credentials for it, so gates 1 and 2 are skipped"
+              echo "rather than failed. This is not a broken build."
+              echo
+              echo "- CRYPTO_IMAGE configured: $(have "$CRYPTO_IMAGE")"
+              echo "- GHCR read user configured: $(have "$GHCR_USER")"
+              echo "- GHCR read PAT configured: $(have "$GHCR_TOKEN")"
+              echo
+              echo "Expected on fork pull requests and in any public clone."
+              echo "Interop is re-verified nightly on main, where the secrets exist."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  engine-boots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+
+      CRYPTO_IMAGE: unused-by-this-job
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+      - name: Models (restore, fetch, verify)
+        uses: ./.github/actions/models
+      - name: Build and boot the engine from docker-compose.test.yml
+        run: |
+          docker compose -f docker-compose.test.yml build engine
+          docker compose -f docker-compose.test.yml up -d engine
+          cid=$(docker compose -f docker-compose.test.yml ps -q engine)
+
+          for i in $(seq 1 60); do
+            state=$(docker inspect -f '{{.State.Health.Status}}' "$cid" 2>/dev/null || echo unknown)
+            echo "attempt $i: $state"
+            if [[ "$state" == "healthy" ]]; then
+              echo "engine healthy"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::engine never reported healthy"
+          docker compose -f docker-compose.test.yml logs --no-color engine
+          exit 1
+      - name: Cleanup
+        if: always()
+        run: docker compose -f docker-compose.test.yml down -v
+
+  interop:
+    needs: preflight
+
+    if: needs.preflight.outputs.crypto_available == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CRYPTO_IMAGE: ${{ vars.CRYPTO_IMAGE }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: "3.12"
+
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_PACKAGES_READ_USER }}
+          password: ${{ secrets.GHCR_PACKAGES_READ }}
+
+      - name: Gate 1 — crypto team harness
+        run: |
+          docker run --rm "${CRYPTO_IMAGE}" /src/scripts/interop/run.sh
+
+      - name: Models (restore, fetch, verify)
+        uses: ./.github/actions/models
+      - name: Gate 2 — full stack e2e
+        run: |
+          docker compose -f docker-compose.test.yml up \
+            --build --abort-on-container-exit --exit-code-from e2e
+
+      - name: Dump logs on failure
+        if: failure()
+        run: docker compose -f docker-compose.test.yml logs --no-color
+
+      - name: Cleanup
+        if: always()
+        run: docker compose -f docker-compose.test.yml down -v

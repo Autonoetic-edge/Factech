@@ -1,0 +1,29 @@
+{
+  "isolated_native_gate_checks": [
+    {
+      "operation": "enroll",
+      "status": 422,
+      "pad": "spoof",
+      "usable": 12,
+      "potential_similarity_same_fixture": 0.9999999999999999,
+      "latency_ms": 2687.36
+    },
+    {
+      "operation": "verify",
+      "status": 422,
+      "pad": "spoof",
+      "usable": 12,
+      "potential_similarity_same_fixture": 0.9999999999999999,
+      "latency_ms": 8364.9
+    },
+    {
+      "operation": "liveness",
+      "status": 422,
+      "pad": "spoof",
+      "usable": 12,
+      "potential_similarity_same_fixture": 0.9999999999999999,
+      "latency_ms": 5103.81
+    }
+  ],
+  "templates_unchanged": true
+}

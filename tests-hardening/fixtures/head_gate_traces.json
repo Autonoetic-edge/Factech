@@ -1,0 +1,1369 @@
+{
+  "source": "read-only VPS capture metadata, 2026-09-20 pull",
+  "contains": "timestamps, recorded yaw ratio pairs and recorded verdicts only",
+  "excludes": "frames, scan payloads, embeddings, templates, user agents, real subject identifiers",
+  "warning": "Nine v2-slow traces from four people are development data. They establish nothing about recognition accuracy or spoof resistance.",
+  "traces": [
+    {
+      "id": 5,
+      "subject": "S1",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": null,
+      "build_id": "eval-d36fa4946ddf",
+      "action": "MOVE_CLOSER",
+      "params": {
+        "settle_ms": 2079,
+        "target": 0.275
+      },
+      "ts_rel_ms": [
+        0,
+        814,
+        1522,
+        2050,
+        2778,
+        3486,
+        4313,
+        4874,
+        5453,
+        6031,
+        6787,
+        7394
+      ],
+      "yaw": null,
+      "recorded": null
+    },
+    {
+      "id": 6,
+      "subject": "S1",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": null,
+      "build_id": "eval-d36fa4946ddf",
+      "action": "MOVE_CLOSER",
+      "params": {
+        "settle_ms": 1093,
+        "target": 0.255
+      },
+      "ts_rel_ms": [
+        0,
+        575,
+        1148,
+        1728,
+        2233,
+        2734,
+        3238,
+        3846,
+        4539,
+        5162,
+        5824,
+        6388
+      ],
+      "yaw": null,
+      "recorded": null
+    },
+    {
+      "id": 7,
+      "subject": "S2",
+      "label": "screen_phone",
+      "endpoint": "/v1/verify",
+      "policy": null,
+      "build_id": "eval-d36fa4946ddf",
+      "action": "MOVE_CLOSER",
+      "params": {
+        "settle_ms": 941,
+        "target": 0.26
+      },
+      "ts_rel_ms": [
+        0,
+        780,
+        1579,
+        2355,
+        2885,
+        3667,
+        4264,
+        4905,
+        5455,
+        6195,
+        6933,
+        7509
+      ],
+      "yaw": null,
+      "recorded": null
+    },
+    {
+      "id": 8,
+      "subject": "S3",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v1",
+      "build_id": "eval-pad-80a3dfa1dfe9",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 1400,
+        "switch_ms": 4400,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        700,
+        1492,
+        2215,
+        2997,
+        3773,
+        4482,
+        5263,
+        6011,
+        6734,
+        7503,
+        8279
+      ],
+      "yaw": [
+        [
+          0.0513,
+          0.0704
+        ],
+        [
+          0.0777,
+          0.1591
+        ],
+        [
+          0.1059,
+          0.1396
+        ],
+        [
+          0.0782,
+          0.1272
+        ],
+        [
+          0.1101,
+          0.1398
+        ],
+        [
+          0.0641,
+          0.1065
+        ],
+        [
+          0.0608,
+          0.0995
+        ],
+        [
+          0.0674,
+          0.0676
+        ],
+        [
+          0.0754,
+          0.0756
+        ],
+        [
+          0.0841,
+          0.0705
+        ],
+        [
+          0.0766,
+          0.0621
+        ],
+        [
+          0.1129,
+          0.1324
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "action_order_or_rotation",
+        "first_sign": 1,
+        "switch_ms": 4400,
+        "span_ms": 8279,
+        "phases": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "subject": "S3",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v1",
+      "build_id": "eval-pad-80a3dfa1dfe9",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 1400,
+        "switch_ms": 4200,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        764,
+        1754,
+        2499,
+        3257,
+        4043,
+        4755,
+        5488,
+        6246,
+        7036,
+        7769,
+        8490
+      ],
+      "yaw": [
+        [
+          0.0573,
+          -0.0564
+        ],
+        [
+          0.0922,
+          0.1798
+        ],
+        [
+          0.0969,
+          -0.0522
+        ],
+        [
+          0.1187,
+          0.2205
+        ],
+        [
+          0.0879,
+          0.1658
+        ],
+        [
+          -2.4609,
+          -3.4265
+        ],
+        [
+          -2.9831,
+          -4.5586
+        ],
+        [
+          -2.0065,
+          -2.342
+        ],
+        [
+          0.8486,
+          0.9179
+        ],
+        [
+          3.9113,
+          10.3266
+        ],
+        [
+          4.2401,
+          9.8765
+        ],
+        [
+          1.0118,
+          1.0712
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": -1,
+        "switch_ms": 4200,
+        "span_ms": 8490,
+        "phases": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "subject": "S3",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v1",
+      "build_id": "eval-pad-80a3dfa1dfe9",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 1400,
+        "switch_ms": 4300,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        742,
+        1495,
+        2359,
+        3102,
+        3861,
+        4742,
+        5494,
+        6247,
+        6990,
+        7745,
+        8563
+      ],
+      "yaw": [
+        [
+          0.086,
+          -0.0131
+        ],
+        [
+          0.0681,
+          0.0836
+        ],
+        [
+          0.0575,
+          0.163
+        ],
+        [
+          0.1296,
+          -0.054
+        ],
+        [
+          0.1401,
+          0.0203
+        ],
+        [
+          -2.3361,
+          -3.0147
+        ],
+        [
+          -1.446,
+          -1.5117
+        ],
+        [
+          0.5582,
+          0.6328
+        ],
+        [
+          2.4088,
+          3.5013
+        ],
+        [
+          2.4673,
+          11.4911
+        ],
+        [
+          3.1332,
+          7.4216
+        ],
+        [
+          0.6778,
+          0.6997
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "action_order_or_rotation",
+        "first_sign": 1,
+        "switch_ms": 4300,
+        "span_ms": 8563,
+        "phases": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "subject": "S3",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v1",
+      "build_id": "eval-pad-80a3dfa1dfe9",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 1400,
+        "switch_ms": 4400,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        700,
+        1449,
+        2212,
+        3000,
+        3777,
+        4584,
+        5442,
+        6242,
+        7044,
+        7818,
+        8550
+      ],
+      "yaw": [
+        [
+          0.1268,
+          0.2137
+        ],
+        [
+          0.1064,
+          0.0491
+        ],
+        [
+          0.0896,
+          -0.0135
+        ],
+        [
+          0.1181,
+          0.026
+        ],
+        [
+          0.1259,
+          0.1951
+        ],
+        [
+          2.1654,
+          2.4391
+        ],
+        [
+          2.0568,
+          2.3638
+        ],
+        [
+          0.3444,
+          0.2948
+        ],
+        [
+          -2.0671,
+          -2.3931
+        ],
+        [
+          -2.204,
+          -2.6657
+        ],
+        [
+          -1.8023,
+          -2.116
+        ],
+        [
+          0.0716,
+          0.1094
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": 1,
+        "switch_ms": 4400,
+        "span_ms": 8550,
+        "phases": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "subject": "S3",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v1",
+      "build_id": "eval-pad-80a3dfa1dfe9",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 1400,
+        "switch_ms": 4300,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        715,
+        1466,
+        2226,
+        2928,
+        3677,
+        4476,
+        5257,
+        6053,
+        6856,
+        7654,
+        8388
+      ],
+      "yaw": [
+        [
+          0.0788,
+          0.1692
+        ],
+        [
+          0.0785,
+          0.1507
+        ],
+        [
+          0.1057,
+          0.1743
+        ],
+        [
+          0.1123,
+          0.2129
+        ],
+        [
+          0.1215,
+          0.1663
+        ],
+        [
+          0.1644,
+          0.226
+        ],
+        [
+          1.7046,
+          2.5671
+        ],
+        [
+          1.7832,
+          2.6755
+        ],
+        [
+          -0.3876,
+          -0.5623
+        ],
+        [
+          -2.5863,
+          -3.4262
+        ],
+        [
+          -2.6955,
+          -3.7486
+        ],
+        [
+          -1.1493,
+          -1.1809
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "action_order_or_rotation",
+        "first_sign": 1,
+        "switch_ms": 4300,
+        "span_ms": 8388,
+        "phases": [
+          2,
+          3,
+          5
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "subject": "S4",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9200,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1465,
+        2960,
+        4371,
+        5886,
+        7337,
+        8815,
+        10318,
+        11791,
+        13203,
+        14707,
+        16195
+      ],
+      "yaw": [
+        [
+          0.1928,
+          0.2717
+        ],
+        [
+          0.1418,
+          0.2452
+        ],
+        [
+          0.1271,
+          0.206
+        ],
+        [
+          0.1427,
+          0.2252
+        ],
+        [
+          -0.0379,
+          -0.0103
+        ],
+        [
+          -0.9384,
+          -0.8962
+        ],
+        [
+          -1.1787,
+          -1.0921
+        ],
+        [
+          -1.1748,
+          -1.1955
+        ],
+        [
+          1.081,
+          1.063
+        ],
+        [
+          1.5893,
+          1.7052
+        ],
+        [
+          1.7346,
+          1.7814
+        ],
+        [
+          1.7206,
+          1.8525
+        ]
+      ],
+      "recorded": {
+        "ok": true,
+        "reason": null,
+        "first_sign": -1,
+        "switch_ms": 9200,
+        "span_ms": 16195,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "subject": "S4",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9200,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1485,
+        2922,
+        4377,
+        5822,
+        7270,
+        8750,
+        10154,
+        11674,
+        13281,
+        14702,
+        16263
+      ],
+      "yaw": [
+        [
+          0.1324,
+          0.0399
+        ],
+        [
+          0.1277,
+          0.2308
+        ],
+        [
+          0.1254,
+          0.2156
+        ],
+        [
+          0.1272,
+          0.2167
+        ],
+        [
+          0.5979,
+          0.5396
+        ],
+        [
+          1.3754,
+          1.3563
+        ],
+        [
+          1.2811,
+          1.258
+        ],
+        [
+          1.3955,
+          1.4147
+        ],
+        [
+          1.3896,
+          1.3602
+        ],
+        [
+          1.2798,
+          1.3114
+        ],
+        [
+          1.354,
+          1.2958
+        ],
+        [
+          -1.2646,
+          -1.2152
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": 1,
+        "switch_ms": 9200,
+        "span_ms": 16263,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "subject": "S4",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9200,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1441,
+        2921,
+        4436,
+        5954,
+        7405,
+        8881,
+        10396,
+        11880,
+        13310,
+        14837,
+        16347
+      ],
+      "yaw": [
+        [
+          0.1798,
+          0.2473
+        ],
+        [
+          0.1962,
+          0.1345
+        ],
+        [
+          0.1879,
+          0.1181
+        ],
+        [
+          0.1803,
+          0.2439
+        ],
+        [
+          -1.1572,
+          -1.1091
+        ],
+        [
+          -1.3212,
+          -1.2107
+        ],
+        [
+          -1.5165,
+          -1.3085
+        ],
+        [
+          -1.0586,
+          -0.8955
+        ],
+        [
+          1.6496,
+          1.8839
+        ],
+        [
+          1.7456,
+          1.9541
+        ],
+        [
+          1.91,
+          2.104
+        ],
+        [
+          1.8699,
+          2.0127
+        ]
+      ],
+      "recorded": {
+        "ok": true,
+        "reason": null,
+        "first_sign": -1,
+        "switch_ms": 9200,
+        "span_ms": 16347,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9000,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1472,
+        2991,
+        4523,
+        5994,
+        7434,
+        8928,
+        10386,
+        11887,
+        13367,
+        14846,
+        16377
+      ],
+      "yaw": [
+        [
+          0.1143,
+          0.0347
+        ],
+        [
+          0.1153,
+          0.1996
+        ],
+        [
+          0.0785,
+          0.1534
+        ],
+        [
+          0.0679,
+          0.1493
+        ],
+        [
+          -0.8131,
+          -0.9335
+        ],
+        [
+          -1.0606,
+          -1.3295
+        ],
+        [
+          -0.9809,
+          -1.1566
+        ],
+        [
+          -0.9434,
+          -1.1285
+        ],
+        [
+          1.0134,
+          1.3442
+        ],
+        [
+          1.0817,
+          1.4384
+        ],
+        [
+          1.0354,
+          1.3873
+        ],
+        [
+          1.1625,
+          1.6754
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": -1,
+        "switch_ms": 9000,
+        "span_ms": 16377,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/enroll",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9000,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1502,
+        2985,
+        4482,
+        5906,
+        7306,
+        8748,
+        10240,
+        11727,
+        13243,
+        14702,
+        16227
+      ],
+      "yaw": [
+        [
+          0.0607,
+          0.1892
+        ],
+        [
+          0.0297,
+          0.1392
+        ],
+        [
+          0.063,
+          0.1011
+        ],
+        [
+          0.0853,
+          0.1483
+        ],
+        [
+          0.7967,
+          0.8565
+        ],
+        [
+          1.6204,
+          2.0694
+        ],
+        [
+          1.5508,
+          1.9089
+        ],
+        [
+          1.1119,
+          1.3233
+        ],
+        [
+          -1.6857,
+          -2.2152
+        ],
+        [
+          -1.8248,
+          -2.6119
+        ],
+        [
+          -2.0244,
+          -2.7822
+        ],
+        [
+          -2.0133,
+          -2.5402
+        ]
+      ],
+      "recorded": {
+        "ok": true,
+        "reason": null,
+        "first_sign": 1,
+        "switch_ms": 9000,
+        "span_ms": 16227,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9400,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1475,
+        2901,
+        4326,
+        5768,
+        7261,
+        8763,
+        10264,
+        11748,
+        13183,
+        14584,
+        16020
+      ],
+      "yaw": [
+        [
+          0.0056,
+          -0.0133
+        ],
+        [
+          0.164,
+          0.0019
+        ],
+        [
+          0.1816,
+          0.0639
+        ],
+        [
+          0.1093,
+          0.164
+        ],
+        [
+          -1.5782,
+          -1.9145
+        ],
+        [
+          -1.9249,
+          -2.5283
+        ],
+        [
+          -1.9774,
+          -2.5343
+        ],
+        [
+          -1.9232,
+          -2.2823
+        ],
+        [
+          1.6832,
+          2.0159
+        ],
+        [
+          1.2582,
+          1.6879
+        ],
+        [
+          1.3925,
+          1.8839
+        ],
+        [
+          1.3692,
+          1.7909
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": -1,
+        "switch_ms": 9400,
+        "span_ms": 16020,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9400,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1478,
+        2962,
+        4422,
+        5946,
+        7502,
+        8978,
+        10498,
+        11983,
+        13406,
+        14929,
+        16386
+      ],
+      "yaw": [
+        [
+          0.1389,
+          0.0232
+        ],
+        [
+          0.101,
+          0.0021
+        ],
+        [
+          0.156,
+          0.1831
+        ],
+        [
+          0.1015,
+          0.1367
+        ],
+        [
+          1.1523,
+          1.421
+        ],
+        [
+          1.3724,
+          2.0534
+        ],
+        [
+          1.2967,
+          1.8711
+        ],
+        [
+          0.4269,
+          0.4746
+        ],
+        [
+          -1.6623,
+          -2.134
+        ],
+        [
+          -1.2301,
+          -1.5869
+        ],
+        [
+          -1.3293,
+          -1.8078
+        ],
+        [
+          -1.2034,
+          -1.606
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "not_frontal_and_still",
+        "first_sign": 1,
+        "switch_ms": 9400,
+        "span_ms": 16386,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9200,
+        "first_sign": 1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1419,
+        2850,
+        4296,
+        5706,
+        7112,
+        8573,
+        10017,
+        11477,
+        12911,
+        14419,
+        15902
+      ],
+      "yaw": [
+        [
+          0.0691,
+          0.0857
+        ],
+        [
+          0.1371,
+          0.1867
+        ],
+        [
+          0.122,
+          0.1687
+        ],
+        [
+          0.0982,
+          0.1364
+        ],
+        [
+          0.8048,
+          0.7942
+        ],
+        [
+          0.8167,
+          0.9196
+        ],
+        [
+          0.8725,
+          0.9868
+        ],
+        [
+          0.7984,
+          0.9354
+        ],
+        [
+          0.7793,
+          0.8602
+        ],
+        [
+          0.1362,
+          0.1344
+        ],
+        [
+          -1.2322,
+          -1.5404
+        ],
+        [
+          -1.2239,
+          -1.5745
+        ]
+      ],
+      "recorded": {
+        "ok": false,
+        "reason": "opposite_action_in_window",
+        "first_sign": 1,
+        "switch_ms": 9200,
+        "span_ms": 15902,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "subject": "S5",
+      "label": "bona_fide",
+      "endpoint": "/v1/verify",
+      "policy": "pad-sequence-v2-slow",
+      "build_id": "eval-pad-0d87e7b9a807",
+      "action": "HEAD_SEQUENCE",
+      "params": {
+        "settle_ms": 3200,
+        "switch_ms": 9200,
+        "first_sign": -1,
+        "target": 0.2
+      },
+      "ts_rel_ms": [
+        0,
+        1511,
+        3027,
+        4564,
+        6070,
+        7572,
+        9026,
+        10547,
+        11976,
+        13468,
+        14923,
+        16351
+      ],
+      "yaw": [
+        [
+          0.004,
+          -0.0184
+        ],
+        [
+          0.0365,
+          0.0653
+        ],
+        [
+          0.0057,
+          0.0151
+        ],
+        [
+          0.0959,
+          0.1305
+        ],
+        [
+          -0.7077,
+          -0.8547
+        ],
+        [
+          -0.675,
+          -0.8495
+        ],
+        [
+          -0.6644,
+          -0.7873
+        ],
+        [
+          0.2238,
+          0.2603
+        ],
+        [
+          0.5629,
+          0.6696
+        ],
+        [
+          0.5493,
+          0.6494
+        ],
+        [
+          0.5448,
+          0.6915
+        ],
+        [
+          0.5758,
+          0.7526
+        ]
+      ],
+      "recorded": {
+        "ok": true,
+        "reason": null,
+        "first_sign": -1,
+        "switch_ms": 9200,
+        "span_ms": 16351,
+        "phases": [
+          3,
+          3,
+          4
+        ]
+      }
+    }
+  ]
+}

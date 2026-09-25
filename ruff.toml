@@ -1,0 +1,33 @@
+target-version = "py312"
+line-length = 88
+
+extend-exclude = [
+
+  "engine/app/vendor",
+  ".venv",
+]
+
+src = [".", "engine", "engine/tests", "mock-gateway"]
+
+[lint]
+select = [
+  "E4", "E7", "E9",
+  "F",
+  "W",
+  "I",
+  "UP",
+  "C4",
+  "SIM",
+  "B",
+]
+ignore = [
+
+  "B905",
+]
+
+[lint.isort]
+known-first-party = ["app", "helpers", "model_guard"]
+
+[lint.per-file-ignores]
+
+"engine/tests/conftest.py" = ["E402"]

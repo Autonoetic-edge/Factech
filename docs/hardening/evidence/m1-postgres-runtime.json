@@ -1,0 +1,7 @@
+{
+  "version": "17.11-4",
+  "url": "https://get.enterprisedb.com/postgresql/postgresql-17.11-4-windows-x64-binaries.zip",
+  "sha256": "b9424ee7bc60b52450ff910a3630225df32e633f3cb29c1d126d9299d59aea28",
+  "bytes": 379726839,
+  "verification": "Downloaded via EDB HTTPS; local SHA256 recorded; no separate publisher SHA256 available"
+}

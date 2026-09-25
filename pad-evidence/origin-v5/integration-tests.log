@@ -1,0 +1,15 @@
+✔ actual form plus page: checked consent reaches enrollment metadata and receipt then resets (232.2887ms)
+✔ actual form plus page: failed recording check preserves selection and retry recovers (272.8722ms)
+✔ pending preflight stops on cancel without opening camera (4.9073ms)
+✔ pending preflight stops on hide without opening camera (3.8023ms)
+✔ pending preflight stops on pagehide without opening camera (5.1381ms)
+✔ pending preflight stops on withdraw without opening camera (7.3213ms)
+✔ async preflight cannot start two attempts on repeated taps (143.4029ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 878.9468

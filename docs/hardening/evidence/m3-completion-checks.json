@@ -1,0 +1,128 @@
+{
+  "date": "2026-09-19",
+  "cwd": "E:\\Factech",
+  "milestone": "M3",
+  "status": "COMPLETE",
+  "scope": "Local and ownership-checked synthetic staging only; no live integration",
+  "tests": {
+    "tests": 666,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds_console": 233.77,
+  "seconds_junit": 233.767,
+  "m2_tests_retained": 617,
+  "new_m3_tests": 49,
+  "lint": "passed",
+  "format": {
+    "passed": true,
+    "python_files": 41
+  },
+  "warning": "One unsuppressed Authlib HTTPX deprecation warning",
+  "schema_revision": "0004_recovery_gate",
+  "m3_schema_revisions": [
+    "0003_privacy",
+    "0004_recovery_gate"
+  ],
+  "baseline": {
+    "files": 100,
+    "changed": []
+  },
+  "source_manifest_files": 51,
+  "supplementary_ledger_age_checks": [
+    {
+      "age_seconds": 0,
+      "accepted": true
+    },
+    {
+      "age_seconds": 300,
+      "accepted": true
+    },
+    {
+      "age_seconds": 301,
+      "accepted": false
+    },
+    {
+      "age_seconds": -1,
+      "accepted": false
+    }
+  ],
+  "staging": {
+    "baseline": {
+      "files": 100,
+      "changed": []
+    },
+    "temporary_database_user_table_counts": {
+      "facetech_m2_migrate": 0,
+      "facetech_m2_restore": 0
+    },
+    "owned_stack_stopped": true,
+    "all_four_ports_free": true,
+    "ports": [
+      15432,
+      18443,
+      18444,
+      18445
+    ]
+  },
+  "dependencies": "Existing pins verified; no installs/upgrades. m3-preflight.json records release review; full scan remains M4/M7.",
+  "usage": {
+    "weekly_used_start_percent": 10,
+    "weekly_used_final_percent": 17,
+    "percentage_point_change": 7,
+    "account_wide_rounded": true
+  },
+  "live_changes": "none",
+  "original_checkout_changes": "none",
+  "m4_started": false,
+  "m7_gaps": [
+    "Separately durable deletion ledger/checkpoint before real deletion acknowledgement",
+    "OS service/key-file/DB privilege separation and key custody",
+    "Host scheduler, metrics and delivered alerts",
+    "Production backup inventory/expiry and clean-host RTO/RPO",
+    "Non-raw audit/consent metadata compaction and retention ownership"
+  ],
+  "development_runs": [
+    {
+      "artifact": "m3-first-tests.xml",
+      "passed": 22,
+      "failed": 4
+    },
+    {
+      "artifact": "m3-second-tests.xml",
+      "passed": 84,
+      "failed": 1
+    },
+    {
+      "artifact": "m3-third-tests.xml",
+      "passed": 30,
+      "failed": 0
+    },
+    {
+      "artifact": "m3-fourth-tests.xml",
+      "passed": 39,
+      "failed": 0
+    },
+    {
+      "artifact": "m3-integrated-tests.xml",
+      "passed": 659,
+      "failed": 1
+    },
+    {
+      "artifact": "m3-staging-recheck.xml",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "artifact": "m3-quarantine-regression-tests.xml",
+      "passed": 652,
+      "failed": 10
+    },
+    {
+      "artifact": "m3-completion-tests.xml",
+      "passed": 666,
+      "failed": 0
+    }
+  ]
+}

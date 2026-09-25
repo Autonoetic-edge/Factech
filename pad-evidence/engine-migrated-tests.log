@@ -1,0 +1,25 @@
+........................................................................ [ 45%]
+.....................................................................F.. [ 91%]
+..............                                                           [100%]
+================================== FAILURES ===================================
+______________ test_msgpack_enroll_reaches_the_parser_not_a_415 _______________
+engine\tests\test_transport.py:70: in test_msgpack_enroll_reaches_the_parser_not_a_415
+    assert r.json()["error"]["code"] in ("NO_FACE", "MODEL_UNAVAILABLE")
+E   AssertionError: assert 'CHALLENGE_FAIL' in ('NO_FACE', 'MODEL_UNAVAILABLE')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"5d5f8ce549f84208be4e3f82c71c18da","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.75,"queue":0.54,"total":1.94},"transport":"msgpack","ts":"2026-09-19T04:20:37.676+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"5d5f8ce549f84208be4e3f82c71c18da","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.75,"queue":0.54,"total":1.94},"transport":"msgpack","ts":"2026-09-19T04:20:37.676+00:00"}
+============================== warnings summary ===============================
+.venv-pad\Lib\site-packages\fastapi\testclient.py:1
+  E:\Factech\.venv-pad\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv-pad\Lib\site-packages\starlette\testclient.py:53
+  E:\Factech\.venv-pad\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED engine/tests/test_transport.py::test_msgpack_enroll_reaches_the_parser_not_a_415
+1 failed, 157 passed, 2 warnings in 7.41s

@@ -1,0 +1,19 @@
+Existing credentials, capture mount/database and seven-day retention preserved
+ Container facetech-pad-stage-gateway-1 Stopping 
+ Container facetech-pad-stage-gateway-1 Stopped 
+ Container facetech-pad-stage-engine-1 Stopping 
+ Container facetech-pad-stage-engine-1 Stopped 
+ Container facetech-demo-engine-1 Recreate 
+ Container facetech-demo-engine-1 Recreated 
+ Container facetech-demo-gateway-1 Recreate 
+ Container facetech-demo-gateway-1 Recreated 
+ Container facetech-demo-engine-1 Starting 
+ Container facetech-demo-engine-1 Started 
+ Container facetech-demo-engine-1 Waiting 
+ Container facetech-demo-engine-1 Healthy 
+ Container facetech-demo-gateway-1 Starting 
+ Container facetech-demo-gateway-1 Started 
+NAME                      IMAGE                                         COMMAND                  SERVICE   CREATED          STATUS                                     PORTS
+facetech-demo-caddy-1     caddy:2                                       "caddy run --config …"   caddy     2 hours ago      Up 2 hours                                 443/tcp, 2019/tcp, 443/udp, 127.0.0.1:8099->80/tcp
+facetech-demo-engine-1    facetech-engine:eval-pad-943dc39ab702         "uvicorn app.main:ap…"   engine    14 seconds ago   Up 6 seconds (healthy)                     8000/tcp
+facetech-demo-gateway-1   facetech-mock-gateway:eval-pad-943dc39ab702   "uvicorn app:app --h…"   gateway   9 seconds ago    Up Less than a second (health: starting)   8080/tcp

@@ -1,0 +1,39 @@
+{
+  "stack": "owned loopback gateway 18444, staged with AMFATEC_TRUSTED_PROXY=127.0.0.1",
+  "hop": "X-Forwarded-For: <forged>, <client>  -- the rightmost entry is the proxy's",
+  "auth_window_per_source_per_minute": 60,
+  "passed": 6,
+  "total": 6,
+  "checks": [
+    {
+      "check": "a trusted proxy sending no X-Forwarded-For is refused",
+      "pass": true,
+      "detail": "400 {\"error\":\"UNTRUSTED_CONTEXT\",\"request_id\":\"a305c96caf7b4fcd2e462a198e628910\"}"
+    },
+    {
+      "check": "an empty X-Forwarded-For is refused, not treated as the peer",
+      "pass": true,
+      "detail": "400 {\"error\":\"UNTRUSTED_CONTEXT\",\"request_id\":\"721298dbd4bcea5f0d42da92d9da6b8a\"}"
+    },
+    {
+      "check": "the liveness probe still answers",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "check": "one client can spend exactly its own allowance",
+      "pass": true,
+      "detail": "302=60 last=429"
+    },
+    {
+      "check": "a second client behind the same proxy is unaffected",
+      "pass": true,
+      "detail": "302 "
+    },
+    {
+      "check": "a forged left-hand entry cannot spend another client's allowance",
+      "pass": true,
+      "detail": "429 {\"error\":\"RATE_LIMITED\",\"request_id\":\"d4b0d2a4c5759d8f4a002a311bb24c88\"}"
+    }
+  ]
+}

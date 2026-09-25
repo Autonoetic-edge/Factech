@@ -1,0 +1,354 @@
+{
+  "status": "Local isolated ASGI profile with PostgreSQL repository/operations and the frozen engine pipeline behind the Analyzer port (M1/M2). Scan routes additionally require an Idempotency-Key header. Acceptance links indicate required coverage, not milestone completion.",
+  "source": "packages/face-auth/src/facetech_auth/http.py",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "action": "health",
+      "kind": "",
+      "mutates": false,
+      "engine": true,
+      "acceptance": [
+        "A07"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/info",
+      "action": "info",
+      "kind": "",
+      "mutates": false,
+      "engine": true,
+      "acceptance": [
+        "A07"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/engine-status",
+      "action": "readiness",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/auth/session",
+      "action": "session",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A06",
+        "S05"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/auth/login",
+      "action": "login",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A01"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/auth/register",
+      "action": "register",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": "Closed by default; enabled preview registration uses PKCE, state, nonce and a verified provider subject. Participant-only binding; no browser-selected tenant or role."
+    },
+    {
+      "method": "GET",
+      "path": "/auth/options",
+      "action": "auth_options",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": "Public no-store registration availability only; no account information or caller query accepted."
+    },
+    {
+      "method": "GET",
+      "path": "/auth/callback",
+      "action": "callback",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A01"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout",
+      "action": "logout",
+      "kind": "",
+      "mutates": true,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A06",
+        "S05"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/auth/backchannel-logout",
+      "action": "backchannel",
+      "kind": "",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A06",
+        "S05"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/subjects/{id}/challenge",
+      "action": "challenge",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08",
+        "A04"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/subjects/{id}/enroll",
+      "action": "template.enroll",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/subjects/{id}/templates",
+      "action": "template.add",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/subjects/{id}/templates",
+      "action": "template.list",
+      "kind": "subject",
+      "mutates": false,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v2/subjects/{id}/templates",
+      "action": "template.revoke",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/subjects/{id}/verify",
+      "action": "subject.verify",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/subjects/{id}/liveness",
+      "action": "subject.liveness",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v2/subjects/{id}/consents/{scope}",
+      "action": "consent.grant",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v2/subjects/{id}/consents/{scope}",
+      "action": "consent.withdraw",
+      "kind": "subject",
+      "mutates": true,
+      "engine": true,
+      "acceptance": [
+        "A07",
+        "A02",
+        "A03",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/receipts/{id}",
+      "action": "receipt.read",
+      "kind": "receipt",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/rounds/{id}/captures",
+      "action": "capture.list",
+      "kind": "round",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/rounds/{id}/capture-status",
+      "action": "capture.aggregates",
+      "kind": "round",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/captures/{id}",
+      "action": "capture.read",
+      "kind": "capture",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/captures/{id}/diagnostics",
+      "action": "diagnostics.read",
+      "kind": "capture",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v2/captures/{id}/frames/{index}",
+      "action": "frame.read",
+      "kind": "capture",
+      "mutates": false,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/v2/captures/{id}",
+      "action": "capture.request_deletion",
+      "kind": "capture",
+      "mutates": true,
+      "engine": false,
+      "acceptance": [
+        "A07",
+        "A05",
+        "A06",
+        "A08"
+      ]
+    }
+  ]
+}

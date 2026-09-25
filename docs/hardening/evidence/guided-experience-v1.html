@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; media-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Facetech · Guided experience preview</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#182e2c;background:#f3f5f0;font-synthesis:none;line-height:1.5}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input{accent-color:#176855}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #a85b13;outline-offset:4px}.preview-banner{background:#e3ebdf;text-align:center;padding:10px 18px;font-size:13px;color:#344b38}header{max-width:1120px;margin:auto;padding:26px 26px 18px;display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-size:21px;font-weight:750;letter-spacing:-.8px}.brand span{color:#176855}.tag{border:1px solid #c8d6cb;padding:5px 11px;border-radius:25px;font-size:12px}main{max-width:1120px;margin:8px auto 35px;padding:0 26px;display:grid;grid-template-columns:255px 1fr;gap:44px}aside h1{font-size:32px;line-height:1.15;letter-spacing:-1.2px;margin:16px 0}aside p{font-size:15px;color:#536460}.steps{list-style:none;padding:0;margin:30px 0}.steps li{display:flex;gap:12px;align-items:center;margin:0 0 20px;color:#6a7670;font-size:14px}.steps b{display:grid;place-items:center;width:30px;height:30px;border:1px solid #ccd6cc;border-radius:50%;font-weight:600;flex-shrink:0}.steps .current{color:#145743;font-weight:650}.steps .current b{background:#176855;color:white;border-color:#176855}.steps .done b{background:#e3ebdf;color:#176855}.small{font-size:12px;color:#68736c}.card{background:#fff;border:1px solid #dce2d8;border-radius:24px;padding:34px;box-shadow:0 10px 28px #263d2510;min-height:540px}.eyebrow{font-size:11px;font-weight:750;letter-spacing:1.4px;color:#176855;text-transform:uppercase}h2{font-size:30px;line-height:1.2;letter-spacing:-.8px;margin:10px 0 14px}h2:focus{outline:none}.lead{color:#596a64;margin:0 0 24px;max-width:49ch}.box{border:1px solid #dfe5db;border-radius:14px;padding:18px;margin:16px 0;background:#fafbf8}.box strong{display:block}.box p{margin:6px 0 0;font-size:14px;color:#536460}.avatar{display:inline-grid;place-items:center;background:#e4eee5;border-radius:50%;width:40px;height:40px;margin-right:10px;font-weight:700}.row{display:flex;align-items:center;gap:12px}.choice{display:flex;align-items:flex-start;gap:12px;padding:18px;border:1px solid #dce3d8;border-radius:14px;margin:14px 0}.choice input{width:20px;height:20px;flex-shrink:0;margin-top:4px}.choice span{display:block;font-size:14px;color:#596a64;margin-top:4px}.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:26px}.primary,.secondary,.linkbutton{border:0;border-radius:10px;padding:13px 21px;font-size:14px;font-weight:650;min-height:46px}.primary{background:#176855;color:white}.primary:hover{background:#0d5645}.secondary{background:#eef2e9;color:#204637}.linkbutton{background:transparent;color:#4b6459;padding:10px 2px}.camera{height:252px;background:#edf1e8;border-radius:18px;position:relative;display:grid;place-items:center;margin:18px 0;overflow:hidden}.oval{width:136px;height:185px;border:2px dashed #809d8b;border-radius:50%;display:grid;place-items:center}.head{width:72px;height:98px;border-radius:47% 47% 44% 44%;background:#c4d6c7;position:relative;border:2px solid #789b84}.head:before{content:"";position:absolute;top:39px;left:18px;width:6px;height:6px;background:#4d705a;border-radius:50%;box-shadow:25px 0 #4d705a}.head:after{content:"";position:absolute;top:61px;left:27px;width:17px;height:9px;border-bottom:2px solid #4d705a;border-radius:50%}.left .head{transform:perspective(180px) rotateY(28deg)}.right .head{transform:perspective(180px) rotateY(-28deg)}.camera .caption{position:absolute;bottom:13px;font-size:11px;color:#667961}.cue{text-align:center;margin-top:6px;font-size:21px;font-weight:700}.cue-note{text-align:center;color:#607165;font-size:14px;margin-top:5px}.checks{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.checks span{background:#eef3e9;border-radius:20px;padding:6px 11px;font-size:12px}.notice{border-left:3px solid #b37c26;background:#fff8eb;padding:14px 16px;font-size:14px;color:#70521f}.result-icon{width:54px;height:54px;border-radius:50%;background:#e4eee5;display:grid;place-items:center;color:#176855;font-size:25px;margin:18px 0}.result-icon.warn{background:#fff2db;color:#986220}details{margin-top:22px;font-size:13px;color:#506557}summary{cursor:pointer}.preview-controls{grid-column:2;border:1px dashed #b7c8b8;border-radius:14px;padding:16px 20px;margin-top:-24px;font-size:12px;color:#516750}.preview-controls h3{margin:0 0 5px;font-size:13px}.preview-controls p{margin:5px 0 13px}.controls-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.controls-row label{display:flex;flex-direction:column;gap:4px}.controls-row select{border:1px solid #c2d1bf;background:white;border-radius:7px;padding:6px 8px;font-size:12px;max-width:100%}.controls-row button{padding:8px 11px;border:1px solid #bbceb9;background:#e8eee2;color:#31583c;border-radius:7px;font-size:12px;min-height:38px}.controls-row button[hidden]{display:none}footer{max-width:1120px;margin:auto;padding:0 26px 25px;color:#6b786d;font-size:12px}@media(max-width:760px){header{padding:20px}main{display:block;padding:0 16px;margin-top:0}aside h1{font-size:27px;margin:8px 0}aside>p,aside>.small{display:none}.steps{display:flex;gap:7px;margin:18px 0}.steps li{flex:1;flex-direction:column;gap:6px;font-size:10px;margin:0;text-align:center}.steps b{width:25px;height:25px}.card{padding:24px 20px;min-height:0;border-radius:18px}h2{font-size:27px}.preview-controls{margin-top:18px}.camera{height:220px}.actions .primary{flex:1}.tag{font-size:10px}.lead{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="preview-banner"><strong>Interactive design preview</strong> · Simulated account, camera and results. No camera access or data sent.</div>
+<header><div class="brand">face<span>tech</span><span aria-hidden="true"> ·</span></div><div class="tag">Your account. Your face. Your choice.</div></header>
+<main>
+<aside><h1>A little guidance.<br>One step at a time.</h1><p>Know what happens next, why it matters, and when you are finished.</p><ol class="steps" id="steps" aria-label="Progress"></ol><p class="small">Only you can set up or manage face recognition for your account.</p></aside>
+<section class="card" id="screen" aria-label="Guided experience"></section>
+<section class="preview-controls" aria-label="Design preview controls">
+<h3>Preview controls — outside the participant experience</h3>
+<p>Walk through sample states manually. These controls do not run authentication, capture, timing or biometric checks.</p>
+<div class="controls-row">
+<label>Journey<select id="journey"><option value="enroll">First-time setup</option><option value="verify">Returning face check</option></select></label>
+<label>Sample outcome<select id="outcome"><option value="success">Successful</option><option value="quality">Unclear capture</option><option value="liveness">Presence not confirmed</option><option value="nomatch">Face not matched (verify)</option><option value="uncertain">Connection lost after submission</option><option value="busy">Service busy before capture</option><option value="expired">Sign-in expired before capture</option></select></label>
+<button id="deny" hidden>Simulate camera permission denied</button><button id="nextCue" hidden>Next sample cue</button><button id="resolve" hidden>Simulate saved result found</button><button id="restart">Restart preview</button>
+</div>
+</section>
+</main>
+<footer>Local proposal · September 2026 · Existing capture policy remains frozen. Production integration and device validation are pending.</footer>
+<noscript><p>This interactive preview needs JavaScript. Read GUIDED_EXPERIENCE.md for the complete flow.</p></noscript>
+<script>
+'use strict';
+const $ = (id) => document.getElementById(id);
+const labels = ['Sign in','Privacy','Get ready','Face check','Result'];
+const state = { step:0, mode:'enroll', consent:false, recording:false, camera:false, cameraError:false, cue:0, outcome:'success', result:'success' };
+const button = (id,text,style='primary',disabled=false) => `<button id="${id}" class="${style}" ${disabled?'disabled':''}>${text}</button>`;
+const art = (direction='',caption='Camera preview placeholder') => `<div class="camera ${direction}"><div class="oval"><div class="head" aria-hidden="true"></div></div><span class="caption">${caption}</span></div>`;
+function start() {
+  state.mode=$('journey').value; state.step=0; state.consent=state.mode==='verify'; state.recording=false; state.camera=false; state.cameraError=false; state.cue=0; render();
+}
+function go(step) { state.step=step; render(); }
+function render() {
+  $('steps').innerHTML=labels.map((label,i)=>`<li class="${i===state.step?'current':i<state.step?'done':''}" ${i===state.step?'aria-current="step"':''}><b>${i<state.step?'✓':i+1}</b>${label}</li>`).join('');
+  let content='';
+  if(state.step===0) content=`<div class="eyebrow">Step 1 of 5 · Your account</div><h2 tabindex="-1">${state.mode==='enroll'?'Set up your face check':'Welcome back'}</h2><p class="lead">Sign in to your own account. We will guide you through the rest.</p><div class="box"><div class="row"><span class="avatar" aria-hidden="true">A</span><div><strong>Asha · demo participant</strong><span class="small">Sample account for this preview</span></div></div></div><div class="box"><strong>What to expect</strong><p>Review your privacy choices, prepare your camera, then follow the head-turn guide. The capture itself takes about 16 seconds.</p></div><p class="small">You can stop before submitting. Your account is selected through sign-in, not a typed participant ID.</p><div class="actions">${button('signin','Continue to sign in')}</div>`;
+  if(state.step===1) content=`<div class="eyebrow">Step 2 of 5 · Your choices</div><h2 tabindex="-1">You decide what is saved</h2><p class="lead">A face template supports your face check. Saving a test recording is a separate, optional choice.</p><label class="choice"><input id="consent" type="checkbox" ${state.consent?'checked':''}><div><strong>Use my face template for my account</strong><span>Required for this feature. ${state.mode==='verify'?'This preview assumes you already gave this permission.':'A protected numerical representation of your face is saved for future checks.'}</span></div></label><label class="choice"><input id="recording" type="checkbox" ${state.recording?'checked':''}><div><strong>Also save this test recording</strong><span>Optional and off by default. Authorized reviewers may inspect it to evaluate the system. Evaluation recordings are kept for up to seven days, or less if you request deletion.</span></div></label><details><summary>More about your choices</summary><p>Declining optional recording does not change the face-check requirements. You can manage your own template and recording permissions. Withdrawal and deletion need the completed privacy workflow before this design goes live.</p></details><div class="actions">${button('privacy','Continue', 'primary',!state.consent)}${button('back','Back','linkbutton')}</div>`;
+  if(state.step===2) content=`<div class="eyebrow">Step 3 of 5 · Camera setup</div><h2 tabindex="-1">${state.camera?'Ready when you are':'Let’s get you ready'}</h2><p class="lead">Keep your phone steady, face a light source, and place your face inside the oval.</p>${art()}${state.cameraError?'<div class="notice" role="alert">Camera access is off. Allow camera access in your browser settings, then try again.</div>':''}${state.camera?'<div class="checks"><span>Camera ready · sample</span><span>One face in view · sample</span></div><p class="small">The recording starts only when you select Start face check.</p>':'<p class="small">Your browser will ask for camera permission in the real experience.</p>'}<div class="actions">${button('camera',state.camera?'Start face check':'Enable camera')}${button('back','Back','linkbutton')}</div>`;
+  if(state.step===3) {
+    const cues=[['Face forward. Hold still.','','Keep both eyes visible and your phone steady.'],['Slowly turn a little to your left.','left','Then hold. Keep both eyes visible.'],['Slowly turn a little to your right.','right','Then hold. Keep your phone steady.'],['Checking your result…','','Your camera is off. You do not need to move again.']];
+    const cue=cues[state.cue];
+    content=`<div class="eyebrow">Step 4 of 5 · ${state.cue===3?'Checking':'Follow the guide'}</div><h2 tabindex="-1">${state.cue===3?'We’re checking your result':'One instruction at a time'}</h2><p class="lead">${state.cue===3?'Please wait while we confirm the outcome.':'Follow the head illustration and the instruction below it.'}</p>${art(cue[1],state.cue===3?'Sample processing state':'Sample cue · real direction comes from the server')}<div class="cue" role="status">${cue[0]}</div><p class="cue-note">${cue[2]}</p><div class="actions">${button('cancel',state.cue===3?'Leave this screen':'Stop face check','secondary')}</div>`;
+  }
+  if(state.step===4) {
+    const outcomes={success:[state.mode==='enroll'?'Your face setup is complete':'Your face check passed',state.mode==='enroll'?'Your face template was saved to your account. You can use it for your next face check.':'Your face matched your saved template and the required checks passed.','Done'],quality:['We need a clearer view','Face the light, keep both eyes visible, and keep your phone steady. Then start a new face check.','Try again'],liveness:['We couldn’t confirm your presence','Hold still at the start, then follow each small head turn. This attempt did not pass.','Try again'],nomatch:['We couldn’t confirm a match','This attempt did not match the face template for your account. No new template was added.','Try again'],uncertain:['We’re not sure whether it finished','The connection was lost after submission. Check the saved result before starting another face check.','Check result'],busy:['The service is busy','Your face check has not started. Wait a moment, then try again.','Try again'],expired:['Please sign in again','Your sign-in expired before capture started. Sign in again to continue with your own account.','Sign in again'],cancelled:['You stopped the face check','No scan was submitted in this sample. You can start again when you are ready.','Start again']};
+    const result=outcomes[state.result];
+    content=`<div class="eyebrow">Step 5 of 5 · Your result</div><div class="result-icon ${state.result==='success'?'':'warn'}" aria-hidden="true">${state.result==='success'?'✓':'!'}</div><h2 tabindex="-1">${result[0]}</h2><p class="lead">${result[1]}</p>${state.result==='success'?`<div class="box"><strong>Test recording</strong><p>${state.recording?'Saved separately in this simulated outcome. You can request deletion of your own recording.':'Not saved. You chose not to save a test recording.'}</p></div>`:''}<div class="actions">${button('result',result[2])}</div><details><summary>Help and result details</summary><p>This is a simulated outcome. Real results must come from the server. A successful upload or a saved test recording is not the same as a successful face check.</p></details>`;
+  }
+  $('screen').innerHTML=content;
+  $('deny').hidden=state.step!==2 || state.camera;
+  $('nextCue').hidden=state.step!==3;
+  $('nextCue').textContent=state.cue===3?'Show sample outcome':'Next sample cue';
+  $('resolve').hidden=!(state.step===4 && state.result==='uncertain');
+  document.querySelector('#screen h2').focus({preventScroll:true});
+  bind();
+}
+function bind() {
+  const on=(id,fn)=>{if($(id)) $(id).onclick=fn;};
+  on('signin',()=>go(1)); on('back',()=>go(state.step-1)); on('privacy',()=>{if(state.consent) go(2);});
+  if($('consent')) $('consent').onchange=(e)=>{state.consent=e.target.checked; $('privacy').disabled=!state.consent;};
+  if($('recording')) $('recording').onchange=(e)=>{state.recording=e.target.checked;};
+  on('deny',()=>{state.cameraError=true; render();});
+  on('camera',()=>{
+    if(!state.camera){state.camera=true;state.cameraError=false;render();return;}
+    if(['busy','expired'].includes(state.outcome)){state.result=state.outcome;go(4);return;}
+    state.cue=0;go(3);
+  });
+  on('cancel',()=>{state.camera=false;state.result=state.cue===3?'uncertain':'cancelled';go(4);});
+  on('result',()=>{
+    if(state.result==='uncertain'){
+      const note=document.createElement('p');note.className='notice';note.setAttribute('role','status');note.textContent='Result is still pending in this preview. No new face check has started.';
+      const old=$('screen').querySelector('.notice');if(old)old.remove();$('screen').append(note);return;
+    }
+    if(state.result==='expired'){state.camera=false;go(0);return;}
+    if(state.result==='success'){start();return;}
+    state.camera=false;state.cameraError=false;go(2);
+  });
+}
+$('journey').onchange=start;
+$('outcome').onchange=(e)=>{state.outcome=e.target.value;};
+$('restart').onclick=start;
+$('nextCue').onclick=()=>{
+  if(state.step!==3)return;
+  if(state.cue<3){state.cue++;if(state.cue===3)state.camera=false;render();}
+  else {state.result=state.outcome==='nomatch'&&state.mode==='enroll'?'quality':state.outcome;go(4);}
+};
+$('resolve').onclick=()=>{state.result='success';go(4);};
+start();
+</script>
+</body>
+</html>

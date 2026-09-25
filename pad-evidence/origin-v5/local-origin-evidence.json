@@ -1,0 +1,16 @@
+{
+  "/capture-status?check=origin-v5": {
+    "enabled": false
+  },
+  "/health": {
+    "status": "ok",
+    "engineVersion": "0.1.0",
+    "buildId": "dev"
+  },
+  "/": {
+    "matches_working_source": true
+  },
+  "/evaluation-form.js?v=ui-v5": {
+    "matches_working_source": true
+  }
+}

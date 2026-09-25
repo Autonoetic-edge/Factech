@@ -1,0 +1,102 @@
+{
+  "date": "2026-09-19",
+  "cwd": "E:\\Factech",
+  "milestone": "M2",
+  "status": "COMPLETE",
+  "scope": "Local and isolated synthetic staging; frozen engine pipeline behind the Analyzer port; no live integration",
+  "tests": {
+    "tests": 617,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds_console": 199.23,
+  "seconds_junit": 199.274,
+  "m1_tests_preserved": 588,
+  "new_tests": {
+    "test_durable_state": 21,
+    "idempotency_key_edges": 8
+  },
+  "lint": "passed",
+  "format": {
+    "passed": true,
+    "python_files": 32
+  },
+  "warning": "One unsuppressed Authlib HTTPX deprecation warning",
+  "legacy_routes": 19,
+  "gateway_routes": 24,
+  "engine_routes": 11,
+  "schema_revision": "0002_durable_templates",
+  "template_format_prefix": "arcface-512-float32-le/",
+  "baseline": {
+    "files": 100,
+    "changed": []
+  },
+  "source_manifest_files": 48,
+  "staging": {
+    "postgresql": "17.11-4",
+    "keycloak": "26.7.4",
+    "engine_process_analyzer": "frozen",
+    "separate_process_probe": "tests-hardening/durable_probe.py",
+    "restore_drill": "pg_dump/pg_restore 17.11-4",
+    "temporary_databases_dropped": [
+      "facetech_m2_migrate",
+      "facetech_m2_restore"
+    ],
+    "synthetic_only": true,
+    "all_owned_test_ports_free": true,
+    "ports": [
+      15432,
+      18443,
+      18444,
+      18445
+    ]
+  },
+  "development_runs": [
+    {
+      "suite": "deterministic",
+      "passed": 532,
+      "failed": 12,
+      "skipped": 44,
+      "seconds": 35.17,
+      "cause": "edge tests lacked Idempotency-Key"
+    },
+    {
+      "suite": "test_postgres_authorization",
+      "passed": 37,
+      "failed": 1,
+      "seconds": 47.1,
+      "cause": "frozen USER_NOT_FOUND order before nonce check"
+    },
+    {
+      "suite": "test_durable_state",
+      "passed": 20,
+      "failed": 1,
+      "seconds": 69.7,
+      "cause": "nested asyncio.run in D08"
+    },
+    {
+      "suite": "test_durable_state -k d08",
+      "passed": 0,
+      "failed": 1,
+      "seconds": 14.71,
+      "cause": "strict interrupted-operation count against shared fixture DB"
+    },
+    {
+      "suite": "full integrated",
+      "passed": 616,
+      "failed": 1,
+      "seconds": 216.71,
+      "cause": "analyzer call counter after added enrollment"
+    },
+    {
+      "suite": "full integrated (final)",
+      "passed": 617,
+      "failed": 0,
+      "seconds": 199.23,
+      "cause": null
+    }
+  ],
+  "usage": "unverified; weekly usage percentage not readable from this session",
+  "live_changes": "none"
+}

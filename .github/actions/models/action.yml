@@ -1,0 +1,27 @@
+name: Pinned ONNX models
+description: >
+  Restore engine/models from the Actions cache, fetch on a miss, then ASSERT
+  the pinned models are present and hash-correct. Used by every job that
+  needs them (engine.yml test + image build, interop.yml gate 2).
+
+runs:
+  using: composite
+  steps:
+
+    - name: Models cache key
+      shell: bash
+      run: echo "MODELS_KEY=$(python3 engine/scripts/download_models.py --print-key)" >> "$GITHUB_ENV"
+
+    - name: Restore models cache
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830
+      with:
+        path: engine/models
+        key: ${{ env.MODELS_KEY }}
+
+    - name: Fetch models (no-op on cache hit)
+      shell: bash
+      run: python3 engine/scripts/download_models.py
+
+    - name: Verify models are present and hash-correct
+      shell: bash
+      run: python3 engine/scripts/download_models.py --verify

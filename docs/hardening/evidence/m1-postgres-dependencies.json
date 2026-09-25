@@ -1,0 +1,655 @@
+{
+  "version": "1",
+  "pip_version": "25.0.1",
+  "install": [
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/d9/10/4a0f7113664c2877906db143709c52ddbd28a88e4d51f0b520bc30048ba7/sqlalchemy-2.0.54-cp312-cp312-win_amd64.whl",
+        "archive_info": {
+          "hash": "sha256=d65f8ca742ef1e1e14bc417ef59dc2ddf207a7b66b30cfdc6152447314e030cf",
+          "hashes": {
+            "sha256": "d65f8ca742ef1e1e14bc417ef59dc2ddf207a7b66b30cfdc6152447314e030cf"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "SQLAlchemy",
+        "version": "2.0.54",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Database Abstraction Library",
+        "description": "SQLAlchemy\r\n==========\r\n\r\n|PyPI| |Python| |Downloads|\r\n\r\n.. |PyPI| image:: https://img.shields.io/pypi/v/sqlalchemy\r\n    :target: https://pypi.org/project/sqlalchemy\r\n    :alt: PyPI\r\n\r\n.. |Python| image:: https://img.shields.io/pypi/pyversions/sqlalchemy\r\n    :target: https://pypi.org/project/sqlalchemy\r\n    :alt: PyPI - Python Version\r\n\r\n.. |Downloads| image:: https://static.pepy.tech/badge/sqlalchemy/month\r\n    :target: https://pepy.tech/project/sqlalchemy\r\n    :alt: PyPI - Downloads\r\n\r\n\r\nThe Python SQL Toolkit and Object Relational Mapper\r\n\r\nIntroduction\r\n-------------\r\n\r\nSQLAlchemy is the Python SQL toolkit and Object Relational Mapper\r\nthat gives application developers the full power and\r\nflexibility of SQL. SQLAlchemy provides a full suite\r\nof well known enterprise-level persistence patterns,\r\ndesigned for efficient and high-performing database\r\naccess, adapted into a simple and Pythonic domain\r\nlanguage.\r\n\r\nMajor SQLAlchemy features include:\r\n\r\n* An industrial strength ORM, built\r\n  from the core on the identity map, unit of work,\r\n  and data mapper patterns.   These patterns\r\n  allow transparent persistence of objects\r\n  using a declarative configuration system.\r\n  Domain models\r\n  can be constructed and manipulated naturally,\r\n  and changes are synchronized with the\r\n  current transaction automatically.\r\n* A relationally-oriented query system, exposing\r\n  the full range of SQL's capabilities\r\n  explicitly, including joins, subqueries,\r\n  correlation, and most everything else,\r\n  in terms of the object model.\r\n  Writing queries with the ORM uses the same\r\n  techniques of relational composition you use\r\n  when writing SQL.  While you can drop into\r\n  literal SQL at any time, it's virtually never\r\n  needed.\r\n* A comprehensive and flexible system\r\n  of eager loading for related collections and objects.\r\n  Collections are cached within a session,\r\n  and can be loaded on individual access, all\r\n  at once using joins, or by query per collection\r\n  across the full result set.\r\n* A Core SQL construction system and DBAPI\r\n  interaction layer.  The SQLAlchemy Core is\r\n  separate from the ORM and is a full database\r\n  abstraction layer in its own right, and includes\r\n  an extensible Python-based SQL expression\r\n  language, schema metadata, connection pooling,\r\n  type coercion, and custom types.\r\n* All primary and foreign key constraints are\r\n  assumed to be composite and natural.  Surrogate\r\n  integer primary keys are of course still the\r\n  norm, but SQLAlchemy never assumes or hardcodes\r\n  to this model.\r\n* Database introspection and generation.  Database\r\n  schemas can be \"reflected\" in one step into\r\n  Python structures representing database metadata;\r\n  those same structures can then generate\r\n  CREATE statements right back out - all within\r\n  the Core, independent of the ORM.\r\n\r\nSQLAlchemy's philosophy:\r\n\r\n* SQL databases behave less and less like object\r\n  collections the more size and performance start to\r\n  matter; object collections behave less and less like\r\n  tables and rows the more abstraction starts to matter.\r\n  SQLAlchemy aims to accommodate both of these\r\n  principles.\r\n* An ORM doesn't need to hide the \"R\".   A relational\r\n  database provides rich, set-based functionality\r\n  that should be fully exposed.   SQLAlchemy's\r\n  ORM provides an open-ended set of patterns\r\n  that allow a developer to construct a custom\r\n  mediation layer between a domain model and\r\n  a relational schema, turning the so-called\r\n  \"object relational impedance\" issue into\r\n  a distant memory.\r\n* The developer, in all cases, makes all decisions\r\n  regarding the design, structure, and naming conventions\r\n  of both the object model as well as the relational\r\n  schema.   SQLAlchemy only provides the means\r\n  to automate the execution of these decisions.\r\n* With SQLAlchemy, there's no such thing as\r\n  \"the ORM generated a bad query\" - you\r\n  retain full control over the structure of\r\n  queries, including how joins are organized,\r\n  how subqueries and correlation is used, what\r\n  columns are requested.  Everything SQLAlchemy\r\n  does is ultimately the result of a developer-initiated \r\n  decision.\r\n* Don't use an ORM if the problem doesn't need one.\r\n  SQLAlchemy consists of a Core and separate ORM\r\n  component.   The Core offers a full SQL expression\r\n  language that allows Pythonic construction\r\n  of SQL constructs that render directly to SQL\r\n  strings for a target database, returning\r\n  result sets that are essentially enhanced DBAPI\r\n  cursors.\r\n* Transactions should be the norm.  With SQLAlchemy's\r\n  ORM, nothing goes to permanent storage until\r\n  commit() is called.  SQLAlchemy encourages applications\r\n  to create a consistent means of delineating\r\n  the start and end of a series of operations.\r\n* Never render a literal value in a SQL statement.\r\n  Bound parameters are used to the greatest degree\r\n  possible, allowing query optimizers to cache\r\n  query plans effectively and making SQL injection\r\n  attacks a non-issue.\r\n\r\nDocumentation\r\n-------------\r\n\r\nLatest documentation is at:\r\n\r\nhttps://www.sqlalchemy.org/docs/\r\n\r\nInstallation / Requirements\r\n---------------------------\r\n\r\nFull documentation for installation is at\r\n`Installation <https://www.sqlalchemy.org/docs/intro.html#installation>`_.\r\n\r\nGetting Help / Development / Bug reporting\r\n------------------------------------------\r\n\r\nPlease refer to the `SQLAlchemy Community Guide <https://www.sqlalchemy.org/support.html>`_.\r\n\r\nCode of Conduct\r\n---------------\r\n\r\nAbove all, SQLAlchemy places great emphasis on polite, thoughtful, and\r\nconstructive communication between users and developers.\r\nPlease see our current Code of Conduct at\r\n`Code of Conduct <https://www.sqlalchemy.org/codeofconduct.html>`_.\r\n\r\nLicense\r\n-------\r\n\r\nSQLAlchemy is distributed under the `MIT license\r\n<https://www.opensource.org/licenses/mit-license.php>`_.\r\n\r\n",
+        "description_content_type": "text/x-rst",
+        "home_page": "https://www.sqlalchemy.org",
+        "author": "Mike Bayer",
+        "author_email": "mike_mp@zzzcomputing.com",
+        "license": "MIT",
+        "license_file": [
+          "LICENSE",
+          "AUTHORS"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.7",
+          "Programming Language :: Python :: 3.8",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Programming Language :: Python :: Implementation :: CPython",
+          "Programming Language :: Python :: Implementation :: PyPy",
+          "Topic :: Database :: Front-Ends"
+        ],
+        "requires_dist": [
+          "importlib-metadata; python_version < \"3.8\"",
+          "greenlet>=1; platform_machine == \"aarch64\" or (platform_machine == \"ppc64le\" or (platform_machine == \"x86_64\" or (platform_machine == \"amd64\" or (platform_machine == \"AMD64\" or (platform_machine == \"win32\" or platform_machine == \"WIN32\")))))",
+          "typing-extensions>=4.6.0",
+          "greenlet>=1; extra == \"asyncio\"",
+          "mypy>=0.910; extra == \"mypy\"",
+          "pyodbc; extra == \"mssql\"",
+          "pymssql; extra == \"mssql-pymssql\"",
+          "pyodbc; extra == \"mssql-pyodbc\"",
+          "mysqlclient>=1.4.0; extra == \"mysql\"",
+          "mysql-connector-python; extra == \"mysql-connector\"",
+          "mariadb!=1.1.10,!=1.1.2,!=1.1.5,>=1.0.1; extra == \"mariadb-connector\"",
+          "cx_oracle>=8; extra == \"oracle\"",
+          "oracledb>=1.0.1; extra == \"oracle-oracledb\"",
+          "psycopg2>=2.7; extra == \"postgresql\"",
+          "pg8000>=1.29.1; extra == \"postgresql-pg8000\"",
+          "greenlet>=1; extra == \"postgresql-asyncpg\"",
+          "asyncpg; extra == \"postgresql-asyncpg\"",
+          "psycopg2-binary; extra == \"postgresql-psycopg2binary\"",
+          "psycopg2cffi; extra == \"postgresql-psycopg2cffi\"",
+          "psycopg>=3.0.7; extra == \"postgresql-psycopg\"",
+          "psycopg[binary]>=3.0.7; extra == \"postgresql-psycopgbinary\"",
+          "pymysql; extra == \"pymysql\"",
+          "greenlet>=1; extra == \"aiomysql\"",
+          "aiomysql>=0.2.0; extra == \"aiomysql\"",
+          "greenlet>=1; extra == \"aioodbc\"",
+          "aioodbc; extra == \"aioodbc\"",
+          "greenlet>=1; extra == \"asyncmy\"",
+          "asyncmy>=0.2.12; extra == \"asyncmy\"",
+          "greenlet>=1; extra == \"aiosqlite\"",
+          "aiosqlite; extra == \"aiosqlite\"",
+          "typing_extensions!=3.10.0.1; extra == \"aiosqlite\"",
+          "sqlcipher3_binary; extra == \"sqlcipher\""
+        ],
+        "requires_python": ">=3.7",
+        "project_url": [
+          "Documentation, https://docs.sqlalchemy.org",
+          "Issue Tracker, https://github.com/sqlalchemy/sqlalchemy/"
+        ],
+        "provides_extra": [
+          "asyncio",
+          "mypy",
+          "mssql",
+          "mssql-pymssql",
+          "mssql-pyodbc",
+          "mysql",
+          "mysql-connector",
+          "mariadb-connector",
+          "oracle",
+          "oracle-oracledb",
+          "postgresql",
+          "postgresql-pg8000",
+          "postgresql-asyncpg",
+          "postgresql-psycopg2binary",
+          "postgresql-psycopg2cffi",
+          "postgresql-psycopg",
+          "postgresql-psycopgbinary",
+          "pymysql",
+          "aiomysql",
+          "aioodbc",
+          "asyncmy",
+          "aiosqlite",
+          "sqlcipher"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/3f/27/78a89b55b0904d222183164e079b4ca56208e94eff1d35ad1f1ad5be9b06/alembic-1.20.0-py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=77eb101048d95f982c0353e9233404889dcd7a6fc244c107836c0e2fc9cf7d9d",
+          "hashes": {
+            "sha256": "77eb101048d95f982c0353e9233404889dcd7a6fc244c107836c0e2fc9cf7d9d"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "alembic",
+        "version": "1.20.0",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "A database migration tool for SQLAlchemy.",
+        "description": "Alembic is a database migrations tool written by the author\nof `SQLAlchemy <http://www.sqlalchemy.org>`_.  A migrations tool\noffers the following functionality:\n\n* Can emit ALTER statements to a database in order to change\n  the structure of tables and other constructs\n* Provides a system whereby \"migration scripts\" may be constructed;\n  each script indicates a particular series of steps that can \"upgrade\" a\n  target database to a new version, and optionally a series of steps that can\n  \"downgrade\" similarly, doing the same steps in reverse.\n* Allows the scripts to execute in some sequential manner.\n\nThe goals of Alembic are:\n\n* Very open ended and transparent configuration and operation.   A new\n  Alembic environment is generated from a set of templates which is selected\n  among a set of options when setup first occurs. The templates then deposit a\n  series of scripts that define fully how database connectivity is established\n  and how migration scripts are invoked; the migration scripts themselves are\n  generated from a template within that series of scripts. The scripts can\n  then be further customized to define exactly how databases will be\n  interacted with and what structure new migration files should take.\n* Full support for transactional DDL.   The default scripts ensure that all\n  migrations occur within a transaction - for those databases which support\n  this (Postgresql, Microsoft SQL Server), migrations can be tested with no\n  need to manually undo changes upon failure.\n* Minimalist script construction.  Basic operations like renaming\n  tables/columns, adding/removing columns, changing column attributes can be\n  performed through one line commands like alter_column(), rename_table(),\n  add_constraint(). There is no need to recreate full SQLAlchemy Table\n  structures for simple operations like these - the functions themselves\n  generate minimalist schema structures behind the scenes to achieve the given\n  DDL sequence.\n* \"auto generation\" of migrations. While real world migrations are far more\n  complex than what can be automatically determined, Alembic can still\n  eliminate the initial grunt work in generating new migration directives\n  from an altered schema.  The ``--autogenerate`` feature will inspect the\n  current status of a database using SQLAlchemy's schema inspection\n  capabilities, compare it to the current state of the database model as\n  specified in Python, and generate a series of \"candidate\" migrations,\n  rendering them into a new migration script as Python directives. The\n  developer then edits the new file, adding additional directives and data\n  migrations as needed, to produce a finished migration. Table and column\n  level changes can be detected, with constraints and indexes to follow as\n  well.\n* Full support for migrations generated as SQL scripts.   Those of us who\n  work in corporate environments know that direct access to DDL commands on a\n  production database is a rare privilege, and DBAs want textual SQL scripts.\n  Alembic's usage model and commands are oriented towards being able to run a\n  series of migrations into a textual output file as easily as it runs them\n  directly to a database. Care must be taken in this mode to not invoke other\n  operations that rely upon in-memory SELECTs of rows - Alembic tries to\n  provide helper constructs like bulk_insert() to help with data-oriented\n  operations that are compatible with script-based DDL.\n* Non-linear, dependency-graph versioning.   Scripts are given UUID\n  identifiers similarly to a DVCS, and the linkage of one script to the next\n  is achieved via human-editable markers within the scripts themselves.\n  The structure of a set of migration files is considered as a\n  directed-acyclic graph, meaning any migration file can be dependent\n  on any other arbitrary set of migration files, or none at\n  all.  Through this open-ended system, migration files can be organized\n  into branches, multiple roots, and mergepoints, without restriction.\n  Commands are provided to produce new branches, roots, and merges of\n  branches automatically.\n* Provide a library of ALTER constructs that can be used by any SQLAlchemy\n  application. The DDL constructs build upon SQLAlchemy's own DDLElement base\n  and can be used standalone by any application or script.\n* At long last, bring SQLite and its inability to ALTER things into the fold,\n  but in such a way that SQLite's very special workflow needs are accommodated\n  in an explicit way that makes the most of a bad situation, through the\n  concept of a \"batch\" migration, where multiple changes to a table can\n  be batched together to form a series of instructions for a single, subsequent\n  \"move-and-copy\" workflow.   You can even use \"move-and-copy\" workflow for\n  other databases, if you want to recreate a table in the background\n  on a busy system.\n\nDocumentation and status of Alembic is at https://alembic.sqlalchemy.org/\n\nThe SQLAlchemy Project\n======================\n\nAlembic is part of the `SQLAlchemy Project <https://www.sqlalchemy.org>`_ and\nadheres to the same standards and conventions as the core project.\n\nDevelopment / Bug reporting / Pull requests\n___________________________________________\n\nPlease refer to the\n`SQLAlchemy Community Guide <https://www.sqlalchemy.org/develop.html>`_ for\nguidelines on coding and participating in this project.\n\nCode of Conduct\n_______________\n\nAbove all, SQLAlchemy places great emphasis on polite, thoughtful, and\nconstructive communication between users and developers.\nPlease see our current Code of Conduct at\n`Code of Conduct <https://www.sqlalchemy.org/codeofconduct.html>`_.\n\nLicense\n=======\n\nAlembic is distributed under the `MIT license\n<https://opensource.org/licenses/MIT>`_.\n",
+        "description_content_type": "text/x-rst",
+        "author_email": "Mike Bayer <mike_mp@zzzcomputing.com>",
+        "license_expression": "MIT",
+        "license_file": [
+          "LICENSE"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Environment :: Console",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Programming Language :: Python :: Implementation :: CPython",
+          "Programming Language :: Python :: Implementation :: PyPy",
+          "Topic :: Database :: Front-Ends"
+        ],
+        "requires_dist": [
+          "SQLAlchemy>=2.0",
+          "Mako",
+          "typing-extensions>=4.12",
+          "tomli; python_version < \"3.11\"",
+          "tzdata; extra == \"tz\""
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://alembic.sqlalchemy.org",
+          "Documentation, https://alembic.sqlalchemy.org/en/latest/",
+          "Changelog, https://alembic.sqlalchemy.org/en/latest/changelog.html",
+          "Source, https://github.com/sqlalchemy/alembic/",
+          "Issue Tracker, https://github.com/sqlalchemy/alembic/issues/"
+        ],
+        "provides_extra": [
+          "tz"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/4e/de/748bd7609c71cae5d737f0ba9192f19329f70180ecda8fff3cac02c5abe3/psycopg-3.3.6-py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631",
+          "hashes": {
+            "sha256": "a1db9f7148b06a28606767efaca51fa6f9398c5c0a3810519be69d7000bdb631"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "psycopg",
+        "version": "3.3.6",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "PostgreSQL database adapter for Python",
+        "description": "Psycopg 3: PostgreSQL database adapter for Python\n=================================================\n\nPsycopg 3 is a modern implementation of a PostgreSQL adapter for Python.\n\nThis distribution contains the pure Python package ``psycopg``.\n\n.. Note::\n\n    Despite the lack of number in the package name, this package is the\n    successor of psycopg2_.\n\n    Please use the psycopg2 package if you are maintaining an existing program\n    using psycopg2 as a dependency. If you are developing something new,\n    Psycopg 3 is the most current implementation of the adapter.\n\n    .. _psycopg2: https://pypi.org/project/psycopg2/\n\n\nInstallation\n------------\n\nIn short, run the following::\n\n    pip install --upgrade pip           # to upgrade pip\n    pip install \"psycopg[binary,pool]\"  # to install package and dependencies\n\nIf something goes wrong, and for more information about installation, please\ncheck out the `Installation documentation`__.\n\n.. __: https://www.psycopg.org/psycopg3/docs/basic/install.html#\n\n\nHacking\n-------\n\nFor development information check out `the project readme`__.\n\n.. __: https://github.com/psycopg/psycopg#readme\n\n\nCopyright (C) 2020 The Psycopg Team\n",
+        "description_content_type": "text/x-rst",
+        "author_email": "Daniele Varrazzo <daniele.varrazzo@gmail.com>",
+        "license_expression": "LGPL-3.0-only",
+        "license_file": [
+          "LICENSE.txt"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Operating System :: MacOS :: MacOS X",
+          "Operating System :: Microsoft :: Windows",
+          "Operating System :: POSIX",
+          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Programming Language :: Python :: Implementation :: CPython",
+          "Programming Language :: Python :: Implementation :: PyPy",
+          "Topic :: Database",
+          "Topic :: Database :: Front-Ends",
+          "Topic :: Software Development",
+          "Topic :: Software Development :: Libraries :: Python Modules"
+        ],
+        "requires_dist": [
+          "typing-extensions>=4.6; python_version < \"3.13\"",
+          "tzdata; sys_platform == \"win32\"",
+          "psycopg-c==3.3.6; implementation_name != \"pypy\" and extra == \"c\"",
+          "psycopg-binary==3.3.6; implementation_name != \"pypy\" and extra == \"binary\"",
+          "psycopg-pool; extra == \"pool\"",
+          "anyio>=4.0; extra == \"test\"",
+          "mypy>=2.1.0; implementation_name != \"pypy\" and extra == \"test\"",
+          "pproxy>=2.7; extra == \"test\"",
+          "pytest>=6.2.5; extra == \"test\"",
+          "pytest-cov>=3.0; extra == \"test\"",
+          "pytest-randomly>=3.5; extra == \"test\"",
+          "ast-comments>=1.1.2; extra == \"dev\"",
+          "black>=26.1.0; extra == \"dev\"",
+          "codespell>=2.2; extra == \"dev\"",
+          "cython-lint>=0.21; extra == \"dev\"",
+          "dnspython>=2.1; extra == \"dev\"",
+          "flake8>=4.0; extra == \"dev\"",
+          "isort[colors]>=6.0; extra == \"dev\"",
+          "isort-psycopg>=0.0.3; extra == \"dev\"",
+          "mypy>=2.1.0; extra == \"dev\"",
+          "pre-commit>=4.0.1; extra == \"dev\"",
+          "types-setuptools>=57.4; extra == \"dev\"",
+          "types-shapely>=2.0; extra == \"dev\"",
+          "wheel>=0.37; extra == \"dev\"",
+          "Sphinx>=9.1; extra == \"docs\"",
+          "furo==2025.12.19; extra == \"docs\"",
+          "sphinx-autobuild>=2025.8.25; extra == \"docs\"",
+          "sphinx-autodoc-typehints>=3.10.2; extra == \"docs\""
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://psycopg.org/",
+          "Documentation, https://psycopg.org/psycopg3/docs/",
+          "Changes, https://psycopg.org/psycopg3/docs/news.html",
+          "Code, https://github.com/psycopg/psycopg",
+          "Issue Tracker, https://github.com/psycopg/psycopg/issues",
+          "Funding, https://github.com/sponsors/dvarrazzo"
+        ],
+        "provides_extra": [
+          "c",
+          "binary",
+          "pool",
+          "test",
+          "dev",
+          "docs"
+        ]
+      },
+      "requested_extras": [
+        "binary"
+      ]
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/1a/9b/94ff7fce53a64d5b286e2ec454e0a025cf3d6e6b4a9189bef16aa5de98b2/psycopg_binary-3.3.6-cp312-cp312-win_amd64.whl",
+        "archive_info": {
+          "hash": "sha256=e23a66a763fbe83fcc210bc77c27e5a5ea380ebf091c06f34d8561b695e5a40f",
+          "hashes": {
+            "sha256": "e23a66a763fbe83fcc210bc77c27e5a5ea380ebf091c06f34d8561b695e5a40f"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "psycopg-binary",
+        "version": "3.3.6",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "PostgreSQL database adapter for Python -- C optimisation distribution",
+        "description": "Psycopg 3: PostgreSQL database adapter for Python - binary package\r\n==================================================================\r\n\r\nThis distribution package is an optional component of `Psycopg 3`__: it\r\ncontains the optional optimization package `psycopg_binary`__.\r\n\r\n.. __: https://pypi.org/project/psycopg/\r\n.. __: https://www.psycopg.org/psycopg3/docs/basic/install.html\r\n       #binary-installation\r\n\r\nYou shouldn't install this package directly: use instead ::\r\n\r\n    pip install \"psycopg[binary]\"\r\n\r\nto install a version of the optimization package matching the ``psycopg``\r\nversion installed.\r\n\r\nInstalling this package requires pip >= 20.3 or newer installed.\r\n\r\nThis package is not available for every platform: check out `Binary\r\ninstallation`__ in the documentation.\r\n\r\n.. __: https://www.psycopg.org/psycopg3/docs/basic/install.html\r\n       #binary-installation\r\n\r\nPlease read `the project readme`__ and `the installation documentation`__ for\r\nmore details.\r\n\r\n.. __: https://github.com/psycopg/psycopg#readme\r\n.. __: https://www.psycopg.org/psycopg3/docs/basic/install.html\r\n\r\n\r\nCopyright (C) 2020 The Psycopg Team\r\n",
+        "description_content_type": "text/x-rst",
+        "author_email": "Daniele Varrazzo <daniele.varrazzo@gmail.com>",
+        "license_expression": "LGPL-3.0-only",
+        "license_file": [
+          "LICENSE.txt"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Operating System :: MacOS :: MacOS X",
+          "Operating System :: Microsoft :: Windows",
+          "Operating System :: POSIX",
+          "Programming Language :: Cython",
+          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Programming Language :: Python :: Implementation :: CPython",
+          "Topic :: Database",
+          "Topic :: Database :: Front-Ends",
+          "Topic :: Software Development",
+          "Topic :: Software Development :: Libraries :: Python Modules"
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://psycopg.org/",
+          "Documentation, https://psycopg.org/psycopg3/docs/",
+          "Changes, https://psycopg.org/psycopg3/docs/news.html",
+          "Code, https://github.com/psycopg/psycopg",
+          "Issue Tracker, https://github.com/psycopg/psycopg/issues",
+          "Funding, https://github.com/sponsors/dvarrazzo"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/c3/71/d79f1791f824f8ff15c2978746640467ae932a2365e0201069f7f272395f/greenlet-3.5.6-cp312-cp312-win_amd64.whl",
+        "archive_info": {
+          "hash": "sha256=7ac4abb3877c43af320392c664774eef6fa2cc063c79a55fc02d844a3cbe7395",
+          "hashes": {
+            "sha256": "7ac4abb3877c43af320392c664774eef6fa2cc063c79a55fc02d844a3cbe7395"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "greenlet",
+        "version": "3.5.6",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Lightweight in-process concurrent programming",
+        "description": ".. This file is included into docs/history.rst\r\n\r\n\r\nGreenlets are lightweight coroutines for in-process concurrent\r\nprogramming.\r\n\r\nThe \"greenlet\" package is a spin-off of `Stackless`_, a version of\r\nCPython that supports micro-threads called \"tasklets\". Tasklets run\r\npseudo-concurrently (typically in a single or a few OS-level threads)\r\nand are synchronized with data exchanges on \"channels\".\r\n\r\nA \"greenlet\", on the other hand, is a still more primitive notion of\r\nmicro-thread with no implicit scheduling; coroutines, in other words.\r\nThis is useful when you want to control exactly when your code runs.\r\nYou can build custom scheduled micro-threads on top of greenlet;\r\nhowever, it seems that greenlets are useful on their own as a way to\r\nmake advanced control flow structures. For example, we can recreate\r\ngenerators; the difference with Python's own generators is that our\r\ngenerators can call nested functions and the nested functions can\r\nyield values too. (Additionally, you don't need a \"yield\" keyword. See\r\nthe example in `test_generator.py\r\n<https://github.com/python-greenlet/greenlet/blob/adca19bf1f287b3395896a8f41f3f4fd1797fdc7/src/greenlet/tests/test_generator.py#L1>`_).\r\n\r\nGreenlets are provided as a C extension module for the regular unmodified\r\ninterpreter.\r\n\r\n.. _`Stackless`: http://www.stackless.com\r\n\r\n\r\nWho is using Greenlet?\r\n======================\r\n\r\nThere are several libraries that use Greenlet as a more flexible\r\nalternative to Python's built in coroutine support:\r\n\r\n - `Concurrence`_\r\n - `Eventlet`_\r\n - `Gevent`_\r\n\r\n.. _Concurrence: http://opensource.hyves.org/concurrence/\r\n.. _Eventlet: http://eventlet.net/\r\n.. _Gevent: http://www.gevent.org/\r\n\r\nGetting Greenlet\r\n================\r\n\r\nThe easiest way to get Greenlet is to install it with pip::\r\n\r\n  pip install greenlet\r\n\r\n\r\nSource code archives and binary distributions are available on the\r\npython package index at https://pypi.org/project/greenlet\r\n\r\nThe source code repository is hosted on github:\r\nhttps://github.com/python-greenlet/greenlet\r\n\r\nDocumentation is available on readthedocs.org:\r\nhttps://greenlet.readthedocs.io\r\n",
+        "description_content_type": "text/x-rst",
+        "keywords": [
+          "greenlet",
+          "coroutine",
+          "concurrency",
+          "threads",
+          "cooperative"
+        ],
+        "author_email": "Alexey Borzenkov <snaury@gmail.com>",
+        "maintainer_email": "Jason Madden <jason@seecoresoftware.com>",
+        "license_expression": "MIT AND PSF-2.0",
+        "license_file": [
+          "LICENSE",
+          "LICENSE.PSF"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Natural Language :: English",
+          "Programming Language :: C",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Operating System :: OS Independent",
+          "Topic :: Software Development :: Libraries :: Python Modules"
+        ],
+        "requires_dist": [
+          "Sphinx; extra == \"docs\"",
+          "furo; extra == \"docs\"",
+          "objgraph; extra == \"test\"",
+          "psutil; extra == \"test\"",
+          "setuptools; extra == \"test\""
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://greenlet.readthedocs.io",
+          "Documentation, https://greenlet.readthedocs.io",
+          "Repository, https://github.com/python-greenlet/greenlet",
+          "Issues, https://github.com/python-greenlet/greenlet/issues",
+          "Changelog, https://greenlet.readthedocs.io/en/latest/changes.html"
+        ],
+        "provides_extra": [
+          "docs",
+          "test"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "hashes": {
+            "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "typing_extensions",
+        "version": "4.16.0",
+        "summary": "Backported and Experimental Type Hints for Python 3.9+",
+        "description": "# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) –\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions ~=x.y`,\nwhere `x.y` is the first version that includes all features you need.\n[This](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release)\nis equivalent to `typing_extensions >=x.y, <(x+1)`. Do not depend on `~= x.y.z`\nunless you really know what you're doing; that defeats the purpose of\nsemantic versioning.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.\n\n",
+        "description_content_type": "text/markdown",
+        "keywords": [
+          "annotations",
+          "backport",
+          "checker",
+          "checking",
+          "function",
+          "hinting",
+          "hints",
+          "type",
+          "typechecking",
+          "typehinting",
+          "typehints",
+          "typing"
+        ],
+        "author_email": "\"Guido van Rossum, Jukka Lehtosalo, Łukasz Langa, Michael Lee\" <levkivskyi@gmail.com>",
+        "license_expression": "PSF-2.0",
+        "license_file": [
+          "LICENSE"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Environment :: Console",
+          "Intended Audience :: Developers",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3 :: Only",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Topic :: Software Development"
+        ],
+        "requires_python": ">=3.9",
+        "project_url": [
+          "Bug Tracker, https://github.com/python/typing_extensions/issues",
+          "Changes, https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+          "Documentation, https://typing-extensions.readthedocs.io/",
+          "Home, https://github.com/python/typing_extensions",
+          "Q & A, https://github.com/python/typing/discussions",
+          "Repository, https://github.com/python/typing_extensions"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/a5/54/12ed58d458474aaab5c3d180173e745a4fe131bb330370596876d19ff60f/mako-1.4.1-py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=a359d9a94a541213958742b2698d0a7757bb83551767bc468a74b9905aba9617",
+          "hashes": {
+            "sha256": "a359d9a94a541213958742b2698d0a7757bb83551767bc468a74b9905aba9617"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "Mako",
+        "version": "1.4.1",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "A super-fast templating language that borrows the best ideas from the existing templating languages.",
+        "description": "=========================\nMako Templates for Python\n=========================\n\nMako is a template library written in Python. It provides a familiar, non-XML \nsyntax which compiles into Python modules for maximum performance. Mako's \nsyntax and API borrows from the best ideas of many others, including Django\ntemplates, Cheetah, Myghty, and Genshi. Conceptually, Mako is an embedded \nPython (i.e. Python Server Page) language, which refines the familiar ideas\nof componentized layout and inheritance to produce one of the most \nstraightforward and flexible models available, while also maintaining close \nties to Python calling and scoping semantics.\n\nNutshell\n========\n\n::\n\n    <%inherit file=\"base.html\"/>\n    <%\n        rows = [[v for v in range(0,10)] for row in range(0,10)]\n    %>\n    <table>\n        % for row in rows:\n            ${makerow(row)}\n        % endfor\n    </table>\n\n    <%def name=\"makerow(row)\">\n        <tr>\n        % for name in row:\n            <td>${name}</td>\\\n        % endfor\n        </tr>\n    </%def>\n\nPhilosophy\n===========\n\nPython is a great scripting language. Don't reinvent the wheel...your templates can handle it !\n\nDocumentation\n==============\n\nSee documentation for Mako at https://docs.makotemplates.org/en/latest/\n\nLicense\n========\n\nMako is licensed under an MIT-style license (see LICENSE).\nOther incorporated projects may be licensed under different licenses.\nAll licenses allow for non-commercial and commercial use.\n",
+        "description_content_type": "text/x-rst",
+        "author_email": "Mike Bayer <mike@zzzcomputing.com>",
+        "license_expression": "MIT",
+        "license_file": [
+          "LICENSE"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Environment :: Web Environment",
+          "Intended Audience :: Developers",
+          "Programming Language :: Python",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Programming Language :: Python :: 3.14",
+          "Programming Language :: Python :: 3.15",
+          "Programming Language :: Python :: Implementation :: CPython",
+          "Programming Language :: Python :: Implementation :: PyPy",
+          "Topic :: Internet :: WWW/HTTP :: Dynamic Content"
+        ],
+        "requires_dist": [
+          "MarkupSafe>=2.0",
+          "pytest; extra == \"testing\"",
+          "Babel; extra == \"babel\"",
+          "lingua>=4.16; extra == \"lingua\""
+        ],
+        "requires_python": ">=3.10",
+        "project_url": [
+          "Homepage, https://www.makotemplates.org/",
+          "Documentation, https://docs.makotemplates.org",
+          "Issue Tracker, https://github.com/sqlalchemy/mako"
+        ],
+        "provides_extra": [
+          "testing",
+          "babel",
+          "lingua"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/f9/bc/8737e8d54cf51106118039b83f485a4783112fab49ea9d044b234978a46e/tzdata-2026.4-py2.py3-none-any.whl",
+        "archive_info": {
+          "hash": "sha256=c2169a8b0a7a5e9674da5a135ccdfb2b3e671b333ed9fed17b41f73c34476e81",
+          "hashes": {
+            "sha256": "c2169a8b0a7a5e9674da5a135ccdfb2b3e671b333ed9fed17b41f73c34476e81"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "tzdata",
+        "version": "2026.4",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Provider of IANA time zone data",
+        "description": "tzdata: Python package providing IANA time zone data\n====================================================\n\nThis is a Python package containing ``zic``-compiled binaries for the IANA time\nzone database. It is intended to be a fallback for systems that do not have\nsystem time zone data installed (or don't have it installed in a standard\nlocation), as a part of `PEP 615 <https://www.python.org/dev/peps/pep-0615/>`_.\n\nThis repository generates a ``pip``-installable package, published on PyPI as\n`tzdata <https://pypi.org/project/tzdata>`_.\n\nFor more information, see `the documentation <https://tzdata.python.org>`_.\n",
+        "description_content_type": "text/x-rst",
+        "home_page": "https://github.com/python/tzdata",
+        "author": "Python Software Foundation",
+        "author_email": "datetime-sig@python.org",
+        "license": "Apache-2.0",
+        "license_file": [
+          "LICENSE",
+          "licenses/LICENSE_APACHE"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Intended Audience :: Developers",
+          "Programming Language :: Python :: 2",
+          "Programming Language :: Python :: 3"
+        ],
+        "requires_python": ">=2",
+        "project_url": [
+          "Bug Reports, https://github.com/python/tzdata/issues",
+          "Source, https://github.com/python/tzdata",
+          "Documentation, https://tzdata.python.org"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/aa/5b/bec5aa9bbbb2c946ca2733ef9c4ca91c91b6a24580193e891b5f7dbe8e1e/markupsafe-3.0.3-cp312-cp312-win_amd64.whl",
+        "archive_info": {
+          "hash": "sha256=26a5784ded40c9e318cfc2bdb30fe164bdb8665ded9cd64d500a34fb42067b1c",
+          "hashes": {
+            "sha256": "26a5784ded40c9e318cfc2bdb30fe164bdb8665ded9cd64d500a34fb42067b1c"
+          }
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": false,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "MarkupSafe",
+        "version": "3.0.3",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Safely add untrusted strings to HTML/XML markup.",
+        "description": "<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/markupsafe/refs/heads/stable/docs/_static/markupsafe-name.svg\" alt=\"\" height=\"150\"></div>\r\n\r\n# MarkupSafe\r\n\r\nMarkupSafe implements a text object that escapes characters so it is\r\nsafe to use in HTML and XML. Characters that have special meanings are\r\nreplaced so that they display as the actual characters. This mitigates\r\ninjection attacks, meaning untrusted user input can safely be displayed\r\non a page.\r\n\r\n\r\n## Examples\r\n\r\n```pycon\r\n>>> from markupsafe import Markup, escape\r\n\r\n>>> # escape replaces special characters and wraps in Markup\r\n>>> escape(\"<script>alert(document.cookie);</script>\")\r\nMarkup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\r\n\r\n>>> # wrap in Markup to mark text \"safe\" and prevent escaping\r\n>>> Markup(\"<strong>Hello</strong>\")\r\nMarkup('<strong>hello</strong>')\r\n\r\n>>> escape(Markup(\"<strong>Hello</strong>\"))\r\nMarkup('<strong>hello</strong>')\r\n\r\n>>> # Markup is a str subclass\r\n>>> # methods and operators escape their arguments\r\n>>> template = Markup(\"Hello <em>{name}</em>\")\r\n>>> template.format(name='\"World\"')\r\nMarkup('Hello <em>&#34;World&#34;</em>')\r\n```\r\n\r\n## Donate\r\n\r\nThe Pallets organization develops and supports MarkupSafe and other\r\npopular packages. In order to grow the community of contributors and\r\nusers, and allow the maintainers to devote more time to the projects,\r\n[please donate today][].\r\n\r\n[please donate today]: https://palletsprojects.com/donate\r\n\r\n## Contributing\r\n\r\nSee our [detailed contributing documentation][contrib] for many ways to\r\ncontribute, including reporting issues, requesting features, asking or answering\r\nquestions, and making PRs.\r\n\r\n[contrib]: https://palletsprojects.com/contributing/\r\n",
+        "description_content_type": "text/markdown",
+        "maintainer_email": "Pallets <contact@palletsprojects.com>",
+        "license_expression": "BSD-3-Clause",
+        "license_file": [
+          "LICENSE.txt"
+        ],
+        "classifier": [
+          "Development Status :: 5 - Production/Stable",
+          "Environment :: Web Environment",
+          "Intended Audience :: Developers",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python",
+          "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+          "Topic :: Text Processing :: Markup :: HTML",
+          "Typing :: Typed"
+        ],
+        "requires_python": ">=3.9",
+        "project_url": [
+          "Donate, https://palletsprojects.com/donate",
+          "Documentation, https://markupsafe.palletsprojects.com/",
+          "Changes, https://markupsafe.palletsprojects.com/page/changes/",
+          "Source, https://github.com/pallets/markupsafe/",
+          "Chat, https://discord.gg/pallets"
+        ]
+      }
+    }
+  ],
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.12.14",
+    "os_name": "nt",
+    "platform_machine": "AMD64",
+    "platform_release": "10",
+    "platform_system": "Windows",
+    "platform_version": "10.0.19045",
+    "python_full_version": "3.12.14",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.12",
+    "sys_platform": "win32"
+  }
+}

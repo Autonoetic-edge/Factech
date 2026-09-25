@@ -1,0 +1,124 @@
+{
+  "stack": "owned loopback: postgres 15432, keycloak 18443, engine 18445, gateway 18444",
+  "entrypoint": "tools/amfatec_stage.py -> facetech_auth.serve (the deployable path)",
+  "body_limit_bytes": 481964,
+  "passed": 23,
+  "total": 23,
+  "checks": [
+    {
+      "check": "gateway /health: HSTS",
+      "pass": true,
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "check": "gateway /health: nosniff",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "gateway /health: no CORS header",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "check": "gateway /health: no server banner",
+      "pass": true,
+      "detail": "None"
+    },
+    {
+      "check": "engine /health: HSTS",
+      "pass": true,
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "check": "engine /health: nosniff",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "engine /health: no CORS header",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "check": "engine /health: no server banner",
+      "pass": true,
+      "detail": "None"
+    },
+    {
+      "check": "page /: HSTS",
+      "pass": true,
+      "detail": "max-age=31536000; includeSubDomains"
+    },
+    {
+      "check": "page /: nosniff",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "page /: no CORS header",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "check": "page /: no server banner",
+      "pass": true,
+      "detail": "None"
+    },
+    {
+      "check": "unauthenticated 32 MB upload refused",
+      "pass": true,
+      "detail": "401"
+    },
+    {
+      "check": "refused as unauthenticated, not parsed",
+      "pass": true,
+      "detail": "{\"error\":\"AUTHENTICATION_REQUIRED\",\"request_id\":\"738ff9c70f8243c0c6a2a36f8b0b6be0\"}"
+    },
+    {
+      "check": "authenticated 32 MB chunked upload -> 413",
+      "pass": true,
+      "detail": "{\"error\":\"PAYLOAD_TOO_LARGE\",\"request_id\":\"1c7467d0941218d5044a0f837355b298\"}"
+    },
+    {
+      "check": "413 body carries the code only",
+      "pass": true,
+      "detail": "{\"error\":\"PAYLOAD_TOO_LARGE\",\"request_id\":\"1c7467d0941218d5044a0f837355b298\"}"
+    },
+    {
+      "check": "scan-limit 429 carries Retry-After",
+      "pass": true,
+      "detail": "59"
+    },
+    {
+      "check": "per-principal scan limit trips over real HTTP",
+      "pass": true,
+      "detail": "[409, 409, 409, 409, 409, 409, 409, 409, 409, 429]"
+    },
+    {
+      "check": "X-Forwarded-For from an undeclared proxy is refused",
+      "pass": true,
+      "detail": "400 {\"error\":\"UNTRUSTED_CONTEXT\",\"request_id\":\"be5656414e996cf88d38f2cd1d956929\"}"
+    },
+    {
+      "check": "the liveness probe is not refused by that gate",
+      "pass": true,
+      "detail": "200"
+    },
+    {
+      "check": "auth surface rate limits",
+      "pass": true,
+      "detail": "[302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 302, 429]"
+    },
+    {
+      "check": "auth bound is the configured 60 per source",
+      "pass": true,
+      "detail": "58"
+    },
+    {
+      "check": "auth 429 carries Retry-After",
+      "pass": true,
+      "detail": "57"
+    }
+  ]
+}

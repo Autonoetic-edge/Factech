@@ -1,0 +1,56 @@
+E:\Factech\vendor\Silent-Face-Anti-Spoofing\src\anti_spoof_predict.py:91: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  result = F.softmax(result).cpu().numpy()
+{
+  "manifest": {
+    "repository": "https://github.com/minivision-ai/Silent-Face-Anti-Spoofing",
+    "revision": "b6d5f04ad78778917853b25c778acef6d5626d15",
+    "license": "Apache-2.0 (repository license; no separate checkpoint license found)",
+    "classes": {
+      "0": "attack (subtype unspecified)",
+      "1": "live",
+      "2": "attack (subtype unspecified)"
+    },
+    "input": "BGR float32 NCHW 1x3x80x80, values 0..255, no normalization",
+    "ensemble": "arithmetic mean of per-model softmax, live iff argmax is 1",
+    "models": [
+      {
+        "checkpoint": "2.7_80x80_MiniFASNetV2.pth",
+        "checkpoint_sha256": "a5eb02e1843f19b5386b953cc4c9f011c3f985d0ee2bb9819eea9a142099bec0",
+        "onnx": "2.7_80x80_MiniFASNetV2.onnx",
+        "onnx_sha256": "6f27a4194ecaf355b5ee43afca868e271ddeff1535f65824d1cf14ebad748257",
+        "scale": 2.7
+      },
+      {
+        "checkpoint": "4_0_0_80x80_MiniFASNetV1SE.pth",
+        "checkpoint_sha256": "84ee1d37d96894d5e82de5a57df044ef80a58be2b218b5ed7cdfd875ec2f5990",
+        "onnx": "4_0_0_80x80_MiniFASNetV1SE.onnx",
+        "onnx_sha256": "6f2e77cb8aca3789a1ecdae0cf647937a2c24aac2040aea367c6a0c61d04e0f7",
+        "scale": 4.0
+      }
+    ],
+    "conversion": {
+      "torch": "2.6.0+cpu",
+      "onnx": "1.17.0",
+      "onnxruntime": "1.30.0",
+      "numpy": "2.5.3",
+      "opencv": "4.11.0",
+      "opset": 17
+    }
+  },
+  "parity": [
+    {
+      "model": "2.7_80x80_MiniFASNetV2.pth",
+      "cases": 9,
+      "max_abs_error": 9.834766387939453e-07,
+      "identical_crops_and_tensors": true,
+      "same_argmax": true
+    },
+    {
+      "model": "4_0_0_80x80_MiniFASNetV1SE.pth",
+      "cases": 9,
+      "max_abs_error": 1.2516975402832031e-06,
+      "identical_crops_and_tensors": true,
+      "same_argmax": true
+    }
+  ]
+}

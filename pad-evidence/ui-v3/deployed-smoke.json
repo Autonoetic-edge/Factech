@@ -1,0 +1,13 @@
+{
+  "request_id": "15773169cddc4402b112aa4e96bed1d9",
+  "gateway_enrollment": {
+    "error": {
+      "code": "LIVENESS_FAIL",
+      "message": "PAD spoof: non_live_frame"
+    }
+  },
+  "status": 422,
+  "latency_ms": 2626.77,
+  "capture_count_unchanged": 8,
+  "sdk_sha256": "fb42da606da066b20c1d43e2f25f246b766b94c96db347d22f22e3cb7f2aedcd"
+}

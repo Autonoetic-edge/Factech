@@ -1,0 +1,39 @@
+# AmFatec preview (/opt/amfatec, compose project "amfatec"). Additive: touches no
+# existing router or service. Rollback = delete this file (Traefik watches the folder).
+#
+# The app speaks TLS itself and checks the exact Host, so Traefik re-encrypts to it
+# and verifies the internal cert. The sign-in server exposes only what a browser
+# login needs; its admin console is not routed.
+http:
+  routers:
+    amfatec-app:
+      rule: "Host(`amfatec.31.97.186.120.sslip.io`)"
+      entryPoints:
+        - websecure
+      service: amfatec-app
+      tls:
+        certResolver: letsencrypt
+    amfatec-auth:
+      rule: "Host(`auth-amfatec.31.97.186.120.sslip.io`) && (PathPrefix(`/realms/amfatec/`) || PathPrefix(`/resources/`))"
+      entryPoints:
+        - websecure
+      service: amfatec-auth
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    amfatec-app:
+      loadBalancer:
+        serversTransport: amfatec-internal
+        servers:
+          - url: "https://127.0.0.1:18444"
+    amfatec-auth:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:18443"
+
+  serversTransports:
+    amfatec-internal:
+      serverName: gateway
+      rootCAs:
+        - /dynamic/amfatec-internal.crt

@@ -1,0 +1,26 @@
+name: Ruff lint and format check
+description: >
+  Install a pinned ruff and run `ruff check` + `ruff format --check` over the
+  whole repo, using the rule set in ruff.toml.
+
+inputs:
+  version:
+    description: >
+      ruff version to install. Pinned by the caller: an unpinned linter turns
+      an upstream release into a red build on an unrelated pull request.
+    required: false
+    default: "0.14.14"
+
+runs:
+  using: composite
+  steps:
+    - name: Install ruff
+      shell: bash
+      run: pip install "ruff==${{ inputs.version }}"
+
+    - name: Lint
+      shell: bash
+      run: ruff check --output-format=github .
+    - name: Format check
+      shell: bash
+      run: ruff format --check --diff .

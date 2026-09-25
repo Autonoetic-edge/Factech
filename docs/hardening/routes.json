@@ -1,0 +1,229 @@
+{
+  "status": "prospective contract; legacy routes are not protected by this file",
+  "explicit_routes": [
+    {
+      "source": "engine/app/main.py",
+      "method": "GET",
+      "path": "/health",
+      "hardened_policy": "minimal public health, no sensitive state",
+      "acceptance": [
+        "B01",
+        "S05"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "GET",
+      "path": "/v1/challenge",
+      "hardened_policy": "self-service subject and operation binding; recent login for enroll",
+      "acceptance": [
+        "A02",
+        "A04"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "POST",
+      "path": "/v1/enroll",
+      "hardened_policy": "participant owns subject; recent login, required consent; fresh challenge or authorized idempotent result",
+      "acceptance": [
+        "A02",
+        "A03",
+        "P01",
+        "D05"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "GET",
+      "path": "/v1/info",
+      "hardened_policy": "authenticated info; v1 retired with 410 at hardened cutover",
+      "acceptance": [
+        "A01",
+        "C05"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "POST",
+      "path": "/v1/liveness",
+      "hardened_policy": "participant owns subject; actor-bound fresh challenge; all gates mandatory",
+      "acceptance": [
+        "A02",
+        "A04",
+        "C02"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "DELETE",
+      "path": "/v1/templates/{user_id}",
+      "hardened_policy": "participant owns subject; recent login; revoke under subject generation lock",
+      "acceptance": [
+        "A02",
+        "A03",
+        "D04"
+      ]
+    },
+    {
+      "source": "engine/app/main.py",
+      "method": "POST",
+      "path": "/v1/verify",
+      "hardened_policy": "participant owns subject; mandatory gates and fresh challenge; recheck revocation at commit",
+      "acceptance": [
+        "A02",
+        "A03",
+        "D04"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "GET",
+      "path": "/capture-status",
+      "hardened_policy": "admin aggregate or reviewer team/round aggregate grant; no unscoped counts",
+      "acceptance": [
+        "A05",
+        "S05"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "GET",
+      "path": "/engine-status",
+      "hardened_policy": "authenticated readiness without sensitive engine configuration",
+      "acceptance": [
+        "A01",
+        "S05"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "GET",
+      "path": "/health",
+      "hardened_policy": "minimal public health, no sensitive state",
+      "acceptance": [
+        "B01",
+        "S05"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "DELETE",
+      "path": "/v1/{path:path}",
+      "hardened_policy": "remove wildcard proxy in hardened service; exact route/method allowlist only",
+      "acceptance": [
+        "A03",
+        "A07"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "GET",
+      "path": "/v1/{path:path}",
+      "hardened_policy": "remove wildcard proxy in hardened service; exact route/method allowlist only",
+      "acceptance": [
+        "A03",
+        "A07"
+      ]
+    },
+    {
+      "source": "mock-gateway/app.py",
+      "method": "POST",
+      "path": "/v1/{path:path}",
+      "hardened_policy": "remove wildcard proxy in hardened service; exact route/method allowlist only",
+      "acceptance": [
+        "A03",
+        "A07"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "GET",
+      "path": "/review",
+      "hardened_policy": "reviewer active metadata grant; no implicit admin access",
+      "acceptance": [
+        "A05"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "GET",
+      "path": "/review/api/captures",
+      "hardened_policy": "reviewer metadata grant; query scoped to tenant and round before pagination",
+      "acceptance": [
+        "A05"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "DELETE",
+      "path": "/review/api/captures/{capture_id}",
+      "hardened_policy": "GET: reviewer metadata grant; DELETE: participant self-deletion request only, service executes policy",
+      "acceptance": [
+        "A02",
+        "A05",
+        "P05"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "GET",
+      "path": "/review/api/captures/{capture_id}",
+      "hardened_policy": "GET: reviewer metadata grant; DELETE: participant self-deletion request only, service executes policy",
+      "acceptance": [
+        "A02",
+        "A05",
+        "P05"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "GET",
+      "path": "/review/api/captures/{capture_id}/frames/{index}",
+      "hardened_policy": "reviewer metadata AND frame grant for tenant/round; audited decryption",
+      "acceptance": [
+        "A05",
+        "P03"
+      ]
+    },
+    {
+      "source": "mock-gateway/evaluation.py",
+      "method": "GET",
+      "path": "/review/api/receipt/{request_id}",
+      "hardened_policy": "participant owns receipt or reviewer metadata grant for its round",
+      "acceptance": [
+        "A05"
+      ]
+    }
+  ],
+  "framework_routes": {
+    "paths": [
+      "/openapi.json",
+      "/docs",
+      "/docs/oauth2-redirect",
+      "/redoc"
+    ],
+    "policy": "FastAPI defaults currently enabled; disable on hardened service, test actual route registry in M1"
+  },
+  "static_mounts": {
+    "paths": [
+      "/",
+      "/console",
+      "/integration",
+      "/sdk",
+      "/shared",
+      "/vendor/mediapipe"
+    ],
+    "policy": "public login/asset allowlist only; authenticated pages otherwise; never fall through protected API paths; some mounts conditional"
+  },
+  "future_routes": {
+    "paths": [
+      "/auth/login",
+      "/auth/callback",
+      "/auth/logout",
+      "/auth/backchannel-logout",
+      "/v2/*"
+    ],
+    "policy": "Separate isolated ASGI factories now implement exact registrations; see hardened-routes.json and evidence/M1.md. Legacy services remain unchanged. Wildcard v2 is never permitted; durable operations and real staging remain open."
+  }
+}

@@ -1,0 +1,15 @@
+# Installed into E:\Factech\.hardening-deps; existing venv was not changed.
+Authlib==1.8.0
+joserfc==1.7.5
+cryptography==50.0.1
+cffi==2.1.1
+pycparser==3.0
+SQLAlchemy==2.0.54
+alembic==1.20.0
+psycopg==3.3.6
+psycopg-binary==3.3.6
+greenlet==3.5.6
+typing-extensions==4.16.0
+Mako==1.4.1
+MarkupSafe==3.0.3
+tzdata==2026.4

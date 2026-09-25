@@ -1,0 +1,70 @@
+{
+  "scans": {
+    "captures_used": 4,
+    "frames_per_capture": [
+      12
+    ],
+    "bytes_per_capture": [
+      177971,
+      180723,
+      236459,
+      254574
+    ],
+    "live_engine_recorded_total_ms": [
+      2173.66,
+      2216.22,
+      2304.76,
+      2508.57
+    ],
+    "accepted": 4,
+    "rejected_codes": [],
+    "serial_ms": {
+      "median": 4258.7,
+      "min": 4032.6,
+      "max": 4505.7
+    },
+    "concurrent": {
+      "1": {
+        "wall_ms": 4352.7,
+        "slowest_caller_ms": 4352.5,
+        "accepted": 1
+      },
+      "5": {
+        "wall_ms": 20086.3,
+        "slowest_caller_ms": 19809.6,
+        "accepted": 5
+      },
+      "6": {
+        "wall_ms": 23354.8,
+        "slowest_caller_ms": 23345.8,
+        "accepted": 6
+      }
+    },
+    "engine_admission": {
+      "workers": 1,
+      "max_queued": 4,
+      "admitted_total": 5,
+      "busy_retry_after_s": 2
+    }
+  },
+  "machine": "E:\\Factech dev laptop, owned loopback stack, no Docker",
+  "auth": {
+    "sign_in": {
+      "seconds": 4.06,
+      "auth_window_calls": 2,
+      "note": "a full OIDC sign-in against the owned Keycloak"
+    },
+    "authenticated_requests": {
+      "served_before_refusal": 119,
+      "elapsed_s": 5.04,
+      "served_per_second": 23.6,
+      "refused_429": 1
+    },
+    "auth_requests": {
+      "served_before_refusal": 58,
+      "elapsed_s": 1.61,
+      "served_per_second": 36.1,
+      "refused_429": 1
+    }
+  }
+}

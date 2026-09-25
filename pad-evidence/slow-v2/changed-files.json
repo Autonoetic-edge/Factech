@@ -1,0 +1,54 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "6bc866a3fb7e9b0d7c17d93fe816f2b7ef67112bc651239340b4830f033dd95e"
+  },
+  {
+    "path": "engine/tests/test_challenge.py",
+    "sha256": "ae75af7bedc7655acdf6e241f6b58b0d344e794fb02ef9eeeed4d2fa06073ae7"
+  },
+  {
+    "path": "apps/integration-demo/index.html",
+    "sha256": "7412176c474e3686cfa32c339c07a69d4815539b22122b2011f48b0760ea5bd9"
+  },
+  {
+    "path": "apps/integration-demo/page.js",
+    "sha256": "9d5550c9d7079c6aa58241f152d35a550e2a285a110dfa347ac0d2ce53b87ad9"
+  },
+  {
+    "path": "apps/tests/guided-page.test.js",
+    "sha256": "4ab356c02818f792365538842badbabfb71121b589cea6ddd2529739060d3ae9"
+  },
+  {
+    "path": "engine/app/anti_spoof.py",
+    "sha256": "707f02992a267b58178f47f47bbbd4142f39521d897caa1d54bee81104da5802"
+  },
+  {
+    "path": "engine/app/challenge.py",
+    "sha256": "1cdcee7c9a56140dc9ddd77b95c47f25223b0a7f52f55c20a00e5a00025cd180"
+  },
+  {
+    "path": "engine/app/head_sequence.py",
+    "sha256": "90c9b45313dd899cc634d0d7d48191fcb2ad60ace9e78b387c559542b85a0a6d"
+  },
+  {
+    "path": "engine/app/liveness.py",
+    "sha256": "2f94cb376987c7430f1132eafb2657db4f242c29290f241aa9cf3287ae8a96ac"
+  },
+  {
+    "path": "engine/tests/test_secure_pad.py",
+    "sha256": "f2983208b078dc4e88a2abf307f7ea1726100e294de5d630bb49126b3a5d83f6"
+  },
+  {
+    "path": "engine/models/anti_spoof/POLICY.md",
+    "sha256": "811d1d169afc922ca04bbbbcaf66d5e9ae598c2eafe3733709285f7cc16290f7"
+  },
+  {
+    "path": "packages/face-sdk/tests/session.test.ts",
+    "sha256": "221b077d055888dfd67e8cfaf7db562eb5d6028c045e94d0a64877519ffb4c26"
+  },
+  {
+    "path": "packages/face-sdk/src/workflow/session.ts",
+    "sha256": "549b6f1629249aa1475754e829519b10ed4b2ec87cb4c07760d79632f443a92a"
+  }
+]

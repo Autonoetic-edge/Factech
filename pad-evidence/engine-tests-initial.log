@@ -1,0 +1,783 @@
+....................F.F.................F............FF.....F.EEEEEEE.FF [ 18%]
+EEEFFF..........................................FFFFFF.................. [ 36%]
+........................................................................ [ 54%]
+....FFFFFFFFFFF....FFF.............F.FF...............F.............FFFF [ 72%]
+FF..FFFFFFFF.........F.................................................. [ 90%]
+.........F..............FFFFF..FF...F.F.                                 [100%]
+=================================== ERRORS ====================================
+________________ ERROR at setup of test_the_valid_flow_passes _________________
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"fa151d188e9c40728be51ec1bdfd6667","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.77,"queue":0.53,"total":4.25},"transport":"json","ts":"2026-09-19T04:15:48.092+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"fa151d188e9c40728be51ec1bdfd6667","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.77,"queue":0.53,"total":4.25},"transport":"json","ts":"2026-09-19T04:15:48.092+00:00"}
+____________ ERROR at setup of test_verify_rejects_a_reused_nonce _____________
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"b3a7e408d2ba44498ca10bd9f1f298d1","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.2,"queue":0.56,"total":3.54},"transport":"json","ts":"2026-09-19T04:15:48.295+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"b3a7e408d2ba44498ca10bd9f1f298d1","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.2,"queue":0.56,"total":3.54},"transport":"json","ts":"2026-09-19T04:15:48.295+00:00"}
+___________ ERROR at setup of test_verify_rejects_an_unknown_nonce ____________
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"69af5f7802e74a29a237f21d45a3d21b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.06,"queue":0.66,"total":3.59},"transport":"json","ts":"2026-09-19T04:15:48.510+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"69af5f7802e74a29a237f21d45a3d21b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.06,"queue":0.66,"total":3.59},"transport":"json","ts":"2026-09-19T04:15:48.510+00:00"}
+___________ ERROR at setup of test_verify_rejects_an_expired_nonce ____________
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"0a05f39c49c84a6ca27a759593f8d076","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.08,"queue":0.65,"total":3.82},"transport":"json","ts":"2026-09-19T04:15:48.732+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"0a05f39c49c84a6ca27a759593f8d076","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.08,"queue":0.65,"total":3.82},"transport":"json","ts":"2026-09-19T04:15:48.732+00:00"}
+__ ERROR at setup of test_verify_rejects_a_nonce_issued_for_the_other_action __
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ba7507256d61429a93d30739660a7569","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.14,"queue":0.63,"total":3.57},"transport":"json","ts":"2026-09-19T04:15:48.933+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ba7507256d61429a93d30739660a7569","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.14,"queue":0.63,"total":3.57},"transport":"json","ts":"2026-09-19T04:15:48.933+00:00"}
+__ ERROR at setup of test_verify_rejects_a_scan_that_echoed_the_wrong_params __
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3364ef324ee649639b66cbfdd516bef9","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.81,"queue":0.57,"total":3.13},"transport":"json","ts":"2026-09-19T04:15:49.129+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3364ef324ee649639b66cbfdd516bef9","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.81,"queue":0.57,"total":3.13},"transport":"json","ts":"2026-09-19T04:15:49.129+00:00"}
+____ ERROR at setup of test_verify_rejects_a_scan_with_no_challenge_at_all ____
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"d5ba68a7c21e418c89b872a5c02ad87a","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.78,"queue":0.53,"total":3.1},"transport":"json","ts":"2026-09-19T04:15:49.350+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"d5ba68a7c21e418c89b872a5c02ad87a","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.78,"queue":0.53,"total":3.1},"transport":"json","ts":"2026-09-19T04:15:49.350+00:00"}
+_____ ERROR at setup of test_liveness_endpoint_leaves_the_nonce_spendable _____
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c9ce90fd0a394266a5ebaebb9b5af013","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.72,"queue":0.75,"total":4.38},"transport":"json","ts":"2026-09-19T04:15:50.222+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c9ce90fd0a394266a5ebaebb9b5af013","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.72,"queue":0.75,"total":4.38},"transport":"json","ts":"2026-09-19T04:15:50.222+00:00"}
+_ ERROR at setup of test_enforcement_off_lets_a_dead_nonce_through_but_still_reports_it _
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"570bb8c797954f18bffa441e9fb0d849","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.15,"queue":0.55,"total":3.65},"transport":"json","ts":"2026-09-19T04:15:50.446+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"570bb8c797954f18bffa441e9fb0d849","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.15,"queue":0.55,"total":3.65},"transport":"json","ts":"2026-09-19T04:15:50.446+00:00"}
+______ ERROR at setup of test_a_second_attempt_needs_a_second_challenge _______
+engine\tests\test_challenge.py:36: in enrolled
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr setup ----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3e1b4a58875444169b10760b80d9cece","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.22,"queue":0.6,"total":3.68},"transport":"json","ts":"2026-09-19T04:15:50.655+00:00"}
+----------------------------- Captured log setup ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3e1b4a58875444169b10760b80d9cece","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.22,"queue":0.6,"total":3.68},"transport":"json","ts":"2026-09-19T04:15:50.655+00:00"}
+================================== FAILURES ===================================
+__________________________ test_health_needs_no_key ___________________________
+engine\tests\test_auth.py:78: in test_health_needs_no_key
+    assert r.status_code == 200
+E   assert 503 == 200
+E    +  where 503 = <Response [503 Service Unavailable]>.status_code
+________________ test_unconfigured_engine_authenticates_nobody ________________
+engine\tests\test_auth.py:90: in test_unconfigured_engine_authenticates_nobody
+    assert client.get("/health").status_code == 200
+E   AssertionError: assert 503 == 200
+E    +  where 503 = <Response [503 Service Unavailable]>.status_code
+E    +    where <Response [503 Service Unavailable]> = get('/health')
+E    +      where get = <starlette.testclient.TestClient object at 0x000002457F8604A0>.get
+________________ test_move_closer_is_what_the_engine_asks_for _________________
+engine\tests\test_challenge.py:80: in test_move_closer_is_what_the_engine_asks_for
+    assert challenge.ISSUABLE_ACTIONS == (challenge.MOVE_CLOSER,)
+E   AssertionError: assert ('HEAD_SEQUENCE',) == ('MOVE_CLOSER',)
+E     
+E     At index 0 diff: 'HEAD_SEQUENCE' != 'MOVE_CLOSER'
+E     Use -v to get more diff
+_______________________ test_issued_params_are_in_band ________________________
+engine\tests\test_challenge.py:271: in test_issued_params_are_in_band
+    assert liveness.SCALE_DELTA_FLOOR <= params["target"] <= ceiling
+E   assert 0.22 <= 0.2
+E    +  where 0.22 = liveness.SCALE_DELTA_FLOOR
+___________________ test_issued_params_vary_between_nonces ____________________
+engine\tests\test_challenge.py:279: in test_issued_params_vary_between_nonces
+    assert len(drawn) > 10, "params are not being redrawn per nonce"
+E   AssertionError: params are not being redrawn per nonce
+E   assert 1 > 10
+E    +  where 1 = len({(1400, 0.2)})
+_________ test_a_target_echoed_with_a_little_float_noise_is_accepted __________
+engine\tests\test_challenge.py:319: in test_a_target_echoed_with_a_little_float_noise_is_accepted
+    assert challenge.check(
+E   AssertionError: assert False
+E    +  where False = ChallengeVerdict(ok=False, reason='params_mismatch', action='HEAD_SEQUENCE', presented_action='HEAD_SEQUENCE', params={'settle_ms': 1400, 'switch_ms': 4300, 'first_sign': -1, 'target': 0.2}, nonce_prefix='0274a756', consumed=True).ok
+E    +    where ChallengeVerdict(ok=False, reason='params_mismatch', action='HEAD_SEQUENCE', presented_action='HEAD_SEQUENCE', params={'settle_ms': 1400, 'switch_ms': 4300, 'first_sign': -1, 'target': 0.2}, nonce_prefix='0274a756', consumed=True) = <function check at 0x000002457F230220>('0274a7563e76577096111626f0f4e4e7', 'HEAD_SEQUENCE', spend=True, presented_params={'settle_ms': 1400, 'switch_ms': 4300, 'first_sign': -1, 'target': 0.200000001})
+E    +      where <function check at 0x000002457F230220> = challenge.check
+___________________ test_a_no_face_scan_keeps_its_challenge ___________________
+engine\tests\test_challenge.py:438: in test_a_no_face_scan_keeps_its_challenge
+    assert r.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"14da05c7c574440592e31710543ac653","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.73,"queue":0.57,"total":3.35},"transport":"json","ts":"2026-09-19T04:15:49.789+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"14da05c7c574440592e31710543ac653","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.73,"queue":0.57,"total":3.35},"transport":"json","ts":"2026-09-19T04:15:49.789+00:00"}
+_________ test_liveness_endpoint_reports_a_bad_nonce_without_erroring _________
+engine\tests\test_challenge.py:452: in test_liveness_endpoint_reports_a_bad_nonce_without_erroring
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":"MOVE_CLOSER","reason":"unknown_nonce"},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: unknown_nonce","request_id":"f3c107da157943ae9c38143050742df7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.32,"queue":0.64,"total":3.98},"transport":"json","ts":"2026-09-19T04:15:50.005+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":"MOVE_CLOSER","reason":"unknown_nonce"},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: unknown_nonce","request_id":"f3c107da157943ae9c38143050742df7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.32,"queue":0.64,"total":3.98},"transport":"json","ts":"2026-09-19T04:15:50.005+00:00"}
+_______________ test_enroll_and_verify_lines_carry_every_field ________________
+engine\tests\test_decision_trace.py:105: in test_enroll_and_verify_lines_carry_every_field
+    assert r.status_code == 200, r.text
+E   AssertionError: {"error":{"code":"CHALLENGE_FAIL","message":"challenge check failed: binding_mismatch"}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"abc1234","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"afef39ecee514e199476f4d4c45afda4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.26,"queue":0.62,"total":3.63},"transport":"json","ts":"2026-09-19T04:15:50.862+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"abc1234","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"afef39ecee514e199476f4d4c45afda4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.26,"queue":0.62,"total":3.63},"transport":"json","ts":"2026-09-19T04:15:50.862+00:00"}
+___________ test_liveness_fail_names_the_failing_and_minimum_signal ___________
+engine\tests\test_decision_trace.py:173: in test_liveness_fail_names_the_failing_and_minimum_signal
+    assert line["error_code"] == r.json()["error"]["code"] == "LIVENESS_FAIL"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'LIVENESS_FAIL'
+E     
+E     - LIVENESS_FAIL
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"86b4df7c1de94aaba8b22378d2a47341","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.22,"queue":0.62,"total":3.63},"transport":"json","ts":"2026-09-19T04:15:50.891+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"86b4df7c1de94aaba8b22378d2a47341","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.22,"queue":0.62,"total":3.63},"transport":"json","ts":"2026-09-19T04:15:50.891+00:00"}
+_____________ test_liveness_endpoint_inspects_and_does_not_spend ______________
+engine\tests\test_decision_trace.py:187: in test_liveness_endpoint_inspects_and_does_not_spend
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"35c0357d79294c14a34d9ef757baccb7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.03,"queue":0.57,"total":3.25},"transport":"json","ts":"2026-09-19T04:15:51.088+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"35c0357d79294c14a34d9ef757baccb7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.03,"queue":0.57,"total":3.25},"transport":"json","ts":"2026-09-19T04:15:51.088+00:00"}
+_____________________ test_enroll_then_verify_round_trip ______________________
+engine\tests\test_enroll_verify.py:79: in test_enroll_then_verify_round_trip
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1bf0f84201a442b48ac0a17d702fdd61","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":3.15,"queue":0.65,"total":4.87},"transport":"json","ts":"2026-09-19T04:15:52.391+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1bf0f84201a442b48ac0a17d702fdd61","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":3.15,"queue":0.65,"total":4.87},"transport":"json","ts":"2026-09-19T04:15:52.391+00:00"}
+_______________ test_verify_with_different_images_scores_lower ________________
+engine\tests\test_enroll_verify.py:112: in test_verify_with_different_images_scores_lower
+    assert -1.0 <= diff["score"] <= 1.0
+                   ^^^^^^^^^^^^^
+E   KeyError: 'score'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"cef2d314af0b40e982d337ad4ecf4466","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.29,"queue":0.5,"total":3.64},"transport":"json","ts":"2026-09-19T04:15:52.601+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"931a9abea179438cb4d473f16e6204c5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.4,"total":3.32},"transport":"json","ts":"2026-09-19T04:15:52.793+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"5f7301d128a8477f85106c4c166f7fe1","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.37,"total":2.92},"transport":"json","ts":"2026-09-19T04:15:53.140+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"cef2d314af0b40e982d337ad4ecf4466","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.29,"queue":0.5,"total":3.64},"transport":"json","ts":"2026-09-19T04:15:52.601+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"931a9abea179438cb4d473f16e6204c5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.4,"total":3.32},"transport":"json","ts":"2026-09-19T04:15:52.793+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"5f7301d128a8477f85106c4c166f7fe1","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.37,"total":2.92},"transport":"json","ts":"2026-09-19T04:15:53.140+00:00"}
+___________________________ test_enroll_no_face_422 ___________________________
+engine\tests\test_enroll_verify.py:122: in test_enroll_no_face_422
+    assert r.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"bfee5cf9602a4fa9966e116d65c7b146","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.77,"queue":0.6,"total":3.12},"transport":"json","ts":"2026-09-19T04:15:53.367+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"bfee5cf9602a4fa9966e116d65c7b146","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.77,"queue":0.6,"total":3.12},"transport":"json","ts":"2026-09-19T04:15:53.367+00:00"}
+____________________ test_verify_no_face_after_enroll_422 _____________________
+engine\tests\test_enroll_verify.py:135: in test_verify_no_face_after_enroll_422
+    assert r.status_code == 422
+E   assert 404 == 422
+E    +  where 404 = <Response [404 Not Found]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"37492d78fef344d8a63b9cb9b92065de","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.88,"queue":0.59,"total":3.22},"transport":"json","ts":"2026-09-19T04:15:53.544+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"f30bbcd06ca348c5b6821ad05a3ce0d3","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.88,"total":2.38},"transport":"json","ts":"2026-09-19T04:15:53.700+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"37492d78fef344d8a63b9cb9b92065de","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.88,"queue":0.59,"total":3.22},"transport":"json","ts":"2026-09-19T04:15:53.544+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"f30bbcd06ca348c5b6821ad05a3ce0d3","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.88,"total":2.38},"transport":"json","ts":"2026-09-19T04:15:53.700+00:00"}
+_________________________ test_enroll_multi_face_422 __________________________
+engine\tests\test_enroll_verify.py:146: in test_enroll_multi_face_422
+    assert r.json()["error"]["code"] == "MULTI_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'MULTI_FACE'
+E     
+E     - MULTI_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a599d3db97e146a7884ae22b8a3731ae","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.0,"queue":0.57,"total":3.17},"transport":"json","ts":"2026-09-19T04:15:53.871+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a599d3db97e146a7884ae22b8a3731ae","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.0,"queue":0.57,"total":3.17},"transport":"json","ts":"2026-09-19T04:15:53.871+00:00"}
+___________________ test_verify_multi_face_is_not_an_error ____________________
+engine\tests\test_enroll_verify.py:160: in test_verify_multi_face_is_not_an_error
+    assert r.status_code == 200
+E   assert 404 == 200
+E    +  where 404 = <Response [404 Not Found]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"2b06f3f5c0ed46cf8d8cf1b4183cc336","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.76,"queue":0.53,"total":2.97},"transport":"json","ts":"2026-09-19T04:15:54.033+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"4759431b75714d4b8d9bdb2589289435","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.87,"total":2.58},"transport":"json","ts":"2026-09-19T04:15:54.191+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"2b06f3f5c0ed46cf8d8cf1b4183cc336","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.76,"queue":0.53,"total":2.97},"transport":"json","ts":"2026-09-19T04:15:54.033+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"4759431b75714d4b8d9bdb2589289435","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.87,"total":2.58},"transport":"json","ts":"2026-09-19T04:15:54.191+00:00"}
+_____________________ test_enroll_rejects_a_replayed_scan _____________________
+engine\tests\test_liveness.py:565: in test_enroll_rejects_a_replayed_scan
+    assert r.json()["error"]["code"] == "LIVENESS_FAIL"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'LIVENESS_FAIL'
+E     
+E     - LIVENESS_FAIL
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"89d4767d7a7c44d0999b990205eef68b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.33,"queue":0.74,"total":4.01},"transport":"json","ts":"2026-09-19T04:16:02.399+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"89d4767d7a7c44d0999b990205eef68b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.33,"queue":0.74,"total":4.01},"transport":"json","ts":"2026-09-19T04:16:02.399+00:00"}
+_____________________ test_verify_rejects_a_replayed_scan _____________________
+engine\tests\test_liveness.py:582: in test_verify_rejects_a_replayed_scan
+    assert r.status_code == 422
+E   assert 404 == 422
+E    +  where 404 = <Response [404 Not Found]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"775ecfa8f4e14e4a8f93507388ef0899","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.97,"queue":0.66,"total":4.76},"transport":"json","ts":"2026-09-19T04:16:02.629+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"13a1ca2f2a8c4e359023d204b7e629d6","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.66,"total":4.45},"transport":"json","ts":"2026-09-19T04:16:02.642+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"775ecfa8f4e14e4a8f93507388ef0899","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.97,"queue":0.66,"total":4.76},"transport":"json","ts":"2026-09-19T04:16:02.629+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"13a1ca2f2a8c4e359023d204b7e629d6","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.66,"total":4.45},"transport":"json","ts":"2026-09-19T04:16:02.642+00:00"}
+_____________________ test_enroll_accepts_a_captured_scan _____________________
+engine\tests\test_liveness.py:593: in test_enroll_accepts_a_captured_scan
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"5f533aacd81649f0bba4f7a4120b4923","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.33,"queue":0.67,"total":3.82},"transport":"json","ts":"2026-09-19T04:16:02.902+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"5f533aacd81649f0bba4f7a4120b4923","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.33,"queue":0.67,"total":3.82},"transport":"json","ts":"2026-09-19T04:16:02.902+00:00"}
+___________ test_enroll_rejects_a_capture_that_did_not_move_closer ____________
+engine\tests\test_liveness.py:608: in test_enroll_rejects_a_capture_that_did_not_move_closer
+    assert r.json()["error"]["code"] == "LIVENESS_FAIL"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'LIVENESS_FAIL'
+E     
+E     - LIVENESS_FAIL
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"d8d1c9fc7b344e6abbd43cad07182e54","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.15,"queue":0.52,"total":3.51},"transport":"json","ts":"2026-09-19T04:16:03.071+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"d8d1c9fc7b344e6abbd43cad07182e54","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.15,"queue":0.52,"total":3.51},"transport":"json","ts":"2026-09-19T04:16:03.071+00:00"}
+___________ test_liveness_endpoint_shows_the_face_did_not_approach ____________
+engine\tests\test_liveness.py:618: in test_liveness_endpoint_shows_the_face_did_not_approach
+    signal = body["signals"]["challenge"]
+             ^^^^^^^^^^^^^^^
+E   KeyError: 'signals'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"8a7f11712bee4420b16e88660aa00496","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.95,"queue":0.59,"total":3.39},"transport":"json","ts":"2026-09-19T04:16:03.273+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"8a7f11712bee4420b16e88660aa00496","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.95,"queue":0.59,"total":3.39},"transport":"json","ts":"2026-09-19T04:16:03.273+00:00"}
+_______________ test_liveness_endpoint_measures_a_real_approach _______________
+engine\tests\test_liveness.py:630: in test_liveness_endpoint_measures_a_real_approach
+    signal = body["signals"]["challenge"]
+             ^^^^^^^^^^^^^^^
+E   KeyError: 'signals'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"722fbed6995b4d13ab56d864b148ce25","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.24,"queue":0.53,"total":3.5},"transport":"json","ts":"2026-09-19T04:16:03.473+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"722fbed6995b4d13ab56d864b148ce25","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.24,"queue":0.53,"total":3.5},"transport":"json","ts":"2026-09-19T04:16:03.473+00:00"}
+_________________ test_verify_carries_the_verdict_on_success __________________
+engine\tests\test_liveness.py:646: in test_verify_carries_the_verdict_on_success
+    assert body["match"] is True
+           ^^^^^^^^^^^^^
+E   KeyError: 'match'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c6737b8fa4bd48ac8313211be5a99b75","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.06,"queue":0.55,"total":3.35},"transport":"json","ts":"2026-09-19T04:16:03.679+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"d5e55dc83cac426d821c96f9610d8791","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.45,"total":3.21},"transport":"json","ts":"2026-09-19T04:16:03.856+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c6737b8fa4bd48ac8313211be5a99b75","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.06,"queue":0.55,"total":3.35},"transport":"json","ts":"2026-09-19T04:16:03.679+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"d5e55dc83cac426d821c96f9610d8791","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.45,"total":3.21},"transport":"json","ts":"2026-09-19T04:16:03.856+00:00"}
+______ test_enforcement_off_lets_the_spoof_through_but_still_reports_it _______
+engine\tests\test_liveness.py:667: in test_enforcement_off_lets_the_spoof_through_but_still_reports_it
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1f1b4e9db35746a6956b851f74b9d0b7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.9,"queue":0.76,"total":4.49},"transport":"json","ts":"2026-09-19T04:16:03.887+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1f1b4e9db35746a6956b851f74b9d0b7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.9,"queue":0.76,"total":4.49},"transport":"json","ts":"2026-09-19T04:16:03.887+00:00"}
+__________ test_liveness_endpoint_reports_a_replay_without_erroring ___________
+engine\tests\test_liveness.py:679: in test_liveness_endpoint_reports_a_replay_without_erroring
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"1c996c436ef5497dbaa90ceac9e9ce44","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.12,"queue":0.67,"total":3.52},"transport":"json","ts":"2026-09-19T04:16:03.920+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"1c996c436ef5497dbaa90ceac9e9ce44","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.12,"queue":0.67,"total":3.52},"transport":"json","ts":"2026-09-19T04:16:03.920+00:00"}
+________________ test_liveness_endpoint_passes_a_captured_scan ________________
+engine\tests\test_liveness.py:691: in test_liveness_endpoint_passes_a_captured_scan
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"6adfb672fa7448f980411ed8ffc1de15","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.99,"queue":0.56,"total":3.26},"transport":"json","ts":"2026-09-19T04:16:04.116+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"6adfb672fa7448f980411ed8ffc1de15","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.99,"queue":0.56,"total":3.26},"transport":"json","ts":"2026-09-19T04:16:04.116+00:00"}
+_____________________ test_liveness_endpoint_no_face_422 ______________________
+engine\tests\test_liveness.py:702: in test_liveness_endpoint_no_face_422
+    assert r.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"162b6783883b42a8a0e275bfbaf2d7ba","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.83,"queue":0.56,"total":3.11},"transport":"json","ts":"2026-09-19T04:16:04.300+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"162b6783883b42a8a0e275bfbaf2d7ba","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.83,"queue":0.56,"total":3.11},"transport":"json","ts":"2026-09-19T04:16:04.300+00:00"}
+____________ test_liveness_endpoint_accepts_the_msgpack_transport _____________
+engine\tests\test_liveness.py:740: in test_liveness_endpoint_accepts_the_msgpack_transport
+    assert r.json()["error"]["code"] in ("NO_FACE", "MODEL_UNAVAILABLE")
+E   AssertionError: assert 'CHALLENGE_FAIL' in ('NO_FACE', 'MODEL_UNAVAILABLE')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"ca762a2138484ed5b5e0b521369fd359","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.78,"queue":0.59,"total":2.32},"transport":"msgpack","ts":"2026-09-19T04:16:04.355+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"ca762a2138484ed5b5e0b521369fd359","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.78,"queue":0.59,"total":2.32},"transport":"msgpack","ts":"2026-09-19T04:16:04.355+00:00"}
+______________________ test_enroll_embeds_several_frames ______________________
+engine\tests\test_liveness.py:749: in test_enroll_embeds_several_frames
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8bd06410142d4dff80b71902325688d0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.3,"queue":0.67,"total":3.73},"transport":"json","ts":"2026-09-19T04:16:04.554+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8bd06410142d4dff80b71902325688d0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.3,"queue":0.67,"total":3.73},"transport":"json","ts":"2026-09-19T04:16:04.554+00:00"}
+______________ test_the_averaged_template_is_still_a_unit_vector ______________
+engine\tests\test_liveness.py:759: in test_the_averaged_template_is_still_a_unit_vector
+    embedding = store.get_templates("alice")[0]["embedding"]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   IndexError: list index out of range
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"7f7a092214fc4a2ca856fae95e8657e4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.09,"queue":0.6,"total":3.44},"transport":"json","ts":"2026-09-19T04:16:04.748+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"7f7a092214fc4a2ca856fae95e8657e4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.09,"queue":0.6,"total":3.44},"transport":"json","ts":"2026-09-19T04:16:04.748+00:00"}
+_______ test_f02_undetectable_settle_window_is_low_quality_not_enrolled _______
+engine\tests\test_review_fixes.py:75: in test_f02_undetectable_settle_window_is_low_quality_not_enrolled
+    assert r.json()["error"]["code"] == "LOW_QUALITY"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'LOW_QUALITY'
+E     
+E     - LOW_QUALITY
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":2400,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"0abe1bfe367642879dde10c88be5ece4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.59,"queue":0.53,"total":3.12},"transport":"json","ts":"2026-09-19T04:16:14.708+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":2400,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"0abe1bfe367642879dde10c88be5ece4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.59,"queue":0.53,"total":3.12},"transport":"json","ts":"2026-09-19T04:16:14.708+00:00"}
+________________ test_f03_verify_does_not_match_the_bystander _________________
+engine\tests\test_review_fixes.py:155: in test_f03_verify_does_not_match_the_bystander
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"4bc31dbcf70d4b7998ff416e0d527701","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.7,"queue":0.56,"total":1.94},"transport":"json","ts":"2026-09-19T04:16:14.733+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"4bc31dbcf70d4b7998ff416e0d527701","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.7,"queue":0.56,"total":1.94},"transport":"json","ts":"2026-09-19T04:16:14.733+00:00"}
+__________ test_f03_enroll_rejects_multi_face_in_any_embedded_frame ___________
+engine\tests\test_review_fixes.py:175: in test_f03_enroll_rejects_multi_face_in_any_embedded_frame
+    assert r.json()["error"]["code"] == "MULTI_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'MULTI_FACE'
+E     
+E     - MULTI_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"6426e1cf0c7147fb89ccf8a3921812ce","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.47,"total":2.06},"transport":"json","ts":"2026-09-19T04:16:14.758+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"6426e1cf0c7147fb89ccf8a3921812ce","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.47,"total":2.06},"transport":"json","ts":"2026-09-19T04:16:14.758+00:00"}
+___________ test_f40_user_id_is_case_insensitive_across_transports ____________
+engine\tests\test_review_fixes.py:296: in test_f40_user_id_is_case_insensitive_across_transports
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3808187be9d545fab86f8d2c8caffa15","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.97,"queue":0.47,"total":2.75},"transport":"json","ts":"2026-09-19T04:16:14.858+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3808187be9d545fab86f8d2c8caffa15","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.97,"queue":0.47,"total":2.75},"transport":"json","ts":"2026-09-19T04:16:14.858+00:00"}
+____________ test_f22_missing_nonce_takes_the_old_path[/v1/enroll] ____________
+engine\tests\test_review_fixes.py:405: in test_f22_missing_nonce_takes_the_old_path
+    assert no_face_detections, "missing nonce was refused before inference"
+E   AssertionError: missing nonce was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"a5d8932ab15a4518b157dfa4d4ff38e2","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.28,"queue":1.27,"total":5.27},"transport":"json","ts":"2026-09-19T04:16:14.981+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"a5d8932ab15a4518b157dfa4d4ff38e2","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.28,"queue":1.27,"total":5.27},"transport":"json","ts":"2026-09-19T04:16:14.981+00:00"}
+____________ test_f22_missing_nonce_takes_the_old_path[/v1/verify] ____________
+engine\tests\test_review_fixes.py:405: in test_f22_missing_nonce_takes_the_old_path
+    assert no_face_detections, "missing nonce was refused before inference"
+E   AssertionError: missing nonce was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"8e85e50cac39449897ab380eef5db239","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.01,"queue":0.67,"total":2.53},"transport":"json","ts":"2026-09-19T04:16:15.033+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"8e85e50cac39449897ab380eef5db239","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.01,"queue":0.67,"total":2.53},"transport":"json","ts":"2026-09-19T04:16:15.033+00:00"}
+_ test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/enroll-params] _
+engine\tests\test_review_fixes.py:417: in test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face
+    assert no_face_detections, "mismatch was refused before inference"
+E   AssertionError: mismatch was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"16b773b08e864049b1a54473d01572d0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.99,"queue":0.65,"total":2.42},"transport":"json","ts":"2026-09-19T04:16:15.061+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"16b773b08e864049b1a54473d01572d0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.99,"queue":0.65,"total":2.42},"transport":"json","ts":"2026-09-19T04:16:15.061+00:00"}
+_ test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/enroll-action] _
+engine\tests\test_review_fixes.py:417: in test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face
+    assert no_face_detections, "mismatch was refused before inference"
+E   AssertionError: mismatch was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"LOOK_LEFT","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"f4aa56f4158c4444a1d0df026823a829","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.97,"queue":0.59,"total":2.27},"transport":"json","ts":"2026-09-19T04:16:15.087+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"LOOK_LEFT","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"f4aa56f4158c4444a1d0df026823a829","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.97,"queue":0.59,"total":2.27},"transport":"json","ts":"2026-09-19T04:16:15.087+00:00"}
+_ test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/verify-params] _
+engine\tests\test_review_fixes.py:417: in test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face
+    assert no_face_detections, "mismatch was refused before inference"
+E   AssertionError: mismatch was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3baca2a6e61a44bcaae9a119e3f60517","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.61,"total":2.23},"transport":"json","ts":"2026-09-19T04:16:15.111+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"3baca2a6e61a44bcaae9a119e3f60517","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.61,"total":2.23},"transport":"json","ts":"2026-09-19T04:16:15.111+00:00"}
+_ test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/verify-action] _
+engine\tests\test_review_fixes.py:417: in test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face
+    assert no_face_detections, "mismatch was refused before inference"
+E   AssertionError: mismatch was refused before inference
+E   assert []
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"LOOK_LEFT","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9f2146d704644e57af1e3ddeb7595bc7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.8,"queue":0.55,"total":2.05},"transport":"json","ts":"2026-09-19T04:16:15.138+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"LOOK_LEFT","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9f2146d704644e57af1e3ddeb7595bc7","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.8,"queue":0.55,"total":2.05},"transport":"json","ts":"2026-09-19T04:16:15.138+00:00"}
+_________________ test_f22_enforcement_off_keeps_the_old_path _________________
+engine\tests\test_review_fixes.py:463: in test_f22_enforcement_off_keeps_the_old_path
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: missing_nonce'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"231f1803166d4aa0977c937a54b1faa0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.9,"queue":0.59,"total":2.17},"transport":"json","ts":"2026-09-19T04:16:15.182+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"231f1803166d4aa0977c937a54b1faa0","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.9,"queue":0.59,"total":2.17},"transport":"json","ts":"2026-09-19T04:16:15.182+00:00"}
+________ test_f22_live_nonce_with_no_face_is_still_no_face_and_unspent ________
+engine\tests\test_review_fixes.py:472: in test_f22_live_nonce_with_no_face_is_still_no_face_and_unspent
+    assert r.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"09506050bad448408e8033d00600ea0d","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.84,"queue":0.55,"total":2.07},"transport":"json","ts":"2026-09-19T04:16:15.204+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"09506050bad448408e8033d00600ea0d","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.84,"queue":0.55,"total":2.07},"transport":"json","ts":"2026-09-19T04:16:15.204+00:00"}
+_______________ test_f21_health_answers_while_a_scan_is_running _______________
+engine\tests\test_review_fixes.py:513: in test_f21_health_answers_while_a_scan_is_running
+    assert scan.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9db5e6e09314447aaee66ccd3a7dc0e3","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.07,"queue":0.61,"total":2.37},"transport":"json","ts":"2026-09-19T04:16:15.225+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9db5e6e09314447aaee66ccd3a7dc0e3","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.07,"queue":0.61,"total":2.37},"transport":"json","ts":"2026-09-19T04:16:15.225+00:00"}
+______________ test_f21_full_queue_is_503_busy_with_retry_after _______________
+engine\tests\test_review_fixes.py:537: in test_f21_full_queue_is_503_busy_with_retry_after
+    assert extra.status_code == 503
+E   assert 422 == 503
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a9a59c03d226497a85e9c18dee02a388","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.65,"queue":1.83,"total":15.44},"transport":"json","ts":"2026-09-19T04:16:15.360+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"bfa2b1980aaf405ea87e8dc78cf70bca","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.5,"queue":2.12,"total":14.33},"transport":"json","ts":"2026-09-19T04:16:15.361+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"824e4c7060674b3f88cf7a7ef6dbb02c","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.47,"queue":3.31,"total":13.65},"transport":"json","ts":"2026-09-19T04:16:15.362+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"f733264d8f284281ab17a9f71284638a","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.46,"queue":3.81,"total":12.76},"transport":"json","ts":"2026-09-19T04:16:15.363+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"50a45f2f13c2443a9daf57b9d3a2e366","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.46,"queue":4.68,"total":11.58},"transport":"json","ts":"2026-09-19T04:16:15.364+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"e6a075285a6d4f5694eb47a60037a2ed","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.1,"queue":0.41,"total":6.59},"transport":"json","ts":"2026-09-19T04:16:15.568+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a9a59c03d226497a85e9c18dee02a388","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.65,"queue":1.83,"total":15.44},"transport":"json","ts":"2026-09-19T04:16:15.360+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"bfa2b1980aaf405ea87e8dc78cf70bca","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.5,"queue":2.12,"total":14.33},"transport":"json","ts":"2026-09-19T04:16:15.361+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"824e4c7060674b3f88cf7a7ef6dbb02c","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.47,"queue":3.31,"total":13.65},"transport":"json","ts":"2026-09-19T04:16:15.362+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"f733264d8f284281ab17a9f71284638a","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.46,"queue":3.81,"total":12.76},"transport":"json","ts":"2026-09-19T04:16:15.363+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"50a45f2f13c2443a9daf57b9d3a2e366","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.46,"queue":4.68,"total":11.58},"transport":"json","ts":"2026-09-19T04:16:15.364+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":true,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":null},"endpoint":"liveness","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"current head sequence required","request_id":"e6a075285a6d4f5694eb47a60037a2ed","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.1,"queue":0.41,"total":6.59},"transport":"json","ts":"2026-09-19T04:16:15.568+00:00"}
+______________________ test_f21_scans_run_one_at_a_time _______________________
+engine\tests\test_review_fixes.py:569: in test_f21_scans_run_one_at_a_time
+    assert peak[0] == 1
+E   assert 0 == 1
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"572c8481159e4d139bb50f57db3205bc","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.99,"queue":1.26,"total":9.12},"transport":"json","ts":"2026-09-19T04:16:15.627+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"95da3f5fc4584453a1d3e9a2122d5c80","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.97,"queue":1.55,"total":8.02},"transport":"json","ts":"2026-09-19T04:16:15.628+00:00"}
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"7ca3b04924c0491ca14a6a46efc75b82","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.96,"queue":2.73,"total":7.38},"transport":"json","ts":"2026-09-19T04:16:15.629+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"572c8481159e4d139bb50f57db3205bc","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.99,"queue":1.26,"total":9.12},"transport":"json","ts":"2026-09-19T04:16:15.627+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"95da3f5fc4584453a1d3e9a2122d5c80","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.97,"queue":1.55,"total":8.02},"transport":"json","ts":"2026-09-19T04:16:15.628+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"7ca3b04924c0491ca14a6a46efc75b82","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.96,"queue":2.73,"total":7.38},"transport":"json","ts":"2026-09-19T04:16:15.629+00:00"}
+____________________ test_f21_verify_reads_templates_once _____________________
+engine\tests\test_review_fixes.py:595: in test_f21_verify_reads_templates_once
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8ec7e45b4d7e46b78b6ef27112f55d0c","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.84,"queue":0.55,"total":2.09},"transport":"json","ts":"2026-09-19T04:16:15.650+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8ec7e45b4d7e46b78b6ef27112f55d0c","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.84,"queue":0.55,"total":2.09},"transport":"json","ts":"2026-09-19T04:16:15.650+00:00"}
+_________________ test_f21_delete_during_verify_does_not_500 __________________
+engine\tests\test_review_fixes.py:612: in test_f21_delete_during_verify_does_not_500
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a73072b62c93492fa8f52174f363d576","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.72,"queue":0.52,"total":1.92},"transport":"json","ts":"2026-09-19T04:16:15.672+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"a73072b62c93492fa8f52174f363d576","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.72,"queue":0.52,"total":1.92},"transport":"json","ts":"2026-09-19T04:16:15.672+00:00"}
+________________ test_f02_complete_settle_window_still_enrolls ________________
+engine\tests\test_review_fixes.py:621: in test_f02_complete_settle_window_still_enrolls
+    assert r.status_code == 200, r.json()
+E   AssertionError: {'error': {'code': 'CHALLENGE_FAIL', 'message': 'challenge check failed: binding_mismatch'}}
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":2400,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"109f5a7077ef435eb8068d5f0c0792dd","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.0,"queue":0.56,"total":3.24},"transport":"json","ts":"2026-09-19T04:16:15.852+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":2400,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"109f5a7077ef435eb8068d5f0c0792dd","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.0,"queue":0.56,"total":3.24},"transport":"json","ts":"2026-09-19T04:16:15.852+00:00"}
+_________________ test_enroll_verify_revoke_verify_round_trip _________________
+engine\tests\test_revoke.py:87: in test_enroll_verify_revoke_verify_round_trip
+    assert client.post("/v1/enroll", json=body()).status_code == 200
+E   AssertionError: assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+E    +    where <Response [422 Unprocessable Entity]> = post('/v1/enroll', json={'user_id': 'carol', 'facescan': 'hKd2ZXJzaW9uAaZmcmFtZXOcg6pqcGVnX2J5dGVzxTXt/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgH...kZDU3MDYwNzEwOWY2MTNiYTAzYmI1Y2JkZTFlNzCmYWN0aW9uq01PVkVfQ0xPU0VSpnBhcmFtc4Kpc2V0dGxlX21zzQXcpnRhcmdldMs/0AAAAAAAAA=='})
+E    +      where post = <starlette.testclient.TestClient object at 0x000002457FEA1DC0>.post
+E    +      and   {'user_id': 'carol', 'facescan': 'hKd2ZXJzaW9uAaZmcmFtZXOcg6pqcGVnX2J5dGVzxTXt/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgH...kZDU3MDYwNzEwOWY2MTNiYTAzYmI1Y2JkZTFlNzCmYWN0aW9uq01PVkVfQ0xPU0VSpnBhcmFtc4Kpc2V0dGxlX21zzQXcpnRhcmdldMs/0AAAAAAAAA=='} = <function test_enroll_verify_revoke_verify_round_trip.<locals>.body at 0x0000024509A6C040>()
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ad718e6a88c5426eaaff0aecbec2decd","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.31,"queue":0.58,"total":3.6},"transport":"json","ts":"2026-09-19T04:16:16.092+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ad718e6a88c5426eaaff0aecbec2decd","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.31,"queue":0.58,"total":3.6},"transport":"json","ts":"2026-09-19T04:16:16.092+00:00"}
+______________ test_msgpack_enroll_reaches_the_parser_not_a_415 _______________
+engine\tests\test_transport.py:70: in test_msgpack_enroll_reaches_the_parser_not_a_415
+    assert r.json()["error"]["code"] in ("NO_FACE", "MODEL_UNAVAILABLE")
+E   AssertionError: assert 'CHALLENGE_FAIL' in ('NO_FACE', 'MODEL_UNAVAILABLE')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"cde7451b6a0c495e8380225055ccd2a4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.86,"queue":0.59,"total":2.13},"transport":"msgpack","ts":"2026-09-19T04:16:16.434+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":null,"consumed":false,"ok":false,"params":null,"presented_action":null,"reason":"missing_nonce"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: missing_nonce","request_id":"cde7451b6a0c495e8380225055ccd2a4","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.86,"queue":0.59,"total":2.13},"transport":"msgpack","ts":"2026-09-19T04:16:16.434+00:00"}
+_________________ test_msgpack_enroll_then_verify_round_trip __________________
+engine\tests\test_transport.py:187: in test_msgpack_enroll_then_verify_round_trip
+    assert r.status_code == 200
+E   assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c1f6889aebc04e3a8551abede9521780","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.83,"queue":0.82,"total":2.34},"transport":"msgpack","ts":"2026-09-19T04:16:16.732+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"c1f6889aebc04e3a8551abede9521780","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.83,"queue":0.82,"total":2.34},"transport":"msgpack","ts":"2026-09-19T04:16:16.732+00:00"}
+_______________ test_enroll_msgpack_verify_json_cross_transport _______________
+engine\tests\test_transport.py:199: in test_enroll_msgpack_verify_json_cross_transport
+    assert post_msgpack("/v1/enroll", scan, user_id="bob").status_code == 200
+E   AssertionError: assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+E    +    where <Response [422 Unprocessable Entity]> = post_msgpack('/v1/enroll', {'version': 1, 'frames': [{'jpeg_bytes': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xd... 'challenge': {'id': 'ch-1', 'results': [], 'nonce': 'e9cc02d42c1c1e57f846f3754f448ad7', 'action': 'MOVE_CLOSER', ...}}, user_id='bob')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ed9ca0c935504a7d89eb578133d2cfc6","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.57,"total":2.13},"transport":"msgpack","ts":"2026-09-19T04:16:16.911+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"ed9ca0c935504a7d89eb578133d2cfc6","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.87,"queue":0.57,"total":2.13},"transport":"msgpack","ts":"2026-09-19T04:16:16.911+00:00"}
+_______________ test_enroll_json_verify_msgpack_cross_transport _______________
+engine\tests\test_transport.py:208: in test_enroll_json_verify_msgpack_cross_transport
+    assert post_json("/v1/enroll", scan, user_id="carol").status_code == 200
+E   AssertionError: assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+E    +    where <Response [422 Unprocessable Entity]> = post_json('/v1/enroll', {'version': 1, 'frames': [{'jpeg_bytes': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xd... 'challenge': {'id': 'ch-1', 'results': [], 'nonce': '344e8dc841daa1d6d38aa8a755402fe9', 'action': 'MOVE_CLOSER', ...}}, user_id='carol')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"777edaa81e2c4fae9eba01061bee105d","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.11,"queue":0.5,"total":3.31},"transport":"json","ts":"2026-09-19T04:16:17.092+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"777edaa81e2c4fae9eba01061bee105d","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.11,"queue":0.5,"total":3.31},"transport":"json","ts":"2026-09-19T04:16:17.092+00:00"}
+__________________ test_transports_produce_identical_scores ___________________
+engine\tests\test_transport.py:220: in test_transports_produce_identical_scores
+    assert j["score"] == pytest.approx(m["score"])
+           ^^^^^^^^^^
+E   KeyError: 'score'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9f4eb48245694bad9832b5a24def281b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.19,"queue":0.61,"total":3.57},"transport":"json","ts":"2026-09-19T04:16:17.267+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"73f437c386404108a79502e6f32a33e5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.94,"total":2.43},"transport":"json","ts":"2026-09-19T04:16:17.276+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"79805eb33da24f52b976986132cf52ee","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.72,"total":1.19},"transport":"msgpack","ts":"2026-09-19T04:16:17.280+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"9f4eb48245694bad9832b5a24def281b","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.19,"queue":0.61,"total":3.57},"transport":"json","ts":"2026-09-19T04:16:17.267+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"73f437c386404108a79502e6f32a33e5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":1.94,"total":2.43},"transport":"json","ts":"2026-09-19T04:16:17.276+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"79805eb33da24f52b976986132cf52ee","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.72,"total":1.19},"transport":"msgpack","ts":"2026-09-19T04:16:17.280+00:00"}
+__________________________ test_msgpack_no_face_422 ___________________________
+engine\tests\test_transport.py:229: in test_msgpack_no_face_422
+    assert r.json()["error"]["code"] == "NO_FACE"
+E   AssertionError: assert 'CHALLENGE_FAIL' == 'NO_FACE'
+E     
+E     - NO_FACE
+E     + CHALLENGE_FAIL
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1332f58bc80843afb374defb6d247456","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.85,"queue":0.55,"total":2.2},"transport":"msgpack","ts":"2026-09-19T04:16:17.457+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1332f58bc80843afb374defb6d247456","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.85,"queue":0.55,"total":2.2},"transport":"msgpack","ts":"2026-09-19T04:16:17.457+00:00"}
+_________________ test_legacy_packed_enroll_verify_round_trip _________________
+engine\tests\test_transport.py:257: in test_legacy_packed_enroll_verify_round_trip
+    assert post_legacy_msgpack("/v1/enroll", scan, user_id="erin").status_code == 200
+E   AssertionError: assert 422 == 200
+E    +  where 422 = <Response [422 Unprocessable Entity]>.status_code
+E    +    where <Response [422 Unprocessable Entity]> = post_legacy_msgpack('/v1/enroll', {'version': 1, 'frames': [{'jpeg_bytes': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00\xff\xd... 'challenge': {'id': 'ch-1', 'results': [], 'nonce': 'e2e33c7ea1eb77160e48b86ccad932f9', 'action': 'MOVE_CLOSER', ...}}, user_id='erin')
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8ae13c0580fb4e2da8886beb3284d3f5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.18,"queue":0.56,"total":5.42},"transport":"msgpack","ts":"2026-09-19T04:16:17.644+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"8ae13c0580fb4e2da8886beb3284d3f5","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.18,"queue":0.56,"total":5.42},"transport":"msgpack","ts":"2026-09-19T04:16:17.644+00:00"}
+______________ test_legacy_and_modern_packing_score_identically _______________
+engine\tests\test_transport.py:269: in test_legacy_and_modern_packing_score_identically
+    assert legacy["score"] == pytest.approx(modern["score"])
+           ^^^^^^^^^^^^^^^
+E   KeyError: 'score'
+---------------------------- Captured stderr call -----------------------------
+{"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1440494c60dc4a4baae75324ae08933f","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.01,"queue":0.59,"total":3.3},"transport":"json","ts":"2026-09-19T04:16:17.826+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"77032c8cf6b24471a289e5ed7b425bbe","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.78,"total":1.48},"transport":"msgpack","ts":"2026-09-19T04:16:17.831+00:00"}
+{"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"029251a21ef543bd8013f24dd51ccfad","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.13,"total":4.63},"transport":"msgpack","ts":"2026-09-19T04:16:17.839+00:00"}
+------------------------------ Captured log call ------------------------------
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","challenge":{"action":"MOVE_CLOSER","consumed":true,"ok":false,"params":{"settle_ms":1500,"target":0.25},"presented_action":"MOVE_CLOSER","reason":"binding_mismatch"},"endpoint":"enroll","enforced":true,"engine_version":"0.2.0","error_code":"CHALLENGE_FAIL","event":"decision","http_status":422,"outcome":"rejected","reason":"challenge check failed: binding_mismatch","request_id":"1440494c60dc4a4baae75324ae08933f","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":2.01,"queue":0.59,"total":3.3},"transport":"json","ts":"2026-09-19T04:16:17.826+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"77032c8cf6b24471a289e5ed7b425bbe","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":0.78,"total":1.48},"transport":"msgpack","ts":"2026-09-19T04:16:17.831+00:00"}
+INFO     facetech.decision:trace.py:199 {"build_id":"dev","endpoint":"verify","enforced":true,"engine_version":"0.2.0","error_code":"USER_NOT_FOUND","event":"decision","http_status":404,"outcome":"rejected","reason":"user has no enrolled template","request_id":"029251a21ef543bd8013f24dd51ccfad","thresholds":{"liveness":0.5,"match":0.55},"timing_ms":{"parse":4.13,"total":4.63},"transport":"msgpack","ts":"2026-09-19T04:16:17.839+00:00"}
+______________ test_warm_models_is_a_noop_when_files_are_absent _______________
+engine\tests\test_warmup.py:89: in test_warm_models_is_a_noop_when_files_are_absent
+    assert warm_models() == {"detector": False, "embedder": False}
+E   AssertionError: assert {'detector': ..., 'pad': True} == {'detector': ...edder': False}
+E     
+E     Differing items:
+E     {'embedder': True} != {'embedder': False}
+E     {'detector': True} != {'detector': False}
+E     Left contains 1 more item:
+E     {'pad': True}
+E     Use -v to get more diff
+__________________ test_warm_models_loads_both_when_present ___________________
+engine\tests\test_warmup.py:103: in test_warm_models_loads_both_when_present
+    assert warm_models() == {"detector": True, "embedder": True}
+E   AssertionError: assert {'detector': ..., 'pad': True} == {'detector': ...bedder': True}
+E     
+E     Omitting 2 identical items, use -vv to show
+E     Left contains 1 more item:
+E     {'pad': True}
+E     Use -v to get more diff
+============================== warnings summary ===============================
+.venv-pad\Lib\site-packages\fastapi\testclient.py:1
+  E:\Factech\.venv-pad\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv-pad\Lib\site-packages\starlette\testclient.py:53
+  E:\Factech\.venv-pad\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED engine/tests/test_auth.py::test_health_needs_no_key - assert 503 == 200
+FAILED engine/tests/test_auth.py::test_unconfigured_engine_authenticates_nobody
+FAILED engine/tests/test_challenge.py::test_move_closer_is_what_the_engine_asks_for
+FAILED engine/tests/test_challenge.py::test_issued_params_are_in_band - asser...
+FAILED engine/tests/test_challenge.py::test_issued_params_vary_between_nonces
+FAILED engine/tests/test_challenge.py::test_a_target_echoed_with_a_little_float_noise_is_accepted
+FAILED engine/tests/test_challenge.py::test_a_no_face_scan_keeps_its_challenge
+FAILED engine/tests/test_challenge.py::test_liveness_endpoint_reports_a_bad_nonce_without_erroring
+FAILED engine/tests/test_decision_trace.py::test_enroll_and_verify_lines_carry_every_field
+FAILED engine/tests/test_decision_trace.py::test_liveness_fail_names_the_failing_and_minimum_signal
+FAILED engine/tests/test_decision_trace.py::test_liveness_endpoint_inspects_and_does_not_spend
+FAILED engine/tests/test_enroll_verify.py::test_enroll_then_verify_round_trip
+FAILED engine/tests/test_enroll_verify.py::test_verify_with_different_images_scores_lower
+FAILED engine/tests/test_enroll_verify.py::test_enroll_no_face_422 - Assertio...
+FAILED engine/tests/test_enroll_verify.py::test_verify_no_face_after_enroll_422
+FAILED engine/tests/test_enroll_verify.py::test_enroll_multi_face_422 - Asser...
+FAILED engine/tests/test_enroll_verify.py::test_verify_multi_face_is_not_an_error
+FAILED engine/tests/test_liveness.py::test_enroll_rejects_a_replayed_scan - A...
+FAILED engine/tests/test_liveness.py::test_verify_rejects_a_replayed_scan - a...
+FAILED engine/tests/test_liveness.py::test_enroll_accepts_a_captured_scan - a...
+FAILED engine/tests/test_liveness.py::test_enroll_rejects_a_capture_that_did_not_move_closer
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_shows_the_face_did_not_approach
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_measures_a_real_approach
+FAILED engine/tests/test_liveness.py::test_verify_carries_the_verdict_on_success
+FAILED engine/tests/test_liveness.py::test_enforcement_off_lets_the_spoof_through_but_still_reports_it
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_reports_a_replay_without_erroring
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_passes_a_captured_scan
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_no_face_422 - As...
+FAILED engine/tests/test_liveness.py::test_liveness_endpoint_accepts_the_msgpack_transport
+FAILED engine/tests/test_liveness.py::test_enroll_embeds_several_frames - ass...
+FAILED engine/tests/test_liveness.py::test_the_averaged_template_is_still_a_unit_vector
+FAILED engine/tests/test_review_fixes.py::test_f02_undetectable_settle_window_is_low_quality_not_enrolled
+FAILED engine/tests/test_review_fixes.py::test_f03_verify_does_not_match_the_bystander
+FAILED engine/tests/test_review_fixes.py::test_f03_enroll_rejects_multi_face_in_any_embedded_frame
+FAILED engine/tests/test_review_fixes.py::test_f40_user_id_is_case_insensitive_across_transports
+FAILED engine/tests/test_review_fixes.py::test_f22_missing_nonce_takes_the_old_path[/v1/enroll]
+FAILED engine/tests/test_review_fixes.py::test_f22_missing_nonce_takes_the_old_path[/v1/verify]
+FAILED engine/tests/test_review_fixes.py::test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/enroll-params]
+FAILED engine/tests/test_review_fixes.py::test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/enroll-action]
+FAILED engine/tests/test_review_fixes.py::test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/verify-params]
+FAILED engine/tests/test_review_fixes.py::test_f22_mismatch_takes_the_old_path_and_is_not_spent_on_no_face[/v1/verify-action]
+FAILED engine/tests/test_review_fixes.py::test_f22_enforcement_off_keeps_the_old_path
+FAILED engine/tests/test_review_fixes.py::test_f22_live_nonce_with_no_face_is_still_no_face_and_unspent
+FAILED engine/tests/test_review_fixes.py::test_f21_health_answers_while_a_scan_is_running
+FAILED engine/tests/test_review_fixes.py::test_f21_full_queue_is_503_busy_with_retry_after
+FAILED engine/tests/test_review_fixes.py::test_f21_scans_run_one_at_a_time - ...
+FAILED engine/tests/test_review_fixes.py::test_f21_verify_reads_templates_once
+FAILED engine/tests/test_review_fixes.py::test_f21_delete_during_verify_does_not_500
+FAILED engine/tests/test_review_fixes.py::test_f02_complete_settle_window_still_enrolls
+FAILED engine/tests/test_revoke.py::test_enroll_verify_revoke_verify_round_trip
+FAILED engine/tests/test_transport.py::test_msgpack_enroll_reaches_the_parser_not_a_415
+FAILED engine/tests/test_transport.py::test_msgpack_enroll_then_verify_round_trip
+FAILED engine/tests/test_transport.py::test_enroll_msgpack_verify_json_cross_transport
+FAILED engine/tests/test_transport.py::test_enroll_json_verify_msgpack_cross_transport
+FAILED engine/tests/test_transport.py::test_transports_produce_identical_scores
+FAILED engine/tests/test_transport.py::test_msgpack_no_face_422 - AssertionEr...
+FAILED engine/tests/test_transport.py::test_legacy_packed_enroll_verify_round_trip
+FAILED engine/tests/test_transport.py::test_legacy_and_modern_packing_score_identically
+FAILED engine/tests/test_warmup.py::test_warm_models_is_a_noop_when_files_are_absent
+FAILED engine/tests/test_warmup.py::test_warm_models_loads_both_when_present
+ERROR engine/tests/test_challenge.py::test_the_valid_flow_passes - AssertionE...
+ERROR engine/tests/test_challenge.py::test_verify_rejects_a_reused_nonce - As...
+ERROR engine/tests/test_challenge.py::test_verify_rejects_an_unknown_nonce - ...
+ERROR engine/tests/test_challenge.py::test_verify_rejects_an_expired_nonce - ...
+ERROR engine/tests/test_challenge.py::test_verify_rejects_a_nonce_issued_for_the_other_action
+ERROR engine/tests/test_challenge.py::test_verify_rejects_a_scan_that_echoed_the_wrong_params
+ERROR engine/tests/test_challenge.py::test_verify_rejects_a_scan_with_no_challenge_at_all
+ERROR engine/tests/test_challenge.py::test_liveness_endpoint_leaves_the_nonce_spendable
+ERROR engine/tests/test_challenge.py::test_enforcement_off_lets_a_dead_nonce_through_but_still_reports_it
+ERROR engine/tests/test_challenge.py::test_a_second_attempt_needs_a_second_challenge
+60 failed, 330 passed, 2 warnings, 10 errors in 41.16s

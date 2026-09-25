@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "files": 100,
+    "changed": []
+  },
+  "temporary_database_user_table_counts": {
+    "facetech_m2_migrate": 0,
+    "facetech_m2_restore": 0
+  },
+  "owned_stack_stopped": true,
+  "all_four_ports_free": true,
+  "ports": [
+    15432,
+    18443,
+    18444,
+    18445
+  ]
+}

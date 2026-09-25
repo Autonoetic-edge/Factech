@@ -1,0 +1,304 @@
+Verified 72 release file checksums
+ Image facetech-mock-gateway:eval-pad-0d87e7b9a807 Building 
+ Image facetech-engine:eval-pad-0d87e7b9a807 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.18kB done
+#1 DONE 0.0s
+
+#2 [engine internal] load build definition from Dockerfile
+#2 transferring dockerfile: 992B done
+#2 DONE 0.0s
+
+#3 [gateway internal] load build definition from Dockerfile
+#3 transferring dockerfile: 723B done
+#3 DONE 0.0s
+
+#4 [engine internal] load metadata for docker.io/library/python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+#4 DONE 1.4s
+
+#5 [gateway internal] load .dockerignore
+#5 transferring context: 271B 0.0s done
+#5 DONE 0.1s
+
+#6 [engine internal] load .dockerignore
+#6 transferring context: 68B done
+#6 DONE 0.1s
+
+#7 [gateway 1/8] FROM docker.io/library/python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea
+#7 resolve docker.io/library/python:3.12-slim@sha256:78387bc3881b8273120a12ebe6c1ab22b018ccc2c9adf565ae1ac9b536e184ea 0.1s done
+#7 DONE 0.1s
+
+#8 [gateway 2/8] WORKDIR /app
+#8 DONE 0.2s
+
+#9 [gateway internal] load build context
+#9 transferring context: 10.55MB 0.2s done
+#9 DONE 0.2s
+
+#10 [gateway 3/8] RUN pip install --no-cache-dir       "fastapi==0.141.1"       "starlette==1.6.0"       "uvicorn[standard]==0.52.4"       "httpx==0.28.1"       "msgpack==1.1.2"
+#10 ...
+
+#11 [engine internal] load build context
+#11 transferring context: 180.57MB 1.8s done
+#11 DONE 1.8s
+
+#12 [engine 3/8] COPY requirements.txt .
+#12 DONE 0.2s
+
+#10 [gateway 3/8] RUN pip install --no-cache-dir       "fastapi==0.141.1"       "starlette==1.6.0"       "uvicorn[standard]==0.52.4"       "httpx==0.28.1"       "msgpack==1.1.2"
+#10 2.857 Collecting fastapi==0.141.1
+#10 2.891   Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+#10 2.926 Collecting starlette==1.6.0
+#10 2.930   Downloading starlette-1.6.0-py3-none-any.whl.metadata (6.4 kB)
+#10 2.964 Collecting uvicorn==0.52.4 (from uvicorn[standard]==0.52.4)
+#10 3.175   Downloading uvicorn-0.52.4-py3-none-any.whl.metadata (6.6 kB)
+#10 3.221 Collecting httpx==0.28.1
+#10 3.224   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#10 3.342 Collecting msgpack==1.1.2
+#10 3.349   Downloading msgpack-1.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+#10 3.690 Collecting pydantic>=2.9.0 (from fastapi==0.141.1)
+#10 3.693   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+#10 3.729 Collecting typing-extensions>=4.8.0 (from fastapi==0.141.1)
+#10 3.734   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#10 3.747 Collecting typing-inspection>=0.4.2 (from fastapi==0.141.1)
+#10 3.756   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#10 3.770 Collecting annotated-doc>=0.0.2 (from fastapi==0.141.1)
+#10 3.778   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#10 3.807 Collecting anyio<5,>=3.6.2 (from starlette==1.6.0)
+#10 4.014   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#10 4.042 Collecting click>=7.0 (from uvicorn==0.52.4->uvicorn[standard]==0.52.4)
+#10 4.046   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#10 4.056 Collecting h11>=0.8 (from uvicorn==0.52.4->uvicorn[standard]==0.52.4)
+#10 4.060   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#10 4.075 Collecting certifi (from httpx==0.28.1)
+#10 4.078   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+#10 4.315 Collecting httpcore==1.* (from httpx==0.28.1)
+#10 4.319   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#10 4.336 Collecting idna (from httpx==0.28.1)
+#10 4.339   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#10 4.366 Collecting httptools>=0.8.0 (from uvicorn[standard]==0.52.4)
+#10 4.370   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#10 4.393 Collecting python-dotenv>=0.13 (from uvicorn[standard]==0.52.4)
+#10 4.396   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+#10 4.434 Collecting pyyaml>=5.1 (from uvicorn[standard]==0.52.4)
+#10 4.439   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#10 4.487 Collecting uvloop>=0.15.1 (from uvicorn[standard]==0.52.4)
+#10 4.490   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#10 4.576 Collecting watchfiles>=0.20 (from uvicorn[standard]==0.52.4)
+#10 4.580   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#10 4.683 Collecting websockets>=13.0 (from uvicorn[standard]==0.52.4)
+#10 4.691   Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+#10 4.716 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi==0.141.1)
+#10 4.723   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#10 5.442 Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi==0.141.1)
+#10 5.445   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#10 5.472 Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+#10 5.479 Downloading starlette-1.6.0-py3-none-any.whl (75 kB)
+#10 5.482 Downloading uvicorn-0.52.4-py3-none-any.whl (79 kB)
+#10 5.485 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#10 5.491 Downloading msgpack-1.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (427 kB)
+#10 5.499 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#10 5.503 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#10 5.508 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#10 5.513 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#10 5.519 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#10 5.526 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#10 5.534 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#10 5.542 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+#10 5.554 Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#10 5.600    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 52.5 MB/s eta 0:00:00
+#10 5.602 Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+#10 5.607 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#10 5.637    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 27.5 MB/s eta 0:00:00
+#10 5.639 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#10 5.644 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#10 5.648 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#10 5.826    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 26.7 MB/s eta 0:00:00
+#10 5.829 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#10 5.841 Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+#10 5.847 Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#10 5.851 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#10 5.935 Installing collected packages: websockets, uvloop, typing-extensions, pyyaml, python-dotenv, msgpack, idna, httptools, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, httpcore, anyio, watchfiles, starlette, pydantic, httpx, fastapi
+#10 7.977 Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.141.1 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.20 msgpack-1.1.2 pydantic-2.13.5 pydantic-core-2.46.5 python-dotenv-1.2.3 pyyaml-6.0.3 starlette-1.6.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.52.4 uvloop-0.22.1 watchfiles-1.2.0 websockets-17.1
+#10 7.980 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#10 8.082 
+#10 8.082 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#10 8.082 [notice] To update, run: pip install --upgrade pip
+#10 DONE 8.4s
+
+#13 [engine 4/8] RUN pip install --no-cache-dir -r requirements.txt
+#13 2.254 Collecting fastapi>=0.115 (from -r requirements.txt (line 1))
+#13 2.269   Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+#13 2.296 Collecting uvicorn>=0.30 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 2.299   Downloading uvicorn-0.53.0-py3-none-any.whl.metadata (6.6 kB)
+#13 2.408 Collecting pydantic>=2.7 (from -r requirements.txt (line 3))
+#13 2.411   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+#13 2.508 Collecting msgpack>=1.0 (from -r requirements.txt (line 4))
+#13 2.512   Downloading msgpack-1.2.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+#13 2.712 Collecting numpy==2.5.3 (from -r requirements.txt (line 5))
+#13 2.716   Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+#13 2.773 Collecting opencv-python-headless==4.11.0.86 (from -r requirements.txt (line 6))
+#13 2.777   Downloading opencv_python_headless-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+#13 2.835 Collecting onnxruntime==1.30.0 (from -r requirements.txt (line 7))
+#13 2.839   Downloading onnxruntime-1.30.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (5.7 kB)
+#13 2.909 Collecting flatbuffers (from onnxruntime==1.30.0->-r requirements.txt (line 7))
+#13 2.914   Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+#13 2.949 Collecting packaging (from onnxruntime==1.30.0->-r requirements.txt (line 7))
+#13 2.956   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+#13 3.145 Collecting protobuf>=4.25.8 (from onnxruntime==1.30.0->-r requirements.txt (line 7))
+#13 3.149   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+#13 3.179 Collecting starlette>=0.46.0 (from fastapi>=0.115->-r requirements.txt (line 1))
+#13 3.183   Downloading starlette-1.6.0-py3-none-any.whl.metadata (6.4 kB)
+#13 3.212 Collecting typing-extensions>=4.8.0 (from fastapi>=0.115->-r requirements.txt (line 1))
+#13 3.217   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#13 3.224 Collecting typing-inspection>=0.4.2 (from fastapi>=0.115->-r requirements.txt (line 1))
+#13 3.228   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#13 3.235 Collecting annotated-doc>=0.0.2 (from fastapi>=0.115->-r requirements.txt (line 1))
+#13 3.238   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+#13 3.257 Collecting click>=7.0 (from uvicorn>=0.30->uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 3.261   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+#13 3.269 Collecting h11>=0.8 (from uvicorn>=0.30->uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 3.272   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#13 3.281 Collecting annotated-types>=0.6.0 (from pydantic>=2.7->-r requirements.txt (line 3))
+#13 3.285   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#13 3.985 Collecting pydantic-core==2.46.5 (from pydantic>=2.7->-r requirements.txt (line 3))
+#13 3.988   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+#13 4.022 Collecting httptools>=0.8.0 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.025   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+#13 4.037 Collecting python-dotenv>=0.13 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.040   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+#13 4.078 Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.081   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+#13 4.117 Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.121   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+#13 4.240 Collecting watchfiles>=0.20 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.245   Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+#13 4.360 Collecting websockets>=13.0 (from uvicorn[standard]>=0.30->-r requirements.txt (line 2))
+#13 4.365   Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+#13 4.398 Collecting anyio<5,>=3.6.2 (from starlette>=0.46.0->fastapi>=0.115->-r requirements.txt (line 1))
+#13 4.403   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#13 4.439 Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette>=0.46.0->fastapi>=0.115->-r requirements.txt (line 1))
+#13 4.444   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#13 4.463 Downloading numpy-2.5.3-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+#13 4.999    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 31.1 MB/s eta 0:00:00
+#13 5.003 Downloading opencv_python_headless-4.11.0.86-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (50.0 MB)
+#13 6.378    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.0/50.0 MB 36.6 MB/s eta 0:00:00
+#13 6.387 Downloading onnxruntime-1.30.0-cp312-cp312-manylinux_2_28_x86_64.whl (23.6 MB)
+#13 ...
+
+#14 [gateway 4/8] COPY apps ./apps
+#14 DONE 0.2s
+
+#15 [gateway 5/8] COPY mock-gateway ./mock-gateway
+#15 DONE 0.1s
+
+#16 [gateway 6/8] COPY packages/face-sdk/dist ./packages/face-sdk/dist
+#16 DONE 0.1s
+
+#13 [engine 4/8] RUN pip install --no-cache-dir -r requirements.txt
+#13 ...
+
+#17 [gateway 7/8] RUN groupadd --gid 10002 gateway  && useradd --uid 10002 --gid 10002 --no-create-home --shell /usr/sbin/nologin gateway
+#17 DONE 0.5s
+
+#13 [engine 4/8] RUN pip install --no-cache-dir -r requirements.txt
+#13 7.162    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.6/23.6 MB 30.6 MB/s eta 0:00:00
+#13 7.167 Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+#13 7.171 Downloading uvicorn-0.53.0-py3-none-any.whl (87 kB)
+#13 7.176 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+#13 7.186 Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#13 7.238    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 47.7 MB/s eta 0:00:00
+#13 7.238 Downloading msgpack-1.2.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (420 kB)
+#13 7.250 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+#13 7.254 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#13 7.258 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#13 7.262 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#13 7.265 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+#13 7.277 Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+#13 7.285 Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+#13 7.289 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+#13 7.309    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 57.9 MB/s eta 0:00:00
+#13 7.314 Downloading starlette-1.6.0-py3-none-any.whl (75 kB)
+#13 7.319 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#13 7.323 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#13 7.328 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+#13 ...
+
+#18 [gateway 8/8] WORKDIR /app/mock-gateway
+#18 DONE 0.1s
+
+#13 [engine 4/8] RUN pip install --no-cache-dir -r requirements.txt
+#13 7.416    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 52.3 MB/s eta 0:00:00
+#13 7.433 Downloading watchfiles-1.2.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (456 kB)
+#13 7.444 Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+#13 7.453 Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+#13 7.468 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#13 7.477 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#13 7.483 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#13 7.801 Installing collected packages: flatbuffers, websockets, uvloop, typing-extensions, pyyaml, python-dotenv, protobuf, packaging, numpy, msgpack, idna, httptools, h11, click, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, opencv-python-headless, onnxruntime, anyio, watchfiles, starlette, pydantic, fastapi
+#13 ...
+
+#19 [gateway] exporting to image
+#19 exporting layers 5.1s done
+#19 exporting manifest sha256:4657f0bbba0c319af44adcd6f5890a76fc421bf102b6a175984b5d5d6d97cdfd 0.0s done
+#19 exporting config sha256:79ea3205a5ec7fef066d85c75aaa13954e03ec7917a368e6e1116004a99ddfee 0.0s done
+#19 exporting attestation manifest sha256:25aeb5045483f1f05bc78eeae036ebb664fb4d1ec18a77f6c3cebca07ebafa82 0.1s done
+#19 exporting manifest list sha256:833d061802b4e11c370a80ee94670904304f0d9acdeccc7a513bc1a2e56c190b 0.0s done
+#19 naming to docker.io/library/facetech-mock-gateway:eval-pad-0d87e7b9a807 done
+#19 unpacking to docker.io/library/facetech-mock-gateway:eval-pad-0d87e7b9a807
+#19 unpacking to docker.io/library/facetech-mock-gateway:eval-pad-0d87e7b9a807 1.4s done
+#19 DONE 6.8s
+
+#20 [gateway] resolving provenance for metadata file
+#20 DONE 0.0s
+
+#13 [engine 4/8] RUN pip install --no-cache-dir -r requirements.txt
+#13 17.36 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+#13 17.36 Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 click-8.5.0 fastapi-0.141.1 flatbuffers-25.12.19 h11-0.16.0 httptools-0.8.0 idna-3.20 msgpack-1.2.2 numpy-2.5.3 onnxruntime-1.30.0 opencv-python-headless-4.11.0.86 packaging-26.3 protobuf-7.36.2 pydantic-2.13.5 pydantic-core-2.46.5 python-dotenv-1.2.3 pyyaml-6.0.3 starlette-1.6.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.53.0 uvloop-0.22.1 watchfiles-1.2.0 websockets-17.1
+#13 17.45 
+#13 17.45 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+#13 17.45 [notice] To update, run: pip install --upgrade pip
+#13 DONE 18.2s
+
+#21 [engine 5/8] COPY models ./models
+#21 DONE 1.2s
+
+#22 [engine 6/8] COPY app ./app
+#22 DONE 0.1s
+
+#23 [engine 7/8] RUN python -c "from app.anti_spoof import get_pad; get_pad()"
+#23 DONE 1.1s
+
+#24 [engine 8/8] RUN groupadd --system --gid 10001 engine && useradd --system --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin engine
+#24 0.425 useradd warning: engine's uid 10001 is greater than SYS_UID_MAX 999
+#24 DONE 0.5s
+
+#25 [engine] exporting to image
+#25 exporting layers
+#25 exporting layers 16.3s done
+#25 exporting manifest sha256:8a11af05151438ff8f0b25b1fbf29159becca504f7d40ca304ae39af36f917ec 0.0s done
+#25 exporting config sha256:1d190bef2d3bd89e20a24ac53f489f2fa6c0b247269e29367cd6c4e198388948 0.0s done
+#25 exporting attestation manifest sha256:3d2fff2ed57a595acb29466fb676e4fddf84687758dd61387c02b00e51b10691 0.0s done
+#25 exporting manifest list sha256:99184e7acc8070854d195d8a985d2d718c7c5ee7f897f3cec45c235feeaddbb0 0.0s done
+#25 naming to docker.io/library/facetech-engine:eval-pad-0d87e7b9a807 done
+#25 unpacking to docker.io/library/facetech-engine:eval-pad-0d87e7b9a807
+#25 unpacking to docker.io/library/facetech-engine:eval-pad-0d87e7b9a807 6.2s done
+#25 DONE 22.6s
+
+#26 [engine] resolving provenance for metadata file
+#26 DONE 0.1s
+ Image facetech-engine:eval-pad-0d87e7b9a807 Built 
+ Image facetech-mock-gateway:eval-pad-0d87e7b9a807 Built 
+ Container facetech-pad-stage-engine-1 Recreate 
+ Container facetech-pad-stage-engine-1 Recreated 
+ Container facetech-pad-stage-gateway-1 Recreate 
+ Container facetech-pad-stage-gateway-1 Recreated 
+ Container facetech-pad-stage-engine-1 Starting 
+ Container facetech-pad-stage-engine-1 Started 
+ Container facetech-pad-stage-engine-1 Waiting 
+ Container facetech-pad-stage-engine-1 Healthy 
+ Container facetech-pad-stage-gateway-1 Starting 
+ Container facetech-pad-stage-gateway-1 Started 
+NAME                           IMAGE                                         COMMAND                  SERVICE   CREATED         STATUS                                     PORTS
+facetech-pad-stage-engine-1    facetech-engine:eval-pad-0d87e7b9a807         "uvicorn app.main:ap…"   engine    7 seconds ago   Up 6 seconds (healthy)                     8000/tcp
+facetech-pad-stage-gateway-1   facetech-mock-gateway:eval-pad-0d87e7b9a807   "uvicorn app:app --h…"   gateway   6 seconds ago   Up Less than a second (health: starting)   8080/tcp

@@ -1,0 +1,450 @@
+{
+  "retention_days": 7,
+  "items": [
+    {
+      "id": 7,
+      "request_id": "74a887eac9e24a038869d2c8f3ca8359",
+      "build_id": "eval-d36fa4946ddf",
+      "captured_at": "2026-09-19T03:23:30+00:00",
+      "subject_id": "T02",
+      "endpoint": "/v1/verify",
+      "label": "screen_phone",
+      "case": {
+        "lighting": "daylight",
+        "case": "screen_photo"
+      },
+      "decision": {
+        "event": "decision",
+        "ts": "2026-09-19T03:23:30.333+00:00",
+        "request_id": "74a887eac9e24a038869d2c8f3ca8359",
+        "build_id": "eval-d36fa4946ddf",
+        "endpoint": "verify",
+        "http_status": 200,
+        "outcome": "match",
+        "error_code": null,
+        "reason": null,
+        "engine_version": "0.1.0",
+        "enforced": true,
+        "thresholds": {
+          "match": 0.55,
+          "liveness": 0.5
+        },
+        "frames": {
+          "count": 12,
+          "with_face": 9,
+          "embedded": 3
+        },
+        "challenge": {
+          "ok": true,
+          "reason": null,
+          "action": "MOVE_CLOSER",
+          "presented_action": "MOVE_CLOSER",
+          "params": {
+            "settle_ms": 941,
+            "target": 0.26
+          },
+          "consumed": true
+        },
+        "liveness": {
+          "live": true,
+          "score": 0.79793,
+          "min_signal": "challenge",
+          "failed": [],
+          "retryable": false,
+          "signals": {
+            "duplicates": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "frames": 12,
+              "distinct_sha256": 12,
+              "distinct_images": 12,
+              "largest_identical_group": 1,
+              "undecodable_frames": 0
+            },
+            "motion": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 9,
+              "pairs": 8,
+              "mean_abs_diff": 8.7754,
+              "min_abs_diff": 5.5553
+            },
+            "landmarks": {
+              "score": 0.93609,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 9,
+              "landmark_jitter": 0.09414,
+              "centre_drift": 0.0216
+            },
+            "timing": {
+              "score": 0.959,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "median_gap_ms": 738,
+              "min_gap_ms": 530,
+              "max_gap_ms": 799,
+              "span_ms": 7509,
+              "implausible_gaps": 0,
+              "expected_cadence_ms": 500
+            },
+            "challenge": {
+              "score": 0.79793,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "nonce_ok": true,
+              "action": "MOVE_CLOSER",
+              "usable_frames": 9,
+              "settle_frames": 2,
+              "approach_frames": 7,
+              "target": 0.26,
+              "scale_settle_spread": 0.0243,
+              "scale_toward": 0.409,
+              "scale_away": -0.0214,
+              "scale_baseline": 4.4286
+            },
+            "depth": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 9,
+              "far_end": "settle window",
+              "far_frames": 2,
+              "near_frames": 3,
+              "scale_gain": 0.3609,
+              "deformation": 0.06458,
+              "depth_index": 0.17896,
+              "reason": "no measured threshold yet (README.md)"
+            },
+            "moire": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 9,
+              "peakiness": 13.558,
+              "max_peakiness": 15.976,
+              "reason": "no measured threshold yet (README.md)"
+            }
+          }
+        },
+        "match": {
+          "similarity": 0.95553,
+          "match": true
+        },
+        "timing_ms": {
+          "parse": 3.43,
+          "queue": 0.14,
+          "detect": 342.83,
+          "liveness": 70.81,
+          "embed": 307.47,
+          "match": 0.04,
+          "total": 726.87
+        }
+      }
+    },
+    {
+      "id": 6,
+      "request_id": "b743eb6df1964a3a85b0bc3952a2ea67",
+      "build_id": "eval-d36fa4946ddf",
+      "captured_at": "2026-09-19T03:23:10+00:00",
+      "subject_id": "T01",
+      "endpoint": "/v1/verify",
+      "label": "bona_fide",
+      "case": {
+        "lighting": "daylight",
+        "case": "self"
+      },
+      "decision": {
+        "event": "decision",
+        "ts": "2026-09-19T03:23:10.431+00:00",
+        "request_id": "b743eb6df1964a3a85b0bc3952a2ea67",
+        "build_id": "eval-d36fa4946ddf",
+        "endpoint": "verify",
+        "http_status": 200,
+        "outcome": "match",
+        "error_code": null,
+        "reason": null,
+        "engine_version": "0.1.0",
+        "enforced": true,
+        "thresholds": {
+          "match": 0.55,
+          "liveness": 0.5
+        },
+        "frames": {
+          "count": 12,
+          "with_face": 12,
+          "embedded": 3
+        },
+        "challenge": {
+          "ok": true,
+          "reason": null,
+          "action": "MOVE_CLOSER",
+          "presented_action": "MOVE_CLOSER",
+          "params": {
+            "settle_ms": 1093,
+            "target": 0.255
+          },
+          "consumed": true
+        },
+        "liveness": {
+          "live": true,
+          "score": 0.86449,
+          "min_signal": "landmarks",
+          "failed": [],
+          "retryable": false,
+          "signals": {
+            "duplicates": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "frames": 12,
+              "distinct_sha256": 12,
+              "distinct_images": 12,
+              "largest_identical_group": 1,
+              "undecodable_frames": 0
+            },
+            "motion": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 12,
+              "pairs": 11,
+              "mean_abs_diff": 9.1405,
+              "min_abs_diff": 6.1515
+            },
+            "landmarks": {
+              "score": 0.86449,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 12,
+              "landmark_jitter": 0.1772,
+              "centre_drift": 0.05631
+            },
+            "timing": {
+              "score": 0.98188,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "median_gap_ms": 575,
+              "min_gap_ms": 501,
+              "max_gap_ms": 693,
+              "span_ms": 6388,
+              "implausible_gaps": 0,
+              "expected_cadence_ms": 500
+            },
+            "challenge": {
+              "score": 0.87612,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "nonce_ok": true,
+              "action": "MOVE_CLOSER",
+              "usable_frames": 12,
+              "settle_frames": 2,
+              "approach_frames": 10,
+              "target": 0.255,
+              "scale_settle_spread": 0.0198,
+              "scale_toward": 0.5137,
+              "scale_away": -0.0039,
+              "scale_baseline": 4.2317
+            },
+            "depth": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 12,
+              "far_end": "settle window",
+              "far_frames": 2,
+              "near_frames": 3,
+              "scale_gain": 0.4373,
+              "deformation": 0.03292,
+              "depth_index": 0.07529,
+              "reason": "no measured threshold yet (README.md)"
+            },
+            "moire": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 12,
+              "peakiness": 17.148,
+              "max_peakiness": 23.576,
+              "reason": "no measured threshold yet (README.md)"
+            }
+          }
+        },
+        "match": {
+          "similarity": 0.94979,
+          "match": true
+        },
+        "timing_ms": {
+          "parse": 2.4,
+          "queue": 0.22,
+          "detect": 447.03,
+          "liveness": 52.48,
+          "embed": 391.8,
+          "match": 0.09,
+          "total": 895.66
+        }
+      }
+    },
+    {
+      "id": 5,
+      "request_id": "0d85fd8c6b3248068fc1ba419cb32b11",
+      "build_id": "eval-d36fa4946ddf",
+      "captured_at": "2026-09-19T03:22:23+00:00",
+      "subject_id": "T01",
+      "endpoint": "/v1/enroll",
+      "label": "bona_fide",
+      "case": {
+        "lighting": "daylight",
+        "case": "self"
+      },
+      "decision": {
+        "event": "decision",
+        "ts": "2026-09-19T03:22:23.861+00:00",
+        "request_id": "0d85fd8c6b3248068fc1ba419cb32b11",
+        "build_id": "eval-d36fa4946ddf",
+        "endpoint": "enroll",
+        "http_status": 200,
+        "outcome": "enrolled",
+        "error_code": null,
+        "reason": null,
+        "engine_version": "0.1.0",
+        "enforced": true,
+        "thresholds": {
+          "match": 0.55,
+          "liveness": 0.5
+        },
+        "frames": {
+          "count": 12,
+          "with_face": 12,
+          "embedded": 3
+        },
+        "challenge": {
+          "ok": true,
+          "reason": null,
+          "action": "MOVE_CLOSER",
+          "presented_action": "MOVE_CLOSER",
+          "params": {
+            "settle_ms": 2079,
+            "target": 0.275
+          },
+          "consumed": true
+        },
+        "liveness": {
+          "live": true,
+          "score": 0.76856,
+          "min_signal": "challenge",
+          "failed": [],
+          "retryable": false,
+          "signals": {
+            "duplicates": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "frames": 12,
+              "distinct_sha256": 12,
+              "distinct_images": 12,
+              "largest_identical_group": 1,
+              "undecodable_frames": 0
+            },
+            "motion": {
+              "score": 1.0,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 12,
+              "pairs": 11,
+              "mean_abs_diff": 6.8719,
+              "min_abs_diff": 3.9974
+            },
+            "landmarks": {
+              "score": 0.91859,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "usable_frames": 12,
+              "landmark_jitter": 0.11443,
+              "centre_drift": 0.02071
+            },
+            "timing": {
+              "score": 0.96135,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "median_gap_ms": 708,
+              "min_gap_ms": 528,
+              "max_gap_ms": 827,
+              "span_ms": 7394,
+              "implausible_gaps": 0,
+              "expected_cadence_ms": 500
+            },
+            "challenge": {
+              "score": 0.76856,
+              "ok": true,
+              "advisory": false,
+              "votes": true,
+              "nonce_ok": true,
+              "action": "MOVE_CLOSER",
+              "usable_frames": 12,
+              "settle_frames": 4,
+              "approach_frames": 8,
+              "target": 0.275,
+              "scale_settle_spread": 0.037,
+              "scale_toward": 0.4712,
+              "scale_away": 0.0313,
+              "scale_baseline": 4.2589
+            },
+            "depth": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 12,
+              "far_end": "settle window",
+              "far_frames": 4,
+              "near_frames": 3,
+              "scale_gain": 0.4547,
+              "deformation": 0.02728,
+              "depth_index": 0.06,
+              "reason": "no measured threshold yet (README.md)"
+            },
+            "moire": {
+              "score": null,
+              "ok": null,
+              "advisory": true,
+              "votes": false,
+              "usable_frames": 12,
+              "peakiness": 15.641,
+              "max_peakiness": 21.321,
+              "reason": "no measured threshold yet (README.md)"
+            }
+          }
+        },
+        "timing_ms": {
+          "parse": 5.15,
+          "queue": 0.83,
+          "detect": 363.3,
+          "liveness": 63.99,
+          "embed": 419.65,
+          "total": 856.49
+        }
+      }
+    }
+  ]
+}

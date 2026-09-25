@@ -1,0 +1,51 @@
+{
+  "date": "2026-09-19",
+  "cwd": "E:\\Factech",
+  "scope": "synthetic policy, source inventory and local integrity only",
+  "checks": [
+    {
+      "command": ".\\.venv-pad\\Scripts\\python.exe -m pytest tests-hardening -q -p no:cacheprovider",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "110c70",
+        "wall_time_seconds": 0.0000338,
+        "exit_code": 0,
+        "original_token_count": 66,
+        "output": "........................................................................ [ 38%]\r\n........................................................................ [ 77%]\r\n..........................................                               [100%]\r\n186 passed in 0.51s\r\n"
+      }
+    },
+    {
+      "command": ".\\.venv-pad\\Scripts\\python.exe -m ruff check packages/face-auth/src tests-hardening tools/hardening_inventory.py",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "83a689",
+        "wall_time_seconds": 0.0000228,
+        "exit_code": 0,
+        "original_token_count": 5,
+        "output": "All checks passed!\n"
+      }
+    },
+    {
+      "command": ".\\.venv-pad\\Scripts\\python.exe -m ruff format --check packages/face-auth/src tests-hardening tools/hardening_inventory.py",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "9b997e",
+        "wall_time_seconds": 0.00003,
+        "exit_code": 0,
+        "original_token_count": 7,
+        "output": "6 files already formatted\n"
+      }
+    },
+    {
+      "command": "Read-only Python SHA-256 comparison against baseline/source-sha256.json and acceptance ID reference validation (see M0.md)",
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "e16a0e",
+        "wall_time_seconds": 1.1569825,
+        "exit_code": 0,
+        "original_token_count": 32,
+        "output": "Baseline comparison: 100 files, 0 changed.\r\nAcceptance mapping: 58 criteria/findings; all 15 referenced route criteria exist.\r\n"
+      }
+    }
+  ]
+}

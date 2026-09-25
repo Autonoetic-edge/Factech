@@ -1,0 +1,7 @@
+ Container facetech-recording-stage-gateway-1 Stopping 
+ Container facetech-recording-stage-gateway-1 Stopped 
+ Container facetech-demo-gateway-1 Recreate 
+ Container facetech-demo-gateway-1 Recreated 
+ Container facetech-demo-gateway-1 Starting 
+ Container facetech-demo-gateway-1 Started 
+Engine and Caddy identities, images and start times unchanged

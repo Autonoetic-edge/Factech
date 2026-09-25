@@ -1,0 +1,23 @@
+[
+  {
+    "tag_name": "26.7.4",
+    "html_url": "https://github.com/keycloak/keycloak/releases/tag/26.7.4",
+    "published_at": "2026-09-16T14:44:06Z",
+    "prerelease": false,
+    "fixed_cve_ids_from_release_notes": [
+      "CVE-2026-17526",
+      "CVE-2026-18212",
+      "CVE-2026-19607",
+      "CVE-2026-74909",
+      "CVE-2026-79651",
+      "CVE-2026-90997"
+    ]
+  },
+  {
+    "tag_name": "jdk-21.0.12.1+1",
+    "html_url": "https://github.com/adoptium/temurin21-binaries/releases/tag/jdk-21.0.12.1%2B1",
+    "published_at": "2026-08-19T12:10:19Z",
+    "prerelease": false,
+    "fixed_cve_ids_from_release_notes": []
+  }
+]

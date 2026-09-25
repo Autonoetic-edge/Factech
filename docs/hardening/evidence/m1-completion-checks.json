@@ -1,0 +1,105 @@
+{
+  "date": "2026-09-19",
+  "cwd": "E:\\Factech",
+  "milestone": "M1",
+  "status": "COMPLETE",
+  "scope": "Local and isolated synthetic staging; no live integration",
+  "tests": {
+    "tests": 588,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seconds_console": 115.99,
+  "seconds_junit": 115.981,
+  "original_tests_preserved": 186,
+  "previous_slice_tests": 544,
+  "new_integration_tests": 44,
+  "lint": "passed",
+  "format": {
+    "passed": true,
+    "python_files": 28
+  },
+  "warning": "One unsuppressed Authlib HTTPX deprecation warning",
+  "legacy_routes": 19,
+  "gateway_routes": 24,
+  "engine_routes": 11,
+  "baseline": {
+    "files": 100,
+    "changed": []
+  },
+  "source_manifest_files": 42,
+  "staging": {
+    "postgresql": "17.11-4",
+    "keycloak": "26.7.4",
+    "temurin": "21.0.12.1+1",
+    "verified_https": true,
+    "separate_gateway_engine_processes": true,
+    "database_migrations": "Owned synthetic cluster only",
+    "synthetic_only": true,
+    "provider_logout_token_inactive": true,
+    "all_owned_test_ports_free": true,
+    "ports": [
+      15432,
+      18443,
+      18444,
+      18445
+    ]
+  },
+  "security_review": {
+    "python_pins_reviewed": 18,
+    "pypi_nonwithdrawn_advisories": 0,
+    "release_notes_reviewed": true,
+    "full_sbom_scan": false,
+    "review_order_deviation": "Finalized after isolated tests; see m1-security-review.md"
+  },
+  "development_runs": [
+    {
+      "passed": 22,
+      "failed": 4,
+      "seconds": 45.86,
+      "fix": "Postcommit self-revocation generation handling"
+    },
+    {
+      "passed": 4,
+      "failed": 0,
+      "seconds": 13.25
+    },
+    {
+      "passed": 0,
+      "failed": 1,
+      "seconds": 11.1,
+      "fix": "Explicit BFF introspection audience in real provider fixture"
+    },
+    {
+      "passed": 6,
+      "failed": 0,
+      "seconds": 18.9
+    },
+    {
+      "passed": 588,
+      "failed": 0,
+      "seconds": 115.99
+    }
+  ],
+  "usage_percent": {
+    "start": 0,
+    "during_checks": 3,
+    "after_full_suite": 4,
+    "final": 4,
+    "delta_percentage_points": 4,
+    "account_wide_rounded": true
+  },
+  "live_changes": false,
+  "original_checkout_accessed": false,
+  "capture_access": false,
+  "biometric_inference_run": false,
+  "hosted_ci_run": false,
+  "next": "M2",
+  "evidence_sha256": {
+    "m1-completion-tests.xml": "e2b6fd3c142347ca883575de153e674142a95851310df38d270e7d703684ca79",
+    "m1-completion-source-sha256.json": "c28c3c9c00fd0c8491abb16c7e1294ffa752e857d533d4ebf140672c04fa0599",
+    "m1-python-vulnerability-review.json": "8c5d544fbb9adb3033c14ceda11e59b90d91c13fc48add010d0e2b87e9414c62",
+    "m1-runtime-release-review.json": "3b8f6c9f388d9243e3ed8f405b9aa9f079303c8beac212f7fbc56ed578182de2"
+  }
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "facetech-auth"
+version = "0.2.0"
+description = "Isolated Facetech OIDC sessions and HTTP authorization profile"
+requires-python = ">=3.12"
+dependencies = [
+    "Authlib==1.8.0",
+    "joserfc==1.7.5",
+    "cryptography==50.0.1",
+    "httpx==0.28.1",
+    "starlette==1.6.0",
+    "msgpack==1.2.2",
+    "SQLAlchemy==2.0.54",
+    "alembic==1.20.0",
+    "psycopg[binary]==3.3.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+facetech_auth = ["migrations/env.py", "migrations/versions/*.py"]

@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-19",
+  "scope": "local isolated adapters only; full M1 and M6 IN_PROGRESS",
+  "cwd": "E:\\Factech",
+  "tests": {
+    "tests": 544,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_run_seconds": 28.83,
+  "registry_test_after_documentation": {
+    "passed": 1,
+    "seconds": 0.55,
+    "runtime_changed": false
+  },
+  "lint": "passed",
+  "format": {
+    "passed": true,
+    "python_files": 15
+  },
+  "legacy_routes": 19,
+  "isolated_gateway_routes": 24,
+  "isolated_engine_routes": 11,
+  "baseline": {
+    "files": 100,
+    "changed": []
+  },
+  "warning": "Authlib 1.8.0 HTTPX deprecation; unsuppressed",
+  "development_runs": [
+    {
+      "passed": 434,
+      "failed": 0,
+      "seconds": 21.62
+    },
+    {
+      "passed": 94,
+      "failed": 4,
+      "seconds": 9.21,
+      "defects": "missing scan field at both boundaries; malformed discovery error type; logout completion attribution"
+    },
+    {
+      "passed": 98,
+      "failed": 0,
+      "seconds": 7.96
+    },
+    {
+      "passed": 544,
+      "failed": 0,
+      "seconds": 28.83
+    }
+  ],
+  "initial_lint_issues": 6,
+  "initial_unformatted_files": 7,
+  "usage_percent": {
+    "start": 69,
+    "after_initial_changes_tests": 70,
+    "evidence_checkpoint": 71,
+    "delta_percentage_points": 2
+  },
+  "live_changes": false,
+  "original_checkout_accessed": false,
+  "capture_access": false,
+  "actual_oidc_provider_tested": false,
+  "durable_repositories_implemented": false,
+  "biometric_pipeline_connected": false,
+  "hosted_ci_run": false
+}

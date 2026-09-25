@@ -1,0 +1,61 @@
+name: facetech-test
+
+networks:
+  internal: {}
+
+services:
+  engine:
+    build: ./engine
+    networks: [internal]
+    environment:
+
+      ENGINE_API_KEY: ci-not-a-secret
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  postgres:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: facetech
+      POSTGRES_PASSWORD: ci-not-a-secret
+      POSTGRES_DB: facetech
+    networks: [internal]
+    tmpfs: ["/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U facetech"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  gateway:
+    image: ${CRYPTO_IMAGE}
+    environment:
+      DATABASE_URL: postgres://facetech:ci-not-a-secret@postgres:5432/facetech
+      ENGINE_URL: http://engine:8000
+      ENGINE_API_KEY: ci-not-a-secret
+    networks: [internal]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      engine:
+        condition: service_healthy
+
+  e2e:
+    image: python:3.12-slim
+    working_dir: /tests
+    volumes:
+      - ./tests-integration:/tests:ro
+    networks: [internal]
+    command: >
+      sh -c "pip install --no-cache-dir -q pytest httpx &&
+             pytest -x -q /tests"
+    environment:
+      GATEWAY_URL: http://gateway:8080
+      ENGINE_URL: http://engine:8000
+      ENGINE_API_KEY: ci-not-a-secret
+    depends_on:
+      gateway:
+        condition: service_started

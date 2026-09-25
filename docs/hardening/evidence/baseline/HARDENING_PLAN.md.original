@@ -1,0 +1,314 @@
+# Facetech hardening plan and session handoff
+
+Updated: 19 September 2026. Status: planning complete; implementation not started.
+Owner of implementation: next working session, one agent. Team owns physical testing.
+
+## Read this first
+
+This is the authoritative forward-work plan. It supersedes older NEXT WORK lists,
+deployment suggestions and readiness plans. Historical reports remain evidence of
+their own release, not instructions to redeploy it. Read README.md for the document
+map, then pad-evidence/consent-v6/REVIEW.md for the source-based findings.
+
+Objective: reach a defensible engineering readiness assessment of at least 9/10 in
+architecture, backend, security, SDK, QA, privacy and deployment. A completed checklist
+does not automatically confer that score. Recognition, liveness and overall biometric
+QA also require independent physical evidence collected by the team. No certification
+or production accuracy claim is implied.
+
+## Non-negotiable working boundaries
+
+- Use E:\Factech explicitly as the working directory. E:\Facetech is the original;
+  never edit it or stop its laptop port-8000 service. Do not assume Git exists.
+- One agent. Preserve existing changes. Inspect applicable AGENTS.md before editing.
+- The team is actively testing the VPS. Freeze its capture UX, SDK capture timing,
+  model files, preprocessing, matching, PAD, challenge policy and thresholds.
+- Do not restart/recreate the live engine, gateway or Caddy, run migrations against
+  live storage, change live authentication/routes/retention, or deploy hardening
+  changes while testing continues. Complete local work and isolated staging first.
+  Live integration is milestone M8 and requires an explicitly coordinated test pause
+  and deployment window. This is an implementation of the user's live-testing
+  constraint, not a restriction on independent local progress.
+- Do not run load tests, adversarial requests or synthetic enrollments against the
+  team environment. Staging must have separate ports, storage, credentials and
+  resource limits; no shared capture mounts or live database connections. Prefer
+  local/CI staging. Do not provision staging on the active VPS without an agreed
+  resource budget; CPU/memory contention can invalidate team results.
+- Use SSH keys with BatchMode=yes and StrictHostKeyChecking=yes for permitted VPS
+  reads. Never print secrets, passwords, tokens, private keys or .env contents.
+- Preserve Basic Auth, captures, labels, seven-day retention and rollback releases.
+  Do not delete/relabel live captures or enable the disabled exporter.
+- A prior automatic approval review blocked VPS biometric frame/JPEG transfer to
+  the laptop. Do not retry via another tool. Read-only metadata/score review is
+  allowed. No verified local capture backup exists. This plan does not authorize
+  raw-data downloads or override that block.
+- Use synthetic nonbiometric fixtures for new persistence, encryption, deletion,
+  export-failure and recovery tests. No real capture transfers are needed.
+- Check weekly usage before implementation, after local changes/tests and before
+  any future deployment; report percentage-point change. Avoid rerunning unchanged
+  suites unless a change or failure warrants it.
+
+## Last verified baseline (not a fresh live inventory)
+
+Source: pad-evidence/consent-v6/REVIEW.md, 19 September 2026.
+
+| Component | Baseline |
+|---|---|
+| Team page | https://facetech.31.97.186.120.sslip.io/?v=ui-v6 |
+| Gateway | eval-pad-0e45ad88290f, UI ui-v6 |
+| Engine | eval-pad-0d87e7b9a807, engineVersion 0.2.0 |
+| Policy | pad-sequence-v2-slow, 12 frames at 1400 ms, approximately 16 seconds |
+| Thresholds | match 0.55; heuristic liveness 0.50; mandatory learned PAD |
+| Services | facetech-demo-engine-1 / gateway-1 / caddy-1 |
+| Capture storage | /var/lib/facetech/eval-d36fa4946ddf mounted at /captures |
+| Retention | seven days; exporter disabled |
+| Enrollment | in memory; restart loses templates and nonces |
+| Consent | explicit remembered grant per tester/browser, storage-consent-v1 |
+
+Last review found 11 retained captures, IDs 5–15; that count changes with team
+activity and expiry. Captures 13/14/15: enrollment accepted, verification rejected
+by initial head stillness, verification matched. All three were saved with
+diagnostics; zero reported storage failures at that snapshot. This is one tester,
+not a population estimate. Current-policy physical attack efficacy was unmeasured.
+76 UI tests passed for ui-v6; real Samsung remembered-consent confirmation was pending.
+
+Do not tune the head gate on capture 14 or replace the models as part of this plan.
+Historical gateway rollback instructions are in consent-v6/REVIEW.md; they are not
+a rollback plan for future database/authentication changes.
+
+## Execution and status rules
+
+Select the earliest ready milestone. Finish implementation, focused tests, evidence
+and handoff before marking it complete. Continue independent work if a later live
+gate is unavailable. Use statuses: TODO, IN_PROGRESS, LOCAL_VERIFIED, STAGING_VERIFIED,
+COMPLETE, BLOCKED. Local completion is never described as live deployment.
+
+| ID | Milestone | Depends on | Status | Evidence |
+|---|---|---|---|---|
+| M0 | Architecture decisions and acceptance contract | — | TODO | — |
+| M1 | Identity and authorization boundaries | M0 | TODO | — |
+| M2 | Durable templates and atomic challenge state | M0, M1 contracts | TODO | — |
+| M3 | Consent, privacy and protected data lifecycle | M1, M2 | TODO | — |
+| M4 | Resource protection and security hardening | M1, M2 | TODO | — |
+| M5 | Backend and SDK contract correctness | M1–M4 contracts | TODO | — |
+| M6 | CI, failure-path and device QA | Starts M0; final gate M1–M5 | TODO | — |
+| M7 | Reproducible deployment and recovery | M2–M6 | TODO | — |
+| M8 | Coordinated integration and independent review | M1–M7 plus test window | TODO | — |
+
+For each milestone create docs/hardening/evidence/Mx.md with: findings, files changed,
+decisions, exact commands/environment, test results, limitations, rollback, and next
+action. Do not include secrets or biometric payloads. Maintain this status table.
+Record failed checks and fixes; do not record planned tests as passing.
+
+## M0 — Design and acceptance contract
+
+Deliver docs/hardening/ARCHITECTURE.md and ACCEPTANCE.md before cross-cutting changes.
+
+- [ ] Inventory current engine/gateway/SDK APIs, storage, trust boundaries and callers.
+- [ ] Define identity concepts: authenticated actor, organization/team if applicable,
+  test participant, claimed enrollment identity, reviewer and administrator.
+- [ ] Write a role/action/resource matrix including list, receipt, image, diagnostics,
+  enrollment, adding templates, verification, revocation and administrative routes.
+- [ ] Select an established authentication integration, durable datastore and key
+  management approach. Document rationale, deployment cost and failure behavior.
+  Do not invent credentials or require a paid provider without a concrete decision.
+- [ ] Define consent scopes, retention classes and whether any raw-frame backup is
+  needed. Prefer minimizing data; do not assume every data type needs a backup.
+- [ ] Define API decision schema, error taxonomy, versioning and migration strategy.
+- [ ] Propose and distinguish agreed versus pending availability, peak load, latency,
+  recovery-time and acceptable-data-loss targets. Avoid arbitrary readiness claims.
+- [ ] Document model/asset license and provenance checks needed for intended use.
+- [ ] Map each known finding in consent-v6/REVIEW.md to a milestone and acceptance test.
+
+Exit: decisions are concrete enough to implement; unanswered business inputs are
+listed with their impact. Keep progressing on independent code while seeking only
+necessary inputs. Do not silently select a weaker security requirement.
+
+## M1 — Identity and authorization
+
+Primary areas: mock-gateway/app.py, engine/app/auth.py, engine/app/main.py and new
+authentication/authorization modules. Freeze browser capture behavior.
+
+- [ ] Establish authenticated principals and session/token validation with safe expiry.
+- [ ] Enforce ownership/role checks server-side on every resource access, including
+  receipts, review image endpoints, metadata, template addition and deletion.
+- [ ] Prevent caller-controlled user IDs or forwarded headers from overriding identity.
+- [ ] Define how the engine receives and verifies trusted authorization context;
+  an internal shared engine key alone must not authorize arbitrary target identities.
+- [ ] Add attributable access/security audit events without raw frames or embeddings.
+- [ ] Implement revocation/logout behavior and deny-by-default route registration.
+- [ ] Provide a staged migration of existing identities without guessing ownership.
+
+Exit tests: unauthenticated, wrong-owner, wrong-role, revoked and expired credentials
+fail across the full route matrix; forged context cannot bypass engine boundaries;
+authorized workflows succeed. Shared live Basic Auth remains intact until M8.
+
+## M2 — Durable templates and challenge state
+
+Primary areas: engine/app/store.py, challenge.py, main.py; repository interfaces,
+schema/migrations and synthetic persistence tests.
+
+- [ ] Persist normalized templates with owner, subject, model version, template ID,
+  creation/revocation timestamps and explicit capacity rules.
+- [ ] Replace silent oldest-user eviction with documented, testable capacity errors.
+- [ ] Preserve existing inference calculations and template comparison semantics.
+- [ ] Define transaction boundaries for enrollment, template addition and revocation.
+- [ ] Store challenge state with TTL and atomically consume an identity/operation-bound
+  nonce; retries and simultaneous requests must not reuse it across instances.
+- [ ] Design request idempotency without reauthorizing expired/replayed challenges.
+- [ ] Handle incompatible model/template versions explicitly; no silent reinterpretation.
+- [ ] Add forward migration, compatibility and recovery procedures using synthetic data.
+- [ ] Plan live volatile-template transition: first inspect export/support feasibility
+  without reading embeddings. If safe migration is unavailable, schedule explicit
+  fresh enrollment in a new round; never restart assuming memory will survive.
+
+Exit tests: restart preserves synthetic enrollments; replicas see consistent state;
+concurrent revocation/enrollment obey documented semantics; only one replay race can
+consume a nonce; capacity and datastore outages fail safely; recovery is demonstrated.
+
+## M3 — Consent and privacy lifecycle
+
+Primary areas: mock-gateway/capture_store.py, evaluation.py, app.py; new consent,
+audit and key-management interfaces. Server contract first; live UI remains unchanged.
+
+- [ ] Create authenticated consent records: participant, acting operator, scope,
+  text version, grant/withdrawal timestamps and recorded authority to act.
+- [ ] Enforce consent at the server when recording; browser localStorage is a UI
+  preference, not proof. Define withdrawal races and cancel new recording accordingly.
+- [ ] Separate optional evaluation frames from templates required for authentication.
+- [ ] Specify retention for scans, diagnostics, templates, audit data and backups.
+- [ ] Add storage encryption with separate key access, rotation and recovery procedures.
+- [ ] Restrict review access and audit reads/changes without duplicating biometric data.
+- [ ] Implement idempotent expiry/deletion jobs and observable partial-failure handling.
+- [ ] Test that recovery cannot resurrect data beyond its retention/deletion policy.
+- [ ] Keep export disabled. If future export support is in scope, repair file/manifest
+  failure handling using synthetic fixtures only; enabling it is a separate decision.
+
+Exit tests: missing/wrong-scope/withdrawn consent blocks recording; legitimate grant
+works; unauthorized review fails; expiry and deletion cover linked diagnostics;
+key loss/rotation and purge failure have explicit outcomes and alerts. Do not perform
+live deletion, relabeling, re-encryption or raw-frame backup in this milestone.
+
+## M4 — Security and abuse resistance
+
+- [ ] Enforce streaming request-size limits at gateway and engine before unbounded
+  buffering; preserve edge limits as another control.
+- [ ] Add per-principal and per-source limits, inference admission control, bounded
+  queues and consistent retry/deadline behavior.
+- [ ] Harden chosen session model, cookie attributes, CSRF, CORS and browser headers.
+- [ ] Keep the engine private; constrain trusted proxies, service identity and egress.
+- [ ] Support credential rotation and safe startup when required secrets are missing.
+- [ ] Pin/scan dependencies and images; review privileges and writable mounts.
+- [ ] Redact logs/errors and avoid leaking another subject's existence where relevant.
+- [ ] Add malformed input, bypass, replay and overload tests in isolated environments.
+
+Exit: no unrestricted expensive inference through unauthenticated requests; bounded
+memory under oversized/slow requests; correct ownership under concurrency; credentials
+rotate successfully; logs contain no secrets or biometric payloads. Browser camera
+origin remains untrusted; record this limitation rather than claiming attestation.
+
+## M5 — Backend maintainability and SDK correctness
+
+Primary areas: engine/app/main.py and helpers; gateway repository boundary;
+packages/face-sdk transport and workflow modules; tests-contract.
+
+- [ ] Separate validation, authorization, inference, decision and persistence stages.
+- [ ] Remove legacy helpers only after checking callers and affected regression tests.
+- [ ] Centralize validated configuration; preserve frozen biometric values exactly.
+- [ ] Replace access to storage internals with supported repository interfaces.
+- [ ] Standardize typed responses, error codes and end-to-end request identifiers.
+- [ ] Distinguish transport completion, recording receipt and biometric acceptance.
+- [ ] Reject contradictory success responses; required PAD/liveness cannot be unknown,
+  missing, failed or not-enforced when reporting authentication acceptance.
+- [ ] Require positive match for verification acceptance; enrollment/liveness have
+  their own explicit predicates. HTTP 200 and SDK ok alone are insufficient.
+- [ ] Define bounded safe retries, cancellation and uncertain server-commit outcomes.
+- [ ] Test supported API/SDK version combinations and document migration behavior.
+
+Exit: contract tests reject each contradictory response and preserve valid responses;
+duplicate requests do not add unintended templates; cancellation cleans resources.
+SDK changes are local/staged, never bundled into the live team page during this round.
+
+## M6 — QA engineering and team evidence integration
+
+Build tests throughout M1–M5, then run the integrated gate here.
+
+- [ ] Create requirement-to-test mapping for critical acceptance criteria.
+- [ ] Cover enrollment, verification, consent, ownership, review and revocation end-to-end.
+- [ ] Inject network loss, timeout, model error, datastore failure, full disk, expired
+  credentials, purge failure and response loss after server commit.
+- [ ] Test concurrency, saturation and recovery with synthetic data in isolation.
+- [ ] CI builds exact artifacts, checks contracts/types/lint and runs relevant suites.
+- [ ] Retain release-linked evidence; block release on failed critical checks.
+- [ ] Establish a real-device checklist: Samsung A13 first; permissions, backgrounding,
+  orientation, slow networks, repeat attempts and tester changes.
+- [ ] Ingest permitted team metadata separately by engine/model/policy version;
+  never merge old fast-policy results with the current slow policy.
+- [ ] Preserve first attempts/retries, failures/missing evidence and denominators.
+
+Exit: deterministic critical checks pass; full traceability exists from finding to
+test; flaky checks are repaired rather than ignored. Real-device checks that require
+a new UI/auth flow wait for the coordinated round. Engineering QA completion does
+not establish recognition FAR/FRR or attack resistance.
+
+## M7 — Deployment and operations
+
+Primary areas: deploy, Compose definitions, CI and new operational runbooks.
+
+- [ ] Build immutable versioned artifacts; pin dependencies and verify model hashes.
+- [ ] Separate staging/production configuration, databases, identities and secrets.
+- [ ] Add preflight, readiness, migrations and smoke gates to release automation.
+- [ ] Design rollback for application and schema compatibility; do not assume an old
+  image can safely use a new database. Prefer compatible staged schema expansion.
+- [ ] Monitor latency, queue pressure, model/store/purge failures and receipt failures.
+- [ ] Add actionable alerts with ownership and incident instructions.
+- [ ] Implement approved backup scope and encrypted restore procedures using synthetic
+  state first. Raw evaluation frames may be deliberately excluded.
+- [ ] Demonstrate restart, rollback, restore, key rotation and dependency outage drills.
+- [ ] Measure supported load against M0 targets; assess single-host failure explicitly.
+
+Exit: a clean environment reproduces the release; recovery meets agreed RTO/RPO;
+alerts fire during injected failures; rollback preserves schema/data integrity.
+If targets remain unagreed, report measured capability without calling the gate passed.
+
+## M8 — Coordinated live integration and readiness review
+
+Prepare everything reviewable before asking for a deployment window.
+
+- [ ] Present exact release, changed contracts, test evidence, data migration impact,
+  enrollment transition, downtime estimate and executable rollback/recovery procedure.
+- [ ] Coordinate a team test pause and freeze the outgoing round's metadata summary.
+  Do not suspend automatic retention or export frames to preserve the round.
+- [ ] Recheck current live versions/state read-only; baseline above may have advanced.
+- [ ] Preserve model hashes, thresholds, preprocessing and capture timing across the
+  hardening cutover. Any unavoidable behavioral difference is disclosed and versioned.
+- [ ] Deploy only in the agreed window; verify authorization, recording receipts,
+  consent, health and rollback readiness without contaminating genuine test identities.
+- [ ] Confirm team access and begin a clearly identified new infrastructure round.
+- [ ] Obtain independent security review and resolve critical/high findings.
+- [ ] Rescore each aspect against evidence, marking unmeasured items explicitly.
+
+Exit: agreed operational checks and review pass; outstanding limitations have owners.
+Do not award 9/10 if critical authorization, data loss, recovery or biometric gaps
+remain. Numeric scores are engineering judgments, not guarantees.
+
+## Deferred work: UX and models
+
+Capture redesign, shorter timing, head-sequence tuning, threshold calibration,
+model replacement/training and new attack defenses are outside this implementation
+track. Record observations in a backlog; do not fix them on the VPS during team
+testing. A later biometric track needs separately frozen development and held-out
+rounds, explicit device/participant/attack coverage and uncertainty reporting.
+
+## Next session instructions
+
+1. Read this plan, consent-v6/REVIEW.md and applicable local instructions.
+2. Check usage and local changes; do not assume Git or clean files.
+3. Begin M0 locally. Inspect current code to validate design assumptions.
+4. Progress through ready milestones with focused tests; no live mutation required.
+5. Update status and evidence at each handoff. List exact next action and blockers.
+6. Before any live work, apply M8; this plan is not blanket authorization to interrupt
+   the team or override the biometric-transfer restriction.
+
+Handoff template: milestone/status; changes/files; decisions; commands/results;
+remaining risks; live changes (normally none); usage delta; next concrete action.
