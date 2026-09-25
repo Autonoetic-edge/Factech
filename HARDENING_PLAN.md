@@ -181,11 +181,26 @@ the Approved column records who approved it and when.
 
 | packages/face-sdk/src/workflow/session.ts (Phase 0 item 0.2) | Fix only: `runScan` clears the session-level `stopReason`/`stopCode` for the new run immediately after `ctl.start()` synchronously cancels the superseded run, so the superseded run's own `catch` later reads `stopReason` as already cleared and reports `reason: 'cancelled'` instead of `'superseded'` (contradicts the comment at line 63 and the test at `tests/session.test.ts:318-325`). Scope: make the cancelled run capture its own reason at cancellation time (e.g. read it inside `ctl.guard`'s cancel handling, or snapshot it before clearing) instead of relying on the shared mutable `stopReason`/`stopCode` variables being read late. No other behavior, no public API or type change. | owner, 25 Sep 2026 |
 
-**Rows proposed for FIX_PLAN.md Phases 2A, 1, 2B and 4 (25 Sep 2026).** None applied yet. Phases 3 and 5
-touch no `engine/app/*` or `packages/face-sdk/src/workflow/*` file. `packages/face-sdk/src/constants.ts`
-(new), `src/challenge/guide.ts` and `src/camera/camera.ts` are treated as NOT protected here — they sit
-outside `workflow/` and are not one of the three individually-named `src/*.ts` files — flag if that reading
-is wrong.
+**Correction, 25 Sep 2026.** The table below this note previously scoped "protected" too narrowly —
+`engine/app/*` plus only three named `packages/face-sdk/src/*.ts` files. The actual protected set is
+every path in the ACTIVE manifest, `docs/hardening/evidence/baseline/source-sha256.v4.json` (100 paths;
+see the new manifest row below for which of those are still live). That set includes all of
+`packages/face-sdk/src/*` (`constants.ts` — which already exists, not a new file — `challenge/guide.ts`,
+`camera/camera.ts`, `camera/capture.ts`, `workflow/run.ts`, plus the files already named), `apps/shared/*`,
+`apps/tests/*`, `apps/vendor/*`, several `deploy/*` scripts, `docker-compose*.yml`, `Caddyfile*` and three
+`.github/` workflow/action files. The rows below are re-walked against that full list.
+
+**Process note.** `deploy/native_gate_check.py` is in the v4 manifest and was edited in Phase 0 item 0.3
+(an E701 lint fix and an unused `numpy` import removal, commit "0.3: exclude vendor/pad-evidence/evidence
+from ruff, fix real lint errors") without an approved row — the narrower scoping above is why that was
+missed at the time. See the retroactive row below; the change is not reverted pending the owner's decision.
+
+*Retroactive and manifest-housekeeping rows:*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| deploy/native_gate_check.py (recorded after the fact, 25 Sep 2026) | Already applied in Phase 0 item 0.3 WITHOUT a prior approved row: rewrote the `if/elif/else: response = ...` one-liners (lines ~31-33) into multi-line blocks (E701 fix) and removed an unused `import numpy as np`. No logic change — same branches, same calls, same assertions. Recorded here per the process note above; the owner can accept it in place or ask for a revert. | pending |
+| docs/hardening/evidence/baseline/source-sha256.v5.json (new manifest) | Record a v5 manifest built from v4's path list: (a) drop the 43 paths permanently removed by the mock-gateway/console/integration-demo deletion (D1) — `mock-gateway/*`, `apps/console/*`, `apps/integration-demo/*`, `apps/e2e_console.js`, `apps/e2e_guided_browser.mjs`, `apps/shared/{boot-check,presenter,verdict}.js`, `apps/tests/{console-transport,console,controller,evaluation-form,guided-page,harness,page-harness}.{test.js,js}`, `deploy/{cutover_pad,gateway_enroll_smoke,package_pad_release,review_metadata,rollback_pad,run_stage_checks,smoke_pad,stage_pad}.{sh,py}`, `docker-compose.demo.yml`, `Caddyfile.demo`, and `packages/face-sdk/src/internal.ts` (deleted alongside the console; a later row re-adds it when Phase 1.8 recreates it); (b) take fresh hashes for the 49 paths that are present and were legitimately edited since v4 was taken (7 `engine/app/*` files plus `trace.py`, from the already-approved LIVENESS_UPGRADE_PLAN Phase 1-5 rows; `.github/workflows/contract.yml` and `apps/tests/face-guide.test.js`, both edited under the D1 removal's own approved scope by the `claude/remove-mock-gateway` session; `packages/face-sdk/src/workflow/session.ts`, from the approved item 0.2 fix; and `deploy/native_gate_check.py`, the retroactive row above); (c) carry the 8 gitignored, never-committed build/fetch artifacts (`apps/vendor/mediapipe/*`, 4 files; `engine/models/anti_spoof/*`, 4 files) forward unchanged from v4, since neither is actually deleted, only absent from a checkout that hasn't run `apps/vendor/fetch.sh` or the PAD conversion. v4 itself already had a wrong hash for `packages/face-sdk/src/camera/capture.ts` (confirmed unrelated to any real edit: `git log` shows it untouched since the initial commit, and its current hash matches that commit) — v5 corrects it as a side effect of (b) recomputing every present path. v4 is kept unchanged as evidence; v5 does not become the new ACTIVE manifest by this row alone — that is a separate, later decision once a phase actually completes. | pending |
 
 *Phase 2A — shared constants, codes and flags (item 2A.1-2A.4):*
 
@@ -209,6 +224,11 @@ is wrong.
 | packages/face-sdk/src/workflow/session.ts (2A.2) | Replace the literal `15400` (line 113) and `1400` (line 129) with imports from the new `src/constants.ts`. No behavior change. Separate change from the item 0.2 row above. | pending |
 | packages/face-sdk/src/index.ts (2A.3) | Re-export the new `ERROR_CODES` map and default user text from `src/errors.ts` (new file). Additive export only. | pending |
 | packages/face-sdk/src/workflow/session.ts (2A.3) | Update the retry-code sets to read from the shared `ERROR_CODES` map instead of their own copy. No change to which codes are retryable today. Separate change from the other session.ts rows here. | pending |
+| apps/shared/messages.js (2A.3) | Replace the `ENGINE_TEXT`/`SDK_TEXT` copies with lookups into the shared `ERROR_CODES` map (2A.3). No wording change beyond resolving the documented disagreements (LOW_QUALITY, CHALLENGE_FAIL, PAYLOAD_TOO_LARGE, MODEL_UNAVAILABLE, UNAUTHORIZED, ENGINE_UNREACHABLE, CHALLENGE_INVALID). | pending |
+| apps/shared/face-guide.js (2A.2) | `SHARP_MIN`/`LUMA_MIN`/`LUMA_MAX` (lines 25, 31) are currently `null` placeholders; wire them to the same values `apps/verify/framing.js` uses (moving to the SDK constants in 2A.2), or delete the dead fields if nothing reads them once wired. No other behavior change. | pending |
+| packages/face-sdk/src/constants.ts (2A.2) | Existing file, not new. Add `LUMA_MIN = 55`, `SHARP_MIN = 12` (moved from `apps/verify/framing.js`) and one exported `CAMERA_CONSTRAINTS`, plus named constants for the HEAD_SEQUENCE-specific span/interval currently inlined as `15400`/`1400` in `session.ts`. No change to the existing exports' values. | pending |
+| packages/face-sdk/src/camera/camera.ts (2A.2, conditional) | Only if consolidating the camera-constraints duplicate (currently `camera.ts` and `apps/verify/bridge.js`, not protected) means moving `CAMERA_CONSTRAINTS`'s definition out of `camera.ts` and into `constants.ts` (re-imported here) rather than leaving it defined in `camera.ts` and re-exported: that one-line move. No behavior change either way. Separate change from the 4.6 camera.ts row below. | pending |
+| packages/face-sdk/src/index.ts (2A.2, conditional) | Only if `LUMA_MIN`, `SHARP_MIN` or `CAMERA_CONSTRAINTS` become public SDK exports (today `apps/verify/framing.js` and `apps/shared/face-guide.js` could instead import them via a relative path with no public export needed): the additive re-export line(s). Separate change from the other index.ts rows here. | pending |
 
 *Phase 1 — anti-spoof and replay (items 1.1-1.9; "Protected: challenge.py, main.py, liveness.py. Rows are needed from 0.1" per FIX_PLAN.md item 1.1):*
 
@@ -228,6 +248,8 @@ is wrong.
 | packages/face-sdk/src/types.ts (1.8) | Remove the public `env` field from `FaceSessionOptions` (line ~126). Add two narrow public options instead: `transport: { fetch }` and `camera: { stream: MediaStream \| () => Promise<MediaStream> }`. | pending |
 | packages/face-sdk/src/workflow/session.ts (1.8) | `resolveEnvironment` (lines 269-296) is driven by the new `transport`/`camera` options instead of the public `env`; a supplied camera stream still goes through the SDK's own frame grabber and readiness checks. Move the fixture-frame injection that `apps/e2e_sdk_session.mjs` uses behind the internal entry (`dist/internal.js`) only. Separate change from the other session.ts rows here. | pending |
 | packages/face-sdk/src/index.ts (1.8, conditional) | Only if the public build re-exports anything `env`-related today, or an internal-only entry point needs to be added for the fixture-frame injection moved out of the public API: make that one export change. Additive/internal only, no other public surface change. | pending |
+| packages/face-sdk/src/internal.ts (1.8, recreate) | Deleted 25 Sep 2026 by the mock-gateway/console removal ("nothing imports them once the console is gone") — it is still in the v4 manifest as a protected path. Item 1.8 needs it back: an internal-only entry point (built to `dist/internal.js`, not part of the public `dist/index.js` build) that exposes the fixture-frame injection `apps/e2e_sdk_session.mjs` needs, and nothing else public-API-shaped. | pending |
+| apps/e2e_sdk_session.mjs (1.8) | Switch its fixture-frame injection from the public `env` option to the internal entry point above. No change to what the e2e script actually exercises. | pending |
 | engine/app/head_sequence.py (1.9) | Rewrite the comment at lines ~105-124 (it claims 0.25/0.15/0.20 are "identical" to the code's 0.30/0.20/0.18). Name the constants `FRONTAL_LIMIT_SWITCH = 0.30`, `STILL_TOLERANCE_SWITCH = 0.20`, `SWITCH_GRACE_FRAMES = 1`. Replace the stamped literal `amfatec-switch-trial-20260922` with a named policy constant `pad-sequence-v2-switch` (old string stays readable in decision records). Separate change from the two existing head_sequence.py rows and the 1.4/2A.4 head_sequence.py rows above. No scoring or threshold change — this documents the values D2 already accepted. | pending |
 | engine/tests/test_head_switch_trial.py (1.9) | Pin `FRONTAL_LIMIT_SWITCH`, `STILL_TOLERANCE_SWITCH` and `SWITCH_GRACE_FRAMES`'s values in the test, matching the frozen-list amendment above. | pending |
 
@@ -238,14 +260,27 @@ is wrong.
 | packages/face-sdk/src/workflow/run.ts (2B.2) | Remove the unused `RUN_CANCELLED` export (confirm with a grep over `apps/` and `packages/` first, per FIX_PLAN.md item 2B.2, that nothing imports it). No other change to `run.ts`. | pending |
 | packages/face-sdk/src/types.ts (2B.2) | Remove the unused `CHALLENGE_ACTIONS` export (confirmed unused first). Separate change from the 1.8 types.ts row above. | pending |
 | packages/face-sdk/src/index.ts (2B.2) | Remove the re-exports of `OVAL_START`, `CHALLENGE_ACTIONS`, `RUN_CANCELLED` and `FACE_FAR` (each confirmed unused first). Separate change from the 2A.3 and 1.8 index.ts rows above. | pending |
+| packages/face-sdk/src/challenge/guide.ts (2B.2) | Stop exporting `OVAL_START` as a public-facing symbol (it is only used internally within `guide.ts` once `index.ts` no longer re-exports it); keep it as an internal `const` if `export` is not otherwise needed. `FACE_FAR` (also defined here) stays — FIX_PLAN.md only asks to remove its `index.ts` re-export, not the internal value. | pending |
 
 *Phase 4 — UX (item 7, conditional only):*
 
 | File | Allowed change | Approved |
 |---|---|---|
-| engine/app/head_sequence.py or engine/app/challenge.py (4.7, conditional) | Only if checking the LOOK_LEFT/`first_sign` arrow and prompt against a mirrored preview finds the engine's sign convention itself disagrees with what the user sees (FIX_PLAN.md item 4.7): the smallest fix to make them agree. If the check finds the SDK/page side (`apps/verify/cues.js`) is the mismatch instead, this row is not used — that file is not protected. | pending |
+| engine/app/head_sequence.py or engine/app/challenge.py (4.7, conditional) | Only if checking the LOOK_LEFT/`first_sign` arrow and prompt against a mirrored preview finds the engine's sign convention itself disagrees with what the user sees (FIX_PLAN.md item 4.7): the smallest fix to make them agree. If the check finds the SDK/page side (`apps/verify/cues.js`, not protected) is the mismatch instead, this row is not used. | pending |
+| packages/face-sdk/src/camera/camera.ts (4.6) | Check abort before and after `getUserMedia` (line ~31) and stop tracks if aborted after; set `playsinline`/`muted` on the video (lines ~61-63); treat a rejected `play()` as not ready (line ~99); `waitForFrames` checks `readyState >= HAVE_CURRENT_DATA` and `!paused`, not only `videoWidth`. No public API change. Separate change from the 2A.2 camera.ts row above. | pending |
+| packages/face-sdk/src/constants.ts (4.2) | Add one shared `MAX_RESTARTS` (the "you moved" restart cap). Separate change from the 2A.2 constants.ts row above. | pending |
 
-No Phase 3 or Phase 5 item touches a protected file.
+*Phase 5 — CI (items 1-5):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| .github/workflows/contract.yml (5.1) | Add `apps/tests/*.test.mjs` to the glob it already runs `apps/tests/*.test.js` from. No other change to this workflow, and specifically not its already-approved-scope mock-gateway-path-filter removal from the D1 branch. | pending |
+| .github/workflows/engine.yml (5, conditional) | Only if adding the new packages/face-sdk, tests-hardening, tests-panel and packages/face-auth CI jobs (item 2), reusing the existing models cached step (item 4) or widening path filters to `packages/**`, `deploy/amfatec/**` and `tests-*/**` (item 5) requires touching this file rather than only adding a new, separate workflow file: the smallest such change, kept away from its VPS-deploy job per FIX_PLAN.md's own instruction ("Keep CI edits away from its deploy job"). | pending |
+| .github/actions/models/action.yml (5.4, conditional) | Only if making the new CI jobs (item 2) reuse this action's existing model-caching step needs a change to the action itself (for example, an input to control which jobs consume its output) rather than just calling it unchanged from a new workflow: that minimal parameterization. No change to what it fetches, converts or verifies. | pending |
+
+Phase 3 touches no protected file (`registration.py`, `lifecycle.py`, `sessions.py`, `.dockerignore`,
+`.gitignore`, `deploy/amfatec/ROTATE.md` and the face-auth panel/evaluation routes it names are all
+outside the v4 manifest).
 
 Not changeable under this procedure by any milestone: model files and model
 hashes, preprocessing, the match threshold 0.55, the heuristic liveness
