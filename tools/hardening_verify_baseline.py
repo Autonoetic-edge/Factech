@@ -22,7 +22,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 BASELINE_DIR = ROOT / "docs/hardening/evidence/baseline"
-ACTIVE = BASELINE_DIR / "source-sha256.v4.json"
+ACTIVE = BASELINE_DIR / "source-sha256.v5.json"
 
 
 def sha256(path: Path) -> str:
