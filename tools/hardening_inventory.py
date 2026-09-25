@@ -5,11 +5,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCES = (
-    "engine/app/main.py",
-    "mock-gateway/app.py",
-    "mock-gateway/evaluation.py",
-)
+SOURCES = ("engine/app/main.py",)
 HTTP_DECORATORS = {"get", "post", "put", "patch", "delete", "head", "options"}
 
 

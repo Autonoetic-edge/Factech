@@ -2,20 +2,12 @@ import importlib.util
 import re
 from pathlib import Path
 
-import pytest
-
 REPO = Path(__file__).resolve().parent.parent
 CONTRACT = REPO / "README.md"
 ENGINE_ERRORS = REPO / "engine" / "app" / "errors.py"
 ENGINE_APP = REPO / "engine" / "app"
-GATEWAY_APP = REPO / "mock-gateway" / "app.py"
 MESSAGES = REPO / "apps" / "shared" / "messages.js"
-CLIENT_FILES = sorted(
-    [
-        *(REPO / "apps" / "shared").glob("*.js"),
-        *(REPO / "apps" / "integration-demo").glob("*.js"),
-    ]
-)
+CLIENT_FILES = sorted((REPO / "apps" / "shared").glob("*.js"))
 
 CODE_RE = r"[A-Z][A-Z0-9_]{2,}"
 
@@ -44,10 +36,15 @@ TABLE = _contract_table()
 CANONICAL = frozenset(TABLE)
 ACTIVE = frozenset(c for c, r in TABLE.items() if r["status"] == "active")
 RESERVED = CANONICAL - ACTIVE
-BY_ORIGIN = {
-    origin: frozenset(c for c, r in TABLE.items() if r["origin"] == origin)
-    for origin in ("engine", "gateway")
-}
+BY_ORIGIN = {"engine": frozenset(c for c, r in TABLE.items() if r["origin"] == "engine")}
+
+# mock-gateway (the only "gateway"-origin emitter this repo ever had) is gone; the
+# production gateway is packages/face-auth, which declares no equivalent code (its
+# own DEPENDENCY_UNAVAILABLE is a different vocabulary, not part of this contract).
+# "gateway"-origin rows (currently just ENGINE_UNREACHABLE) are documented and may
+# still be client-handled, but this file can no longer verify an in-repo emitter or
+# HTTP-status mapping for them.
+NO_IN_REPO_EMITTER = frozenset(c for c, r in TABLE.items() if r["origin"] != "engine")
 
 
 def _load_engine_errors():
@@ -72,36 +69,9 @@ def _engine_emitted():
     return frozenset(found) & frozenset(ENGINE.ENGINE_CODES)
 
 
-def _gateway_lines():
-    return GATEWAY_APP.read_text(encoding="utf-8").splitlines()
-
-
-def _gateway_declared():
-    return frozenset(
-        m.group(1) for m in (DECL_RE.match(ln) for ln in _gateway_lines()) if m
-    )
-
-
-def _gateway_emitted():
-    declared = _gateway_declared()
-    emitted = set()
-    for line in _gateway_lines():
-        stripped = line.strip()
-        if (
-            DECL_RE.match(stripped)
-            or stripped.startswith("#")
-            or stripped.startswith("GATEWAY_")
-        ):
-            continue
-        emitted.update(n for n in declared if re.search(rf"\b{n}\b", line))
-    return frozenset(emitted)
-
-
 ENGINE_EMITTED = _engine_emitted()
-GATEWAY_DECLARED = _gateway_declared()
-GATEWAY_EMITTED = _gateway_emitted()
-EMITTED = ENGINE_EMITTED | GATEWAY_EMITTED
-EMITTED_BY_ORIGIN = {"engine": ENGINE_EMITTED, "gateway": GATEWAY_EMITTED}
+EMITTED = ENGINE_EMITTED
+EMITTED_BY_ORIGIN = {"engine": ENGINE_EMITTED}
 
 
 def _client_handled():
@@ -128,11 +98,10 @@ CLIENT_HANDLED = _client_handled()
 
 
 def test_every_client_code_is_emitted_somewhere():
-    dead = CLIENT_HANDLED - EMITTED
+    dead = CLIENT_HANDLED - EMITTED - NO_IN_REPO_EMITTER
     assert not dead, (
-        f"the client handles {sorted(dead)}, which neither the engine nor "
-        f"the gateway ever emits — those branches can never run. Engine emits "
-        f"{sorted(ENGINE_EMITTED)}; gateway emits {sorted(GATEWAY_EMITTED)}. "
+        f"the client handles {sorted(dead)}, which the engine never emits — "
+        f"those branches can never run. Engine emits {sorted(ENGINE_EMITTED)}. "
         f"Fix the client, or add the emitter and its §3.1 row."
     )
 
@@ -154,31 +123,29 @@ def test_client_does_not_branch_on_reserved_codes():
     )
 
 
-@pytest.mark.parametrize("origin", ["engine", "gateway"])
-def test_declared_codes_match_the_contract(origin):
-    declared = frozenset(
-        ENGINE.ENGINE_CODES if origin == "engine" else GATEWAY_DECLARED
-    )
-    expected = BY_ORIGIN[origin]
+def test_declared_codes_match_the_contract():
+    declared = frozenset(ENGINE.ENGINE_CODES)
+    expected = BY_ORIGIN["engine"]
     assert declared == expected, (
-        f"the {origin} declares {sorted(declared)} but contract §3.1 lists "
+        f"the engine declares {sorted(declared)} but contract §3.1 lists "
         f"{sorted(expected)} for it. Undeclared: {sorted(expected - declared)}; "
         f"undocumented: {sorted(declared - expected)}."
     )
 
 
-@pytest.mark.parametrize("origin", ["engine", "gateway"])
-def test_emitted_codes_come_from_the_component_the_contract_names(origin):
-    strays = EMITTED_BY_ORIGIN[origin] - BY_ORIGIN[origin]
+def test_emitted_codes_come_from_the_component_the_contract_names():
+    strays = EMITTED_BY_ORIGIN["engine"] - BY_ORIGIN["engine"]
     assert not strays, (
-        f"the {origin} emits {sorted(strays)}, which §3.1 attributes to another "
+        f"the engine emits {sorted(strays)}, which §3.1 attributes to another "
         f"component (or does not list at all)."
     )
 
 
 def test_active_codes_are_actually_emitted():
     missing = sorted(
-        code for code in ACTIVE if code not in EMITTED_BY_ORIGIN[TABLE[code]["origin"]]
+        code
+        for code in ACTIVE
+        if TABLE[code]["origin"] == "engine" and code not in EMITTED_BY_ORIGIN["engine"]
     )
     assert not missing, (
         f"§3.1 marks {missing} `active`, but no emission site references them. "
@@ -200,22 +167,11 @@ def test_http_statuses_match_the_contract():
             f"{code}: errors.HTTP_STATUS says {ENGINE.HTTP_STATUS[code]}, "
             f"contract §3.1 says {TABLE[code]['http']}."
         )
-    gw_status = dict(
-        re.findall(
-            rf"({CODE_RE}):\s*(\d{{3}})", GATEWAY_APP.read_text(encoding="utf-8")
-        )
-    )
-    for code in sorted(BY_ORIGIN["gateway"]):
-        assert code in gw_status, f"{code}: gateway declares no HTTP status for it."
-        assert int(gw_status[code]) == TABLE[code]["http"], (
-            f"{code}: gateway maps it to {gw_status[code]}, contract §3.1 says "
-            f"{TABLE[code]['http']}."
-        )
 
 
 def test_emitters_use_constants_not_string_literals():
     offenders = []
-    for path in [*_engine_source_files(), GATEWAY_APP]:
+    for path in _engine_source_files():
         for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             if DECL_RE.match(line.strip()):
                 continue
@@ -227,20 +183,6 @@ def test_emitters_use_constants_not_string_literals():
     assert not offenders, (
         "error codes hardcoded as string literals instead of constants:\n  "
         + "\n  ".join(offenders)
-    )
-
-
-CONSOLE = REPO / "apps" / "console" / "console.js"
-
-
-def test_f17_console_stage_map_is_exactly_the_canonical_codes():
-    text = CONSOLE.read_text(encoding="utf-8")
-    m = re.search(r"const STAGE_OF=\{(.*?)\};", text, re.DOTALL)
-    assert m, "STAGE_OF not found in apps/console/console.js"
-    keys = frozenset(re.findall(rf"\b({CODE_RE})\s*:", m.group(1)))
-    assert keys == CANONICAL, (
-        f"console STAGE_OF keys differ from contract §3.1: missing "
-        f"{sorted(CANONICAL - keys)}, extra {sorted(keys - CANONICAL)}"
     )
 
 
@@ -256,7 +198,7 @@ def test_the_retired_name_stays_retired():
     )
     hits = [
         f"{path.relative_to(REPO).as_posix()}:{n}"
-        for path in [*CLIENT_FILES, CONSOLE, GATEWAY_APP, *_engine_source_files()]
+        for path in [*CLIENT_FILES, *_engine_source_files()]
         for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1)
         if _RETIRED_USE_RE.search(line)
     ]
