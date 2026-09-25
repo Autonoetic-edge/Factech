@@ -1,8 +1,0 @@
-Caddy gateway connection serves the exact ui-v6 release files
-{'status': 'ok', 'engineVersion': '0.2.0', 'buildId': 'eval-pad-0d87e7b9a807'}
-/health 200
-/ 401
-/capture-status 401
-/review 401
-facetech-demo-gateway-1 healthy
-facetech-demo-engine-1 healthy

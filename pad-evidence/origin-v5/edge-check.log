@@ -1,7 +1,0 @@
-Caddy gateway connection serves exact ui-v5 page/scripts
-facetech-demo-gateway-1 healthy
-facetech-demo-engine-1 healthy
-/health 200
-/ 401
-/capture-status?check=origin-v5 401
-/review 401

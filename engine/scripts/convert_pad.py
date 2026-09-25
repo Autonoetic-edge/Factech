@@ -150,9 +150,7 @@ def main():
         },
     }
     (OUTPUT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    evidence = ROOT / "pad-evidence"
-    evidence.mkdir(exist_ok=True)
-    (evidence / "parity.json").write_text(json.dumps(reports, indent=2) + "\n")
+    (OUTPUT / "parity.json").write_text(json.dumps(reports, indent=2) + "\n")
     print(json.dumps({"manifest": manifest, "parity": reports}, indent=2))
 
 

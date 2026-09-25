@@ -1,1 +1,0 @@
-{"ui": "ui-v4", "consent_only": true, "retry_and_diagnostics": true, "served_files_match": true, "status": {"enabled": true, "evaluation_only": true, "consent_version": "storage-consent-v1", "retention_days": 7, "total": 8, "write_failures": 0, "bank_failures": 0, "purge_failures": 0}}

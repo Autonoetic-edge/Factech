@@ -1,7 +1,0 @@
-{
-  "apps/integration-demo/evaluation-form.js": "dd48f85d2cbd7b3a81032f24953ba3aa40ce844d1d16dd7aa427866a5ed35c69",
-  "apps/integration-demo/index.html": "cdd4d202a8cc825c68bd16e97a2e5f88194c4be2cc912965db68b081743ec12b",
-  "apps/integration-demo/page.js": "f0c2d4c55056be9aed43962755bb4b7667fec0ba2cd252107603608d281c345b",
-  "apps/tests/evaluation-form.test.js": "47058866e07d9a8a4b02e75a22fd6de52f56aa821dde8ecf4fd11a6c2bc3598a",
-  "apps/tests/page-harness.js": "5cf97fa01ffa76b3623df02dd4c00b10ff79b81ba2878211febdae0454763846"
-}

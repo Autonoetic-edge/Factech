@@ -1,4 +1,0 @@
-Verified 72 checksums; only three UI files differ
-Traceback (most recent call last):
-  File "<stdin>", line 25, in <module>
-AssertionError
