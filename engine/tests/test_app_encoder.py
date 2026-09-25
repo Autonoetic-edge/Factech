@@ -7,6 +7,7 @@ from pathlib import Path
 import msgpack
 import pytest
 
+from app.constants import MAX_SCAN_BYTES
 from app.facescan import parse_facescan
 from helpers import make_jpeg
 
@@ -78,7 +79,7 @@ def test_golden_fixture_parses():
 def test_golden_fixture_matches_reference_bytes():
     raw = base64.b64decode(GOLDEN.read_text().strip())
     assert raw == msgpack.packb(reference_scan(), use_bin_type=True)
-    assert len(raw) < 350 * 1024
+    assert len(raw) < MAX_SCAN_BYTES
 
 
 @pytest.mark.skipif(NODE is None, reason="node not found on PATH")

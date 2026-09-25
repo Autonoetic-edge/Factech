@@ -4,8 +4,7 @@ import binascii
 import msgpack
 
 from app import errors
-
-MAX_BYTES = 350 * 1024
+from app.constants import MAX_SCAN_BYTES as MAX_BYTES
 
 MAX_B64_CHARS = 4 * ((MAX_BYTES + 2) // 3)
 FRAME_COUNT = 12

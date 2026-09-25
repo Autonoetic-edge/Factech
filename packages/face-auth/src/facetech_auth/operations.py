@@ -264,6 +264,8 @@ class PostgresOperations:
             actor_id = fresh.auth.principal.actor_id
             now = int(self.repo.clock())
             if action.startswith("challenge."):
+                from app.constants import CHALLENGE_EXPIRY_MS  # the engine's own expiry
+
                 issued_ms = int(self.repo.clock() * 1000)
                 nonce = secrets.token_hex(16)
                 # Single-turn policies: the engine's own draw, glow schedule included,
@@ -288,7 +290,7 @@ class PostgresOperations:
                         operation=action.split(".")[1],
                         parameters=parameters,
                         issued_at=issued_ms,
-                        expires_at=issued_ms + 30000,
+                        expires_at=issued_ms + CHALLENGE_EXPIRY_MS,
                         consumed=False,
                     )
                 )
@@ -296,7 +298,7 @@ class PostgresOperations:
                     "nonce": nonce,
                     **parameters,
                     "issued_ms": issued_ms,
-                    "expires_ms": issued_ms + 30000,
+                    "expires_ms": issued_ms + CHALLENGE_EXPIRY_MS,
                 }
             elif action == Action.LIST_TEMPLATES:
                 rows = connection.execute(

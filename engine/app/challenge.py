@@ -5,9 +5,11 @@ import threading
 import time
 from dataclasses import dataclass
 
+from app.constants import CHALLENGE_EXPIRY_MS
+
 NONCE_BYTES = 16
 
-EXPIRY_MS = 30_000
+EXPIRY_MS = CHALLENGE_EXPIRY_MS
 
 RETAIN_AFTER_EXPIRY_MS = 5 * 60_000
 

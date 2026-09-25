@@ -14,15 +14,17 @@ import cv2
 import numpy as np
 import onnxruntime as ort
 
+from app import constants
+
 MODEL_DIR = Path(__file__).resolve().parents[1] / "models" / "anti_spoof"
 POLICY_VERSION = "pad-sequence-v2-slow"
 MODEL_VERSION = "MiniFASNet-b6d5f04ad787"
 MIN_USABLE = 9
-MAX_GAP_MS = 3800
+MAX_GAP_MS = constants.MAX_GAP_MS
 # single-turn-v1 (CHALLENGE_POLICY): same 12 frames and rules at 500 ms cadence. The gap
 # limit keeps v2-slow's meaning, one missing sample allowed and two refused.
 SINGLE_POLICY_VERSION = "pad-single-v1"
-SINGLE_MAX_GAP_MS = 1400
+SINGLE_MAX_GAP_MS = constants.SINGLE_MAX_GAP_MS
 SCAN_TIMEOUT_S = 15.0
 RUN_TIMEOUT_S = 2.0
 _model = None
@@ -175,7 +177,7 @@ def evaluate(frames, detections, embed_face, decode, policy=POLICY_VERSION):
 
     try:
         model = get_pad()
-        if len(frames) != 12 or len(detections) != 12:
+        if len(frames) != constants.FRAME_COUNT or len(detections) != constants.FRAME_COUNT:
             return finish("insufficient_evidence", "frame_count")
         for i, (frame, faces) in enumerate(zip(frames, detections)):
             if time.perf_counter() - start > SCAN_TIMEOUT_S:

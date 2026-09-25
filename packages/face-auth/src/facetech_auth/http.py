@@ -579,7 +579,10 @@ class HardenedApp:
             raw = base64.b64decode(body["facescan"], validate=True)
         elif media != "application/msgpack":
             raise Denied("UNSUPPORTED_MEDIA_TYPE", 415)
-        if len(raw) > 350 * 1024:
+        # The engine's own limit: the frozen `app` package ships in the same image.
+        from app.constants import MAX_SCAN_BYTES
+
+        if len(raw) > MAX_SCAN_BYTES:
             raise Denied("PAYLOAD_TOO_LARGE", 413)
         scan = msgpack.unpackb(
             raw, raw=False, strict_map_key=True, object_pairs_hook=unique_pairs

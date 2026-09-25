@@ -24,6 +24,7 @@ sys.path[:0] = [
     str(ROOT / ".hardening-deps"),
     str(ROOT / "packages/face-auth/src"),
     str(ROOT / "tests-hardening"),
+    str(ROOT / "engine"),  # app.constants, read by the gateway too (as in the image)
 ]
 STATE = ROOT / ".hardening-runtime/state"
 ISSUER = "https://127.0.0.1:18443/realms/facetech-hardening"

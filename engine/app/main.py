@@ -24,6 +24,7 @@ from app import (
     store,
     trace,
 )
+from app.constants import MATCH_THRESHOLD
 from app.detect import (
     align_largest_face,
     decode_jpeg,
@@ -41,7 +42,7 @@ from app.facescan import (
 MODEL_VERSION = "det_500m+w600k_r50 (buffalo_sc/buffalo_l)"
 ENGINE_VERSION = "0.2.0"
 
-PLACEHOLDER_THRESHOLD = 0.55
+PLACEHOLDER_THRESHOLD = MATCH_THRESHOLD
 
 REFERENCE_FRAMES = 3
 
