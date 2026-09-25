@@ -10,6 +10,13 @@ add their templates, verify as them, or revoke their templates.
 Source inspection, not a fresh VPS inventory. The historical live baseline remains
 gateway `eval-pad-0e45ad88290f`, engine `eval-pad-0d87e7b9a807`, UI `ui-v6`.
 
+**Note (removal, later than the design date above):** `mock-gateway/` (its `app.py`,
+`evaluation.py`, `capture_store.py`, `export_captures.py`), `docker-compose.demo.yml`,
+`Caddyfile.demo`, and the `apps/console` and `apps/integration-demo` pages it served
+have been deleted from the repository; the rows below describe them as they existed
+for this design's source inspection, not code you can still open. The hardened
+gateway in `packages/face-auth`, run via `deploy/amfatec`, is the only gateway left.
+
 | Boundary / caller | Current interface and authority | State / consequence |
 |---|---|---|
 | Browser -> Caddy -> gateway | Shared Basic Auth except `/health`; browser selects `user_id`, `X-User-Id`, `X-Capture-Meta` | No individual identity or ownership proof; camera, device fields and labels untrusted |
