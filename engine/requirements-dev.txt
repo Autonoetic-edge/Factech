@@ -1,0 +1,9 @@
+# Test-only dependencies on top of requirements.txt.
+# onnx is needed by the engine tests (PAD conversion parity checks) but was
+# missing here before; without it, pytest collection fails wherever a test
+# imports onnx directly. Pins match this workspace as of 2026-09-25.
+-r requirements.txt
+pytest==9.1.1
+httpx==0.28.1
+onnx==1.23.0
+ruff==0.14.14
