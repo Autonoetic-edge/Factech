@@ -17,9 +17,6 @@ dist/
 eval/data/
 *.facescan
 
-mock-gateway/captures.db
-mock-gateway/captures.db-*
-
 Thumbs.db
 .vscode/
 
