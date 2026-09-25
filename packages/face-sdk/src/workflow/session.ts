@@ -26,11 +26,16 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
   const video = options.videoElement;
   let disposed = false;
 
-  let stopCode: FailureCode | null = null;
-  let stopReason: string | null = null;
+  // Cancellation reason per run id, not one shared variable: a superseding
+  // start() cancels the previous run synchronously, before that run's own
+  // catch has a chance to read why. Keyed storage lets each run read only
+  // its own reason, however many runs start and finish around it.
+  const stopInfo = new Map<number, { code: FailureCode | null; reason: string }>();
 
   const ctl = createRunController({
-    onCancel: (_run, reason) => { stopReason ??= reason; },
+    onCancel: (run, reason) => {
+      if (!stopInfo.has(run.id)) stopInfo.set(run.id, { code: null, reason });
+    },
   });
   const unbind = options.cancelOnHide === false || !env.document || !env.window
     ? null
@@ -60,9 +65,6 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
       return fail(op, 'INVALID_USER_ID', 'user_id must match [a-z0-9._-]{1,64} after trimming and lowercasing');
     }
     const token = ctl.start(op, userId);
-    // start() cancels any earlier run ('superseded'); clear that after, not before.
-    stopCode = null;
-    stopReason = null;
     const ac = new AbortController();
 
     ctl.own(token, () => ac.abort());
@@ -86,7 +88,7 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
       const cam = await openCamera(env, video, () => {
 
         if (!ctl.live(token)) return;
-        stopCode = 'CAMERA_ENDED';
+        stopInfo.set(token.id, { code: 'CAMERA_ENDED', reason: 'camera-ended' });
         ctl.cancel('camera-ended');
       }, () => ctl.live(token), signal);
 
@@ -148,7 +150,7 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
           if (probe?.lost === true) { if (!faceLostSince) faceLostSince = env.now(); } else faceLostSince = 0;
         },
         shouldAbort: () => {
-          if (!ctl.live(token)) return stopCode ?? 'CANCELLED';
+          if (!ctl.live(token)) return stopInfo.get(token.id)?.code ?? 'CANCELLED';
           if (faceLostSince && env.now() - faceLostSince > FACE_LOST_MS) return 'FACE_LOST';
           return null;
         },
@@ -195,12 +197,14 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
         match: body.match, score: body.score, threshold: body.threshold,
       };
     } catch (e) {
+      const info = stopInfo.get(token.id);
+      stopInfo.delete(token.id);
       if (isCancelled(e)) {
-        return fail(op, stopCode ?? 'CANCELLED', 'the attempt was stopped before it finished',
-          { reason: stopReason ?? 'cancelled' });
+        return fail(op, info?.code ?? 'CANCELLED', 'the attempt was stopped before it finished',
+          { reason: info?.reason ?? 'cancelled' });
       }
       if (isCodedError(e)) {
-        return fail(op, e.sdkCode, e.message, e.sdkCode === 'CANCELLED' ? { reason: stopReason ?? 'cancelled' } : undefined);
+        return fail(op, e.sdkCode, e.message, e.sdkCode === 'CANCELLED' ? { reason: info?.reason ?? 'cancelled' } : undefined);
       }
       throw e;
     } finally {
