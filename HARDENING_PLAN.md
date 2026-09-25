@@ -181,6 +181,72 @@ the Approved column records who approved it and when.
 
 | packages/face-sdk/src/workflow/session.ts (Phase 0 item 0.2) | Fix only: `runScan` clears the session-level `stopReason`/`stopCode` for the new run immediately after `ctl.start()` synchronously cancels the superseded run, so the superseded run's own `catch` later reads `stopReason` as already cleared and reports `reason: 'cancelled'` instead of `'superseded'` (contradicts the comment at line 63 and the test at `tests/session.test.ts:318-325`). Scope: make the cancelled run capture its own reason at cancellation time (e.g. read it inside `ctl.guard`'s cancel handling, or snapshot it before clearing) instead of relying on the shared mutable `stopReason`/`stopCode` variables being read late. No other behavior, no public API or type change. | owner, 25 Sep 2026 |
 
+**Rows proposed for FIX_PLAN.md Phases 2A, 1, 2B and 4 (25 Sep 2026).** None applied yet. Phases 3 and 5
+touch no `engine/app/*` or `packages/face-sdk/src/workflow/*` file. `packages/face-sdk/src/constants.ts`
+(new), `src/challenge/guide.ts` and `src/camera/camera.ts` are treated as NOT protected here — they sit
+outside `workflow/` and are not one of the three individually-named `src/*.ts` files — flag if that reading
+is wrong.
+
+*Phase 2A — shared constants, codes and flags (item 2A.1-2A.4):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| engine/app/constants.py (new file) | Add `FRAME_COUNT`, `FRAME_INTERVAL_MS`, `CAPTURE_SPAN_MS`, `MAX_SCAN_BYTES`, `MAX_B64_CHARS`, `MAX_GAP_MS`, `SINGLE_MAX_GAP_MS`, `MATCH_THRESHOLD`, `LIVENESS_THRESHOLD`, `CHALLENGE_EXPIRY_MS`. Values only restate the existing frozen numbers; no threshold changes. | pending |
+| engine/app/facescan.py (2A.1) | Replace the literal at line 8 with the import from `constants.py`. No behavior change. | pending |
+| engine/app/anti_spoof.py (2A.1) | Replace the `len(frames) != 12` check and the gap-limit literals with the constants import. No behavior change. | pending |
+| engine/app/challenge.py (2A.1) | Replace the `EXPIRY_MS` literal with the constants import, kept as an alias so existing importers of `challenge.EXPIRY_MS` keep working. No behavior change. | pending |
+| engine/app/main.py (2A.1) | Replace `PLACEHOLDER_THRESHOLD` with the constants import, kept as an alias. No behavior change. | pending |
+| engine/tests/test_app_encoder.py (2A.1) | Line 81: replace the literal with the constants import. Golden file and test logic otherwise untouched; `test_app_encoder.py` must still pass unedited in substance. | pending |
+| engine/app/flags.py (new file) | Add `choice(name, allowed, default)` and `enabled(name, default)`, one shared "off" vocabulary. Invalid values log once and fall back to the default (not raise, not silently accept a bad value). | pending |
+| engine/app/liveness.py (2A.4) | Replace the env-flag parsing at lines 92-96 with a call to `flags.py`. Same log-and-fall-back behavior on an invalid value. No threshold or signal change. | pending |
+| engine/app/main.py (2A.4) | Replace the env-flag parsing at line 172 with a call to `flags.py`. Same log-and-fall-back behavior. No response or decision change. | pending |
+| engine/app/flash.py (2A.4) | Replace the env-flag parsing at lines 73-75 with a call to `flags.py`. No behavior change. | pending |
+| engine/app/geometry.py (2A.4) | Replace the env-flag parsing at lines 31-33 with a call to `flags.py`. No behavior change. | pending |
+| engine/app/enrolment.py (2A.4) | Replace the env-flag parsing at lines 57-61 with a call to `flags.py`, and fix the real bug: `enrolment.py` reads `PAD_GEOMETRY` with a different meaning than `geometry.py` does. Give the enrolment use its own flag name (or make both agree), with a test for it. No change to what the flag values already do beyond that name fix. | pending |
+| engine/app/aenet.py (2A.4) | Replace the env-flag parsing at lines 63-65 with a call to `flags.py`. No behavior change. | pending |
+| engine/app/challenge.py (2A.4) | Replace the env-flag parsing at lines 74-76 with a call to `flags.py`. Separate change from the 2A.1 constants row above. No behavior change. | pending |
+| engine/app/head_sequence.py (2A.4) | Replace the env-flag parsing at lines 143-146 with a call to `flags.py`. Separate change from the two existing head_sequence.py rows above. No scoring or threshold change. | pending |
+| packages/face-sdk/src/workflow/session.ts (2A.2) | Replace the literal `15400` (line 113) and `1400` (line 129) with imports from the new `src/constants.ts`. No behavior change. Separate change from the item 0.2 row above. | pending |
+| packages/face-sdk/src/index.ts (2A.3) | Re-export the new `ERROR_CODES` map and default user text from `src/errors.ts` (new file). Additive export only. | pending |
+| packages/face-sdk/src/workflow/session.ts (2A.3) | Update the retry-code sets to read from the shared `ERROR_CODES` map instead of their own copy. No change to which codes are retryable today. Separate change from the other session.ts rows here. | pending |
+
+*Phase 1 — anti-spoof and replay (items 1.1-1.9; "Protected: challenge.py, main.py, liveness.py. Rows are needed from 0.1" per FIX_PLAN.md item 1.1):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| engine/app/challenge.py (1.1) | Server-measured timing (D3): reject when the server-measured window (nonce spend time minus issue time, or standalone-engine receipt time) is shorter than the action's minimum real capture time; enforce per-gap and per-span plausibility bounds on client `ts_ms`; bind the head-sequence switch to the server-measured window. Bug fix: `consume_from_scan` takes one snapshot of `_issued[nonce]` under the lock instead of re-reading it after checks (avoids a `KeyError` on an evicted nonce), and `check()` reads `record.get("binding")` inside the lock. No change to `MATCH_THRESHOLD`, `LIVENESS_THRESHOLD`, frame count/interval, or the wire format. | pending |
+| engine/app/main.py (1.1) | Record the request receipt time before queueing and pass it into `_secure_analysis`, so nonce/window checks judge against real receipt time, not the time the queued scan happens to be processed. No response or decision-shape change. | pending |
+| engine/app/liveness.py (1.1) | `_timing_signal`, `_challenge_signal` and `_settle_split` take the server-measured window instead of trusting client `ts_ms` alone for the pass/fail boundary. No threshold change. | pending |
+| engine/app/challenge.py (1.2) | Behind `CHALLENGE_VARIANTS=wide` (default off = today's 6 variants): widen `_draw_params`'s `switch_ms` to 8400-10000 ms at 200 ms steps, `settle_ms` jitter to ±400 ms, `first_sign` to ±1. `target` stays 0.18 (D2). `head_parameters_match` accepts the wider ranges. Separate change from the 1.1 row above. | pending |
+| packages/face-sdk/src/workflow/session.ts (1.2) | The HEAD_SEQUENCE guide-cue timing (currently hardcoded fallbacks `switch_ms ?? 9000`, `settle_ms ?? 3200` at lines ~134-136) reads only from the issued challenge's `params`, never a hardcoded fallback, so a widened server-side draw is followed correctly. No other behavior change. Separate change from the 0.2, 2A.2 and 2A.3 session.ts rows above. | pending |
+| engine/app/main.py (1.3) | Add `FLASH_CHECK=strict`: an `inconclusive` glow result (no_baseline, too_bright, too_few_frames) under a glow challenge refuses with a retryable `LOW_QUALITY` ("too bright / hold still"). `on`, `log` and `off` keep today's behavior; `no_glow_issued` is never refused. Separate change from the other main.py rows here. | pending |
+| engine/app/main.py (1.4) | Set `tracked[i] = None` for every frame PAD marked `invalid_crop` before liveness, `head_sequence` and geometry see the frame list, instead of only `anti_spoof.py` skipping PAD on it while `main.py`'s `tracked` list still counts the frame. Separate change from the other main.py rows here. | pending |
+| engine/app/head_sequence.py (1.4, conditional) | Only if `validate_for`/`validate` do not already treat a `None` frame as missing while still enforcing the challenge's minimum usable-frame count: make them do so. No scoring or threshold change. If the existing code already handles `None` correctly, this row is not used. | pending |
+| engine/app/store.py (1.5) | `store.enroll` (lines 13-24): if the subject already has templates, the new embedding must reach `MATCH_THRESHOLD` against at least one existing template, or the enroll is refused with a new `ENROLL_MISMATCH` (409, not retryable). The first enrollment for a subject is unchanged. | pending |
+| engine/app/main.py (1.6a) | Behind `RESPONSE_DETAIL=minimal` (default after staging): `/v1/verify` and `/v1/liveness` responses, and `_liveness_summary` (line 414), keep `match`/`live` and a coarse `reason` (`no_match`, `not_live`, `retry`) only; per-signal scores and thresholds go to the trace/decision record only, not the response body. `full` keeps today's response shape. | pending |
+| engine/app/liveness.py (1.7) | Compute `DEPTH_*`/`MOIRE_*` signals on every scan (both currently unset/inert) and write them to the trace/decision record under the existing `PAD_*` logging style. Neither signal votes on the verdict; no scoring or threshold change; enforcing them is a separately approved future change. | pending |
+| packages/face-sdk/src/types.ts (1.8) | Remove the public `env` field from `FaceSessionOptions` (line ~126). Add two narrow public options instead: `transport: { fetch }` and `camera: { stream: MediaStream \| () => Promise<MediaStream> }`. | pending |
+| packages/face-sdk/src/workflow/session.ts (1.8) | `resolveEnvironment` (lines 269-296) is driven by the new `transport`/`camera` options instead of the public `env`; a supplied camera stream still goes through the SDK's own frame grabber and readiness checks. Move the fixture-frame injection that `apps/e2e_sdk_session.mjs` uses behind the internal entry (`dist/internal.js`) only. Separate change from the other session.ts rows here. | pending |
+| packages/face-sdk/src/index.ts (1.8, conditional) | Only if the public build re-exports anything `env`-related today, or an internal-only entry point needs to be added for the fixture-frame injection moved out of the public API: make that one export change. Additive/internal only, no other public surface change. | pending |
+| engine/app/head_sequence.py (1.9) | Rewrite the comment at lines ~105-124 (it claims 0.25/0.15/0.20 are "identical" to the code's 0.30/0.20/0.18). Name the constants `FRONTAL_LIMIT_SWITCH = 0.30`, `STILL_TOLERANCE_SWITCH = 0.20`, `SWITCH_GRACE_FRAMES = 1`. Replace the stamped literal `amfatec-switch-trial-20260922` with a named policy constant `pad-sequence-v2-switch` (old string stays readable in decision records). Separate change from the two existing head_sequence.py rows and the 1.4/2A.4 head_sequence.py rows above. No scoring or threshold change — this documents the values D2 already accepted. | pending |
+| engine/tests/test_head_switch_trial.py (1.9) | Pin `FRONTAL_LIMIT_SWITCH`, `STILL_TOLERANCE_SWITCH` and `SWITCH_GRACE_FRAMES`'s values in the test, matching the frozen-list amendment above. | pending |
+
+*Phase 2B — remaining cleanup (item 2):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| packages/face-sdk/src/workflow/run.ts (2B.2) | Remove the unused `RUN_CANCELLED` export (confirm with a grep over `apps/` and `packages/` first, per FIX_PLAN.md item 2B.2, that nothing imports it). No other change to `run.ts`. | pending |
+| packages/face-sdk/src/types.ts (2B.2) | Remove the unused `CHALLENGE_ACTIONS` export (confirmed unused first). Separate change from the 1.8 types.ts row above. | pending |
+| packages/face-sdk/src/index.ts (2B.2) | Remove the re-exports of `OVAL_START`, `CHALLENGE_ACTIONS`, `RUN_CANCELLED` and `FACE_FAR` (each confirmed unused first). Separate change from the 2A.3 and 1.8 index.ts rows above. | pending |
+
+*Phase 4 — UX (item 7, conditional only):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| engine/app/head_sequence.py or engine/app/challenge.py (4.7, conditional) | Only if checking the LOOK_LEFT/`first_sign` arrow and prompt against a mirrored preview finds the engine's sign convention itself disagrees with what the user sees (FIX_PLAN.md item 4.7): the smallest fix to make them agree. If the check finds the SDK/page side (`apps/verify/cues.js`) is the mismatch instead, this row is not used — that file is not protected. | pending |
+
+No Phase 3 or Phase 5 item touches a protected file.
+
 Not changeable under this procedure by any milestone: model files and model
 hashes, preprocessing, the match threshold 0.55, the heuristic liveness
 threshold 0.50, the PAD decision rule, the all-frames-live rule, 12 frames at
