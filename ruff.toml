@@ -5,6 +5,10 @@ extend-exclude = [
 
   "engine/app/vendor",
   ".venv",
+  "vendor",
+  "apps/vendor",
+  "pad-evidence",
+  "docs/hardening/evidence",
 ]
 
 src = [".", "engine", "engine/tests"]

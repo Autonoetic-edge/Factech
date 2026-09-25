@@ -3,7 +3,6 @@ import json
 import time
 
 import cv2
-import numpy as np
 
 from app import challenge, main, store, trace
 from app.detect import align_largest_face, detect_faces
@@ -28,9 +27,12 @@ for operation in ("enroll", "verify", "liveness"):
     t, token = trace.start(operation, "native-test-" + operation)
     started = time.perf_counter()
     try:
-        if operation == "enroll": response = main._enroll_scan(user, scan)
-        elif operation == "verify": response = main._verify_scan(store.get_templates(user), scan, user)
-        else: response = main._liveness_scan(scan)
+        if operation == "enroll":
+            response = main._enroll_scan(user, scan)
+        elif operation == "verify":
+            response = main._verify_scan(store.get_templates(user), scan, user)
+        else:
+            response = main._liveness_scan(scan)
         assert response.status_code == 422
         assert t.fields["pad"]["outcome"] == "spoof"
         assert "match" not in t.fields
