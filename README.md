@@ -23,7 +23,7 @@ service. The local examples below require unused ports; they are not instruction
 to replace an existing listener. The deployed evaluation UI redirects other origins
 to the canonical VPS site; local UI testing needs an isolated test harness/configuration.
 
-Browser face capture, a TypeScript SDK, and a Python biometric engine. The included mock gateway serves the web pages and forwards requests to the engine.
+Browser face capture, a TypeScript SDK, and a Python biometric engine. `packages/face-auth` (the hardened gateway) serves the web pages and forwards requests to the engine; it is what production runs, via `deploy/amfatec`.
 
 This is a controlled evaluation prototype. Recognition thresholds are not calibrated
 for production. Learned PAD and ordered movement checks are mandatory, but physical
@@ -38,11 +38,11 @@ Templates and challenge nonces are held in memory. Restarting the engine clears 
 | `engine/models` | Pinned ONNX model files |
 | `engine/eval` | Offline recognition and presentation-attack evaluation tools |
 | `packages/face-sdk` | Camera lifecycle, challenge timing, encoding and transport |
-| `apps/integration-demo` | Guided capture page |
-| `apps/console` | Diagnostic console |
+| `packages/face-auth` | Hardened gateway: authentication, authorization and the engine proxy |
+| `apps/verify` | Self-service enroll/verify page served by the hardened gateway |
 | `apps/shared` | Shared guidance, messages and assets |
 | `apps/vendor` | Pinned browser detector assets and verification script |
-| `mock-gateway` | Development proxy and optional evaluation capture storage |
+| `deploy/amfatec` | Local/staging stack for the hardened gateway |
 | `tests-contract` | API error-code and client contract checks |
 | `tests-integration` | Engine integration smoke checks |
 | `deploy` | Deployment script |
@@ -85,53 +85,12 @@ $env:ENGINE_API_KEY = "local-development-only"
 ..\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-Gateway:
-
-```powershell
-cd E:\Factech\mock-gateway
-$env:ENGINE_API_KEY = "local-development-only"
-$env:FACETECH_ENGINE_URL = "http://127.0.0.1:8000"
-..\.venv\Scripts\python.exe -m uvicorn app:app --host 127.0.0.1 --port 8080
-```
-
-Open the guided page at `http://127.0.0.1:8080/` or the console at `http://127.0.0.1:8080/console/`. Both pages use the built SDK in `packages/face-sdk/dist`.
-
-The console sends its requests through the SDK transport: 8 seconds for a challenge or status call, 20 seconds for a scan, and the `X-Request-Id` of a failed call is shown with the error. Leaving the screen or hiding the tab cancels the run, aborts its request and stops the camera. Cancelling cannot undo work the server already finished: if an enroll, verify or revoke reached the engine before the cancel, it may have taken effect, so check the Subjects screen or run it again. After a run the console keeps only metadata (sizes, nonce, frame SHA-256 hashes), never the frames or the FaceScan; it has no mode that keeps a scan.
-
-The mock gateway is a development proxy. It does not implement individual account authorization or the external crypto gateway's sealing and persistence. Do not expose it as a production authentication service.
-
-### Phone on the same Wi-Fi
-
-A phone browser only opens the camera on HTTPS. Serve the gateway over TLS on the laptop's Wi-Fi address and keep the engine on `127.0.0.1`. No Docker, tunnel or browser flag is needed.
-
-1. Make a local test CA and a certificate for the laptop's Wi-Fi IPv4 address (`ipconfig`). Keep these files outside the repository and delete them after testing. Replace `192.168.1.5` with your address; `openssl` ships with Git for Windows.
-
-```powershell
-mkdir $HOME\facetech-phone-cert; cd $HOME\facetech-phone-cert
-openssl req -x509 -newkey rsa:2048 -nodes -keyout ca.key -out ca.crt -days 7 -subj "/CN=Facetech local test CA" -addext "basicConstraints=critical,CA:TRUE" -addext "keyUsage=critical,keyCertSign,cRLSign"
-openssl req -newkey rsa:2048 -nodes -keyout server.key -out server.csr -subj "/CN=192.168.1.5"
-Set-Content ext.cnf "subjectAltName=IP:192.168.1.5`nextendedKeyUsage=serverAuth`nbasicConstraints=CA:FALSE" -Encoding ascii
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 7 -extfile ext.cnf
-```
-
-2. Install `ca.crt` on the phone as a trusted CA. Android: Settings, Security, Encryption and credentials, Install a certificate, CA certificate. iPhone: open the file, install the profile, then turn on full trust in Settings, General, About, Certificate Trust Settings. Remove it after testing.
-3. Start the engine as above on `127.0.0.1:8000`. Start the gateway on the Wi-Fi address with TLS:
-
-```powershell
-cd E:\Factech\mock-gateway
-$env:ENGINE_API_KEY = "local-development-only"
-$env:FACETECH_ENGINE_URL = "http://127.0.0.1:8000"
-..\.venv\Scripts\python.exe -m uvicorn app:app --host 192.168.1.5 --port 8443 --ssl-keyfile $HOME\facetech-phone-cert\server.key --ssl-certfile $HOME\facetech-phone-cert\server.crt
-```
-
-4. Allow the port for the phone only, from an administrator PowerShell, and remove the rule afterwards. The Wi-Fi network must be a Private network and must not isolate clients.
-
-```powershell
-New-NetFirewallRule -DisplayName "Facetech phone test 8443" -Direction Inbound -Protocol TCP -LocalPort 8443 -RemoteAddress <phone IP> -Profile Private -Action Allow
-Remove-NetFirewallRule -DisplayName "Facetech phone test 8443"
-```
-
-5. On the phone open `https://192.168.1.5:8443/`. The browser must show a normal padlock with no warning. Anyone who can reach this port can enroll and verify through the gateway, so stop it when the test ends.
+Gateway: the hardened gateway in `packages/face-auth` requires PostgreSQL and a
+configured Keycloak realm; it is not a single-process dev server. Run its stack with
+[`deploy/amfatec`](deploy/amfatec) (`docker compose -f deploy/amfatec/compose.yml up`),
+which serves `apps/verify` and the built SDK together with the engine. See
+`packages/face-auth/README.md` for the durable-integration requirements and the
+account/registration scripts under `deploy/amfatec`.
 
 ## 1. FaceScan format
 
@@ -217,37 +176,10 @@ Engine, from `engine`:
 ..\.venv\Scripts\python.exe -m pytest tests -q
 ```
 
-Gateway, from `mock-gateway`:
+With the hardened gateway and engine running (`deploy/amfatec`), `node apps/e2e_app_sdk.js` and `node apps/e2e_sdk_session.mjs` exercise the synthetic SDK pipeline against it. Synthetic fixtures validate software behavior, not biometric accuracy or presentation-attack resistance.
 
-```powershell
-..\.venv\Scripts\python.exe -m pytest tests -q
-```
+## Deployment
 
-With both local services running, `node apps/e2e_app_sdk.js` and `node apps/e2e_sdk_session.mjs` exercise the synthetic SDK pipeline. Synthetic fixtures validate software behavior, not biometric accuracy or presentation-attack resistance.
-
-`node apps/e2e_guided_browser.mjs` runs the real guided page in an installed Edge or Chrome, headless, with the browser's synthetic camera and fixture responses. It checks the wording and colour for each result, cancel and camera denial. Add `--live http://127.0.0.1:8080` to drive a running gateway and engine instead. The synthetic camera shows no face, so no live run can succeed.
-
-## Deployment and capture data
-
-The private team evaluation deployment uses the existing HTTPS edge and a password-gated Caddy gateway. The guided page offers an unchecked consent control, a person code, test case and lighting. Only consenting submitted scans are retained; cancelled camera attempts have no uploaded frames. Test labels are independent of the engine verdict. The full camera frame is stored, including anything outside the preview oval.
-
-`FACETECH_EVALUATION_DAYS=7` selects the database-only evaluation policy. Retention is persisted in the database and applies to scans and their linked diagnostics together, with hourly cleanup and cleanup before review reads. `/review` provides a protected frame viewer, measurements, capture receipts and deletion. `FACETECH_DIAGNOSTIC_HEADER=1` sends the engine decision only over the authenticated internal engine-to-gateway response; the gateway strips it from browser responses and stores it alongside the consenting scan. In this mode normal decisions are not also written into engine logs. Missing diagnostics or match scores mean unavailable/not computed, not zero. The engine remains database-free but has bounded in-memory enrollment templates and nonce state; restart loses enrollments. FaceScan encoding, recognition threshold 0.55 and heuristic threshold 0.50 are unchanged. Learned PAD has its own mandatory gate and versioned temporal policy.
-
-Evaluation stores refuse the export command, including after restart without the evaluation environment variable. The known export/relabel failure-recovery defect is not repaired by this mode; managed file exports must remain disabled until separately repaired and verified. Captures are capped at 5,000 records and 350 KiB per scan; a receipt reports when an attempt was not saved. No raw-capture backups or independent exports are configured for the private pilot. Host/provider snapshots and manually copied data are outside the app's deletion guarantee. Team credentials permit all team reviewers to view/delete pilot captures; this is not individual account authorization or production authentication.
-
-`docker-compose.demo.yml` runs the engine, mock gateway and password-gated Caddy demo. `docker-compose.yml` expects the separate production crypto gateway. Configure values from `.env.example`; never commit actual credentials. Build the SDK and verify model/browser assets before building images. Run Docker on the intended server or CI host.
-
-Capture storage requires `FACETECH_CAPTURE_DB` and matching consent metadata in
-`X-Capture-Meta`. The current evaluation page sends this metadata, requires confirmed
-recording availability, and remembers an explicit grant per tester and consent
-version in that browser. A new tester needs a separate grant. Unticking withdraws
-future recording; existing records remain subject to the seven-day expiry.
-
-The active evaluation policy is seven days, not the legacy generic store default.
-Purge failures are exposed through capture status. The legacy export/relabel tooling
-has unresolved failure-recovery limitations and is not an operational workflow for
-this evaluation. Keep export disabled; do not manually delete/relabel live captures
-or transfer VPS frames locally. No verified local capture backup exists. Use the
-protected review workflow and permitted read-only metadata inspection.
+`docker-compose.yml` expects the separate production crypto gateway (`CRYPTO_IMAGE`) fronting the engine. Configure values from `.env.example`; never commit actual credentials. Build the SDK and verify model/browser assets before building images. Run Docker on the intended server or CI host. `deploy/amfatec` is the separate hardened-gateway (`packages/face-auth`) stack; see `packages/face-auth/README.md` for its data, consent and retention model.
 
 Required third-party licenses and operational directives are retained. Local environments and dependency-install directories are not included; create them using the setup commands above.

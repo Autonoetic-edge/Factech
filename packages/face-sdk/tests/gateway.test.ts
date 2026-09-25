@@ -3,7 +3,7 @@ import { test } from 'node:test';
 
 import {
   ENGINE_MESSAGE_MAX, canonicalUserId, engineMessage, getChallenge, isValidUserId, livenessVerdict,
-  postScan, resolveGatewayUrl,
+  postScan, rawRequest, resolveGatewayUrl,
 } from '../src/transport/gateway.ts';
 import type { EnrollBody, GatewayConfig, VerifyBody } from '../src/transport/gateway.ts';
 import {
@@ -502,8 +502,7 @@ test('with no capture meta the header is absent, not empty', async () => {
   assert.equal('X-Capture-Meta' in headers, false);
 });
 
-test('rawRequest (console transport) returns the raw status, body and request id under the same rules', async () => {
-  const { rawRequest } = await import('../src/internal.ts');
+test('rawRequest returns the raw status, body and request id under the same rules', async () => {
   const h = harness();
   h.fetch.reply('/v1/verify', { status: 422, body: { error: { code: 'LIVENESS_FAIL' } },
     headers: { 'X-Request-Id': 'req-55556666' } });
@@ -523,7 +522,6 @@ test('rawRequest (console transport) returns the raw status, body and request id
 });
 
 test('rawRequest times out at its deadline and aborts on the run signal, leaving no timer', async () => {
-  const { rawRequest } = await import('../src/internal.ts');
   const h = harness();
   h.fetch.reply('/health', { body: {}, delayMs: CHALLENGE_TIMEOUT_MS + 1000 });
   const slow = await rawRequest(h.env, '', 'GET', '/health', CHALLENGE_TIMEOUT_MS, h.signal);

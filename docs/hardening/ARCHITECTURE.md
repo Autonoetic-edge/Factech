@@ -10,6 +10,15 @@ add their templates, verify as them, or revoke their templates.
 Source inspection, not a fresh VPS inventory. The historical live baseline remains
 gateway `eval-pad-0e45ad88290f`, engine `eval-pad-0d87e7b9a807`, UI `ui-v6`.
 
+**Note (removal, later than the design date above):** the legacy dev-only gateway
+module tree this section inspected (its app, evaluation/review, capture-storage and
+export-tooling files), the demo compose stack and Caddyfile, and the `apps/console`
+and `apps/integration-demo` pages it exclusively served have all since been deleted
+from the repository; the rows below describe them as they existed for this design's
+source inspection, not code you can still open. The hardened gateway in
+`packages/face-auth`, run via `deploy/amfatec`, is the only gateway left; `apps/verify`
+is the only page it serves from this repo's front end.
+
 | Boundary / caller | Current interface and authority | State / consequence |
 |---|---|---|
 | Browser -> Caddy -> gateway | Shared Basic Auth except `/health`; browser selects `user_id`, `X-User-Id`, `X-Capture-Meta` | No individual identity or ownership proof; camera, device fields and labels untrusted |
@@ -17,16 +26,17 @@ gateway `eval-pad-0e45ad88290f`, engine `eval-pad-0d87e7b9a807`, UI `ui-v6`.
 | Gateway -> engine | Catch-all `/v1/{path:path}` for GET/POST/DELETE; replaces engine key, forwards caller identity/operation | Shared key authenticates gateway access, not authority over the selected subject |
 | Engine | `/health`, `/v1/info`, `/v1/challenge`, `/v1/enroll`, `/v1/verify`, `/v1/liveness`, `/v1/templates/{user_id}` DELETE | `engine/app/main.py`; FastAPI also creates docs/OpenAPI routes by default |
 | Gateway status | `/engine-status`, `/capture-status`, proxied `/health` | Capture counts and health are different privileges; capture-status calls purge indirectly |
-| Review | `/review`, GET `/review/api/captures`, GET receipt by request ID, GET detail by capture ID, GET frame by index, DELETE capture | `mock-gateway/evaluation.py`; shared access, store internals; GET reads can trigger retention cleanup |
+| Review | `/review`, GET `/review/api/captures`, GET receipt by request ID, GET detail by capture ID, GET frame by index, DELETE capture | the gateway's evaluation/review module; shared access, store internals; GET reads can trigger retention cleanup |
 | Static assets | `/`, `/console`, `/integration`, `/sdk`, `/shared`, `/vendor/mediapipe` | Gateway static mounts; some conditional on directories; entry pages currently use canonical live origin routing |
 | Engine repositories | `store.py`, `challenge.py` | Process dictionaries and thread locks; 1,000 users, five templates/user, silent oldest eviction; restart loses state; 30-second nonces bound to operation and caller-selected ID |
-| Evaluation repository | `capture_store.py` | SQLite/WAL, raw MessagePack scans, labels, receipts, diagnostic JSON and export inventory; evaluation retention seven days in Compose, generic fallback 90 days |
-| Export / administration | `export_captures.py`, deploy shell/Python commands; no public identity administration API | Export is disabled; commands can mutate files/storage and must never be invoked against live during this track |
+| Evaluation repository | the gateway's capture-storage module | SQLite/WAL, raw MessagePack scans, labels, receipts, diagnostic JSON and export inventory; evaluation retention seven days in Compose, generic fallback 90 days |
+| Export / administration | its export-tooling module, deploy shell/Python commands; no public identity administration API | Export is disabled; commands can mutate files/storage and must never be invoked against live during this track |
 | Model pipeline | SCRFD -> aligned ArcFace -> mandatory two-model PAD and sequence/heuristic gates | Normalized 512-D embeddings; max cosine over templates; current threshold 0.55; no production accuracy claim |
 | Operations | Compose/Caddy, `.github/workflows/*`, `deploy/*` | Separate gateway/engine containers; single host; several dependencies/image tags unpinned; old gateway-only rollback cannot undo new schema/auth changes |
 
-Authoritative source entry points: `engine/app/{main,auth,store,challenge,trace}.py`,
-`mock-gateway/{app,evaluation,capture_store,export_captures}.py`,
+Authoritative source entry points (as inspected; the gateway paths below no longer
+exist — see the removal note above): `engine/app/{main,auth,store,challenge,trace}.py`,
+the removed gateway's app/evaluation/capture-storage/export-tooling modules,
 `packages/face-sdk/src/{types,transport/gateway,workflow/session,workflow/run}.ts`.
 `routes.json` records the explicit current route surface without importing apps or
 opening capture stores. Framework routes and static mounts are classified separately.

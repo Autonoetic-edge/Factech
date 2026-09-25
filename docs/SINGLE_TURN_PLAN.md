@@ -552,10 +552,16 @@ the PAD line is the one that matters for S3.
 
 ## Part 8. Evidence protocol (shared by Phase 0 and Part 7)
 
-**Where:** the guided evaluation page (`apps/integration-demo/`) on a local stack with the dev
+**Where:** `apps/integration-demo/` and the legacy dev-only gateway (including its
+capture-export tooling) have since been removed from the repository; this protocol's
+capture/export path needs a replacement (`apps/verify` against the hardened gateway in
+`packages/face-auth`, or a purpose-built evaluation harness) before Part 8 can run again.
+The paragraph below describes the now-deleted flow for reference only.
+
+~~the guided evaluation page (`apps/integration-demo/`) on a local stack with the dev
 engine, consent ticked, one tester code per person, `case`, `lighting` and `glasses` set per
-attempt. Captures land in the mock gateway's store and export with
-`mock-gateway/export_captures.py`; decisions are in the gateway's `operations` table.
+attempt. Captures land in the (removed) dev gateway's store and export with its capture-export
+tool; decisions are in the gateway's `operations` table.~~
 
 **Devices:** at least two phones (one iPhone, one Android) and one laptop webcam. Write the
 exact models into the report; the biometric track wants the supported list locked.
