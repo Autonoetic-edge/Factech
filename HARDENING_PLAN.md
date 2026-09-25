@@ -136,11 +136,11 @@ is still unfixed. This procedure is the only way a protected file changes.
 
 Baselines accumulate and are never rewritten or deleted.
 `docs/hardening/evidence/baseline/source-sha256.json` is retained unchanged as
-evidence of the M0-M6 freeze. The ACTIVE manifest (owner approved 25 Sep 2026) after
-the "new manifest" row below (this is the end of Phase 0, and FIX_PLAN.md calls
-for a rebaseline at the end of each phase), is
-`docs/hardening/evidence/baseline/source-sha256.v5.json`; `source-sha256.v4.json`
-is retained unchanged as evidence of the pre-Phase-0 state. `source-sha256.v2.json`
+evidence of the M0-M6 freeze. FIX_PLAN.md rebaselines at the end of each phase. The ACTIVE
+manifest (owner approved 25 Sep 2026, end of Phase 2A) is
+`docs/hardening/evidence/baseline/source-sha256.v6.json`; `source-sha256.v5.json`
+is retained unchanged as the end-of-Phase-0 state and `source-sha256.v4.json`
+as the pre-Phase-0 state. `source-sha256.v2.json`
 is retained as the adoption-time baseline and `source-sha256.v3.json` as the B2
 baseline. Verify the active one with
 
@@ -232,6 +232,13 @@ missed at the time. See the retroactive row below; the change is kept; the owner
 | packages/face-sdk/src/constants.ts (2A.2) | Existing file, not new. Add `LUMA_MIN = 55`, `SHARP_MIN = 12` (moved from `apps/verify/framing.js`) and one exported `CAMERA_CONSTRAINTS`, plus named constants for the HEAD_SEQUENCE-specific span/interval currently inlined as `15400`/`1400` in `session.ts`. No change to the existing exports' values. | owner, 25 Sep 2026 |
 | packages/face-sdk/src/camera/camera.ts (2A.2, conditional) | Only if consolidating the camera-constraints duplicate (currently `camera.ts` and `apps/verify/bridge.js`, not protected) means moving `CAMERA_CONSTRAINTS`'s definition out of `camera.ts` and into `constants.ts` (re-imported here) rather than leaving it defined in `camera.ts` and re-exported: that one-line move. No behavior change either way. Separate change from the 4.6 camera.ts row below. | owner, 25 Sep 2026 |
 | packages/face-sdk/src/index.ts (2A.2, conditional) | Only if `LUMA_MIN`, `SHARP_MIN` or `CAMERA_CONSTRAINTS` become public SDK exports (today `apps/verify/framing.js` and `apps/shared/face-guide.js` could instead import them via a relative path with no public export needed): the additive re-export line(s). Separate change from the other index.ts rows here. | owner, 25 Sep 2026 |
+
+*Phase 2A close (owner decisions, 25 Sep 2026):*
+
+| File | Allowed change | Approved |
+|---|---|---|
+| docs/hardening/evidence/baseline/source-sha256.v6.json | v5 with the 10 files changed under the approved Phase 2A rows rehashed, plus three new protected paths: `engine/app/constants.py`, `engine/app/flags.py`, `packages/face-sdk/src/errors.ts` (they now hold the frozen values and error codes). Becomes the ACTIVE manifest; v5 kept unchanged. | owner, 25 Sep 2026 |
+| apps/shared/face-guide.js, apps/shared/messages.js (2A.2, 2A.3 remainder) | Deferred to Phase 2B: both are pinned by the protected apps/tests/face-guide.test.js, which needs its own row, to be added at the start of 2B. Until then a contract test keeps messages.js wording equal to the SDK default text. Not a licence to edit either file now. | owner, 25 Sep 2026 — deferred |
 
 *Phase 1 — anti-spoof and replay (items 1.1-1.9; "Protected: challenge.py, main.py, liveness.py. Rows are needed from 0.1" per FIX_PLAN.md item 1.1):*
 
