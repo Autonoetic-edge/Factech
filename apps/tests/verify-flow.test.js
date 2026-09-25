@@ -333,7 +333,8 @@ test("Start arms preparation and requires readiness from an available guide", as
 
 test("the on-screen line is steady: no flicker, no losing Good to a wobble", async () => {
   const { createFraming, framingStep, SETTLE_MS } = await load("framing.js");
-  const F = createFraming();
+  const { LUMA_MIN, SHARP_MIN } = await import("../../packages/face-sdk/src/index.ts");
+  const F = createFraming({ lumaMin: LUMA_MIN, sharpMin: SHARP_MIN });
   const at = (cue, now, armed = false) => framingStep(F, { cue, armed }, now);
   assert.equal(at("far", 0), "find"); // a new line is not shown at once...
   assert.equal(at("offcentre", 100), "find"); // ...and a flicker between cues restarts the wait

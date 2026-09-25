@@ -15,15 +15,12 @@
 
 import { glowOf } from './glow.js';
 
-// Same request the SDK itself makes (packages/face-sdk/src/camera/camera.ts).
-const CAMERA_CONSTRAINTS = {
-  video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
-  audio: false,
-};
-
 const DENIED = new Set(['NotAllowedError', 'PermissionDeniedError', 'SecurityError']);
 
-export function createCameraOwner({ mediaDevices, video, onEnded }) {
+// `constraints` is the SDK's own CAMERA_CONSTRAINTS (main.js imports it from /sdk/index.js),
+// so the page opens the camera with the same request the SDK makes.
+export function createCameraOwner({ mediaDevices, video, onEnded, constraints }) {
+  if (!constraints) throw new TypeError('camera constraints are required (the SDK CAMERA_CONSTRAINTS)');
   let stream = null;
 
   const live = () => !!stream && stream.getTracks().some((t) => t.readyState !== 'ended');
@@ -34,7 +31,7 @@ export function createCameraOwner({ mediaDevices, video, onEnded }) {
     if (!mediaDevices?.getUserMedia) throw Object.assign(new Error('no camera API'), { cameraError: 'nocamera' });
     let s;
     try {
-      s = await mediaDevices.getUserMedia(CAMERA_CONSTRAINTS);
+      s = await mediaDevices.getUserMedia(constraints);
     } catch (e) {
       throw Object.assign(new Error('camera failed'), { cameraError: DENIED.has(e?.name) ? 'denied' : 'nocamera' });
     }

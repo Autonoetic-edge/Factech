@@ -1,5 +1,6 @@
 import {
-  EXPIRY_MARGIN_MS, FACE_LOST_MS, LANDING_MS, READY_TIMEOUT_MS,
+  EXPIRY_MARGIN_MS, FACE_LOST_MS, HEAD_SEQUENCE_INTERVAL_MS, HEAD_SEQUENCE_SPAN_MS, LANDING_MS,
+  READY_TIMEOUT_MS,
 } from '../constants.ts';
 import { createGuide, guideStep, instructionOf } from '../challenge/guide.ts';
 import { CAPTURE_SPAN_MS, captureFrames, encodeFrames, releaseFrames } from '../camera/capture.ts';
@@ -112,7 +113,7 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
       assertLive(ctl, token);
 
       const sequence = challenge.action === 'HEAD_SEQUENCE';
-      if (remaining() < (sequence ? 15400 : CAPTURE_SPAN_MS) + LANDING_MS + EXPIRY_MARGIN_MS) {
+      if (remaining() < (sequence ? HEAD_SEQUENCE_SPAN_MS : CAPTURE_SPAN_MS) + LANDING_MS + EXPIRY_MARGIN_MS) {
         return fail(op, 'CHALLENGE_EXPIRED', 'too little of the challenge window left to record a scan');
       }
 
@@ -128,7 +129,7 @@ export function createFaceSession(options: FaceSessionOptions): FaceSession {
 
       frames = await captureFrames({
         env, video,
-        intervalMs: sequence ? 1400 : undefined,
+        intervalMs: sequence ? HEAD_SEQUENCE_INTERVAL_MS : undefined,
         onFrame: (index, total) => emit({ type: 'frame', index, total }),
         onTick: (elapsed) => {
           const probe = readProbe();

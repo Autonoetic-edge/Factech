@@ -1,11 +1,6 @@
-import { CAMERA_READY_MS, CAMERA_READY_POLL_MS } from '../constants.ts';
+import { CAMERA_CONSTRAINTS, CAMERA_READY_MS, CAMERA_READY_POLL_MS } from '../constants.ts';
 import { codedError } from '../types.ts';
 import type { Environment } from '../types.ts';
-
-export const CAMERA_CONSTRAINTS: MediaStreamConstraints = {
-  video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
-  audio: false,
-};
 
 export interface Camera {
   readonly stream: MediaStream;

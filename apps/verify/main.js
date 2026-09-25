@@ -1,6 +1,6 @@
 // Wires the flow (flow.js) to the real world: the signed-in account, the /v2 gateway,
 // the camera and the capture SDK. Every effect named by flow.js is performed here.
-import { createFaceSession } from '/sdk/index.js';
+import { CAMERA_CONSTRAINTS, createFaceSession, LUMA_MIN, SHARP_MIN } from '/sdk/index.js';
 import { createBridge, createCameraOwner } from './bridge.js';
 import { poseOf, poseOfAction, POSE_ORDER, TURN_SIGN } from './cues.js';
 import { initial, step } from './flow.js';
@@ -69,7 +69,7 @@ const watchingCapture = () => state.view === 'capture' && (watchingSettle || !!t
 function stopSettleWatch() { watchingSettle = false; clearInterval(settleWatch); settleWatch = 0; }
 
 const camera = createCameraOwner({
-  mediaDevices: navigator.mediaDevices, video,
+  mediaDevices: navigator.mediaDevices, video, constraints: CAMERA_CONSTRAINTS,
   onEnded: () => dispatch({ type: 'CAMERA_ENDED' }),
 });
 
@@ -198,7 +198,7 @@ const effects = {
     guideTimer = setTimeout(guideOff, GUIDE_WAIT_MS);
     try {
       const { createFaceDetector } = await loadGuide();
-      framing = createFraming();
+      framing = createFraming({ lumaMin: LUMA_MIN, sharpMin: SHARP_MIN });
       detector ??= createFaceDetector({
         video, view: video, onUnavailable: guideOff,
         onTick(g, dets, frame) {

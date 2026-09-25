@@ -20,7 +20,7 @@ const VERIFIED = {
 };
 
 async function rig() {
-  const { createFaceSession } = await import("../../packages/face-sdk/src/index.ts");
+  const { CAMERA_CONSTRAINTS, createFaceSession } = await import("../../packages/face-sdk/src/index.ts");
   const { testEnv } = await import("../../packages/face-sdk/tests/helpers.ts");
   const { createBridge, createCameraOwner } = await import("../verify/bridge.js");
   const { classifyReply } = await import("../verify/outcome.js");
@@ -39,7 +39,7 @@ async function rig() {
     return c;
   };
   const mediaDevices = { getUserMedia: async (c) => { opened++; const s = await t.env.getUserMedia(c); s.clone = () => cloneOf(s); return s; } };
-  const owner = createCameraOwner({ mediaDevices, video: t.video });
+  const owner = createCameraOwner({ mediaDevices, video: t.video, constraints: CAMERA_CONSTRAINTS });
   let keys = 0;
   const bridge = createBridge({
     fetch: t.fetch, subjectId: SID, csrfToken: CSRF,

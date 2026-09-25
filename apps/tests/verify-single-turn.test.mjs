@@ -10,6 +10,9 @@ import {
   createTurnMeter, turnStep, ZONE_TICKS, yawOf,
 } from '../verify/framing.js';
 import { stageText, COPY } from '../verify/view.js';
+import { LUMA_MIN, SHARP_MIN } from '../../packages/face-sdk/src/index.ts';
+
+const LIMITS = { lumaMin: LUMA_MIN, sharpMin: SHARP_MIN }; // the SDK's, as main.js hands them in
 
 const run = (events, state) => events.reduce((acc, e) => {
   const r = step(acc.state, e);
@@ -87,28 +90,28 @@ test('auto-start: "good" arms preparation once; no guide keeps the Start button'
 
 test('pre-checks: one hint at a time, most important first', () => {
   const g = (o = {}) => ({ luma: 120, sharp: 80, ...o });
-  assert.equal(precheck(g()), null);
-  assert.equal(precheck(g({ luma: 20, sharp: 1 }), { yaw: 0.5 }), 'frontal');
-  assert.equal(precheck(g({ luma: 20, sharp: 1 }), { yaw: 0.1 }), 'light');
-  assert.equal(precheck(g({ luma: 90 }), { frameLuma: 200 }), 'light'); // backlight
-  assert.equal(precheck(g({ luma: 90 }), { frameLuma: 120 }), null);
-  assert.equal(precheck(g({ sharp: 3 })), 'steady');
-  assert.equal(precheck({ luma: null, sharp: null }, {}), null); // nothing measured: no hint
+  assert.equal(precheck(g(), {}, LIMITS), null);
+  assert.equal(precheck(g({ luma: 20, sharp: 1 }), { yaw: 0.5 }, LIMITS), 'frontal');
+  assert.equal(precheck(g({ luma: 20, sharp: 1 }), { yaw: 0.1 }, LIMITS), 'light');
+  assert.equal(precheck(g({ luma: 90 }), { frameLuma: 200 }, LIMITS), 'light'); // backlight
+  assert.equal(precheck(g({ luma: 90 }), { frameLuma: 120 }, LIMITS), null);
+  assert.equal(precheck(g({ sharp: 3 }), {}, LIMITS), 'steady');
+  assert.equal(precheck({ luma: null, sharp: null }, {}, LIMITS), null); // nothing measured: no hint
 });
 
 test('pre-check hints replace "good", then a light or blur hint gives way after 10 s', () => {
-  const F = createFraming();
+  const F = createFraming(LIMITS);
   const dark = { cue: 'good', armed: true, luma: 20, sharp: 80 };
   assert.equal(framingStep(F, dark, 0), 'find');
   assert.equal(framingStep(F, dark, SETTLE_MS), 'light');
   assert.equal(framingStep(F, dark, HINT_CAP_MS - 1), 'light');
   assert.equal(framingStep(F, dark, HINT_CAP_MS), 'good'); // capped: the check may start
   // a guide problem (distance) still wins over the pre-checks, and resets the cap
-  const F2 = createFraming();
+  const F2 = createFraming(LIMITS);
   const far = { cue: 'far', armed: false, luma: 20 };
   framingStep(F2, far, 0); assert.equal(framingStep(F2, far, SETTLE_MS), 'closer');
   // frontal is never capped
-  const F3 = createFraming();
+  const F3 = createFraming(LIMITS);
   const turned = { cue: 'good', armed: true, luma: 120, sharp: 80 };
   framingStep(F3, turned, 0, { yaw: 0.6 });
   assert.equal(framingStep(F3, turned, HINT_CAP_MS * 2, { yaw: 0.6 }), 'frontal');
@@ -145,7 +148,7 @@ test('page yaw: one face only, same formula as the engine head gate', () => {
 });
 
 test('pre-check reading: the numbers behind the hint, rounded, with the hint-cap state', () => {
-  const F = createFraming();
+  const F = createFraming(LIMITS);
   assert.deepEqual(precheckReading({ luma: 81.54, sharp: 33.06 }, { frameLuma: 140.23 }, F),
     { luma: 81.5, frame_luma: 140.2, backlight: 58.7, sharp: 33.1, hint: null, capped: false });
   F.hint = 'light';

@@ -17,23 +17,31 @@ const LINE = {
 // The light and blur limits are PROVISIONAL (set 24 Sep 2026, not yet measured on phones);
 // the Phase 1 team round sets them from the guide's logged luma/sharp. They are hints: after
 // HINT_CAP_MS of the same light or blur hint the start is allowed anyway (plan §9).
+// The light and blur limits are the SDK's LUMA_MIN / SHARP_MIN; main.js imports them from
+// /sdk/index.js and hands them in as { lumaMin, sharpMin } (createFraming).
 export const FRONTAL_MAX = 0.30;   // page yaw units, the engine head gate's "frontal"
-export const LUMA_MIN = 55;        // mean luma of the face crop, 0-255
 export const BACKLIGHT_GAP = 60;   // the whole frame this much brighter than the face = backlight
-export const SHARP_MIN = 12;       // Laplacian variance of the 64x64 face crop
 export const HINT_CAP_MS = 10000;
 
+function checkedLimits(limits) {
+  if (!Number.isFinite(limits?.lumaMin) || !Number.isFinite(limits?.sharpMin)) {
+    throw new TypeError('pre-check limits { lumaMin, sharpMin } are required (the SDK LUMA_MIN / SHARP_MIN)');
+  }
+  return limits;
+}
+
 /** @returns 'frontal' | 'light' | 'steady' | null */
-export function precheck(guide, { yaw = null, frameLuma = null } = {}) {
+export function precheck(guide, { yaw = null, frameLuma = null } = {}, limits) {
+  const { lumaMin, sharpMin } = checkedLimits(limits);
   if (Number.isFinite(yaw) && Math.abs(yaw) > FRONTAL_MAX) return 'frontal';
   const luma = guide.luma;
-  if (Number.isFinite(luma) && (luma < LUMA_MIN || (Number.isFinite(frameLuma) && frameLuma - luma > BACKLIGHT_GAP))) return 'light';
-  if (Number.isFinite(guide.sharp) && guide.sharp < SHARP_MIN) return 'steady';
+  if (Number.isFinite(luma) && (luma < lumaMin || (Number.isFinite(frameLuma) && frameLuma - luma > BACKLIGHT_GAP))) return 'light';
+  if (Number.isFinite(guide.sharp) && guide.sharp < sharpMin) return 'steady';
   return null;
 }
 
 // The numbers behind the last pre-check, sent with the capture (X-Facetech-Precheck) so the
-// engine trace can set LUMA_MIN / BACKLIGHT_GAP / SHARP_MIN from real phones. Trace data only.
+// engine trace can set the SDK's LUMA_MIN / SHARP_MIN and BACKLIGHT_GAP from real phones. Trace data only.
 export function precheckReading(guide, { frameLuma = null } = {}, F = null) {
   const r1 = (v) => (Number.isFinite(v) ? Math.round(v * 10) / 10 : null);
   const luma = r1(guide.luma), frame = r1(frameLuma);
@@ -43,15 +51,15 @@ export function precheckReading(guide, { frameLuma = null } = {}, F = null) {
   };
 }
 
-export function createFraming() {
-  return { shown: 'find', pending: null, since: 0, hint: null, hintSince: 0 };
+export function createFraming(limits) {
+  return { shown: 'find', pending: null, since: 0, hint: null, hintSince: 0, limits: checkedLimits(limits) };
 }
 
 /** @returns the line to show now: find | one | closer | back | centre | frontal | light | steady | hold | good */
 export function framingStep(F, guide, now, extra) {
   let want = guide.armed ? 'good' : LINE[guide.cue] ?? 'find';
   if (want === 'good' || want === 'hold') {
-    const pre = precheck(guide, extra);
+    const pre = precheck(guide, extra, F.limits);
     if (pre !== F.hint) { F.hint = pre; F.hintSince = now; }
     const capped = (pre === 'light' || pre === 'steady') && now - F.hintSince >= HINT_CAP_MS;
     if (pre && !capped) want = pre;

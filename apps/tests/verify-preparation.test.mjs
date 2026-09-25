@@ -78,7 +78,7 @@ async function harness({ glow = null, reducedMotion = false, storage = new Map()
     localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},glowColour,reducedGlowColour,
     setInterval(fn){intervals.add(fn);return fn},clearInterval(fn){intervals.delete(fn)},
     createPreparation,sampleOf,initial,step,createTurnMeter,turnStep,yawOf,poseOfAction,TURN_SIGN,precheckReading,
-    createFraming:()=>({}), framingStep:()=> 'good',
+    createFraming:()=>({}), framingStep:()=> 'good', LUMA_MIN:55, SHARP_MIN:12, CAMERA_CONSTRAINTS:{},
     createHeadGuide:()=>({setPaused(){},destroy(){},reducedMotion}), createCameraOwner:()=>camera,
     createBridge:()=>bridge, poseOf:t=>t, POSE_ORDER:[], icon:()=>'',render(){},renderMotion(){},
     classifyReply(){},decide:()=>({outcome:'cancelled'}),errorOutcome(){},
