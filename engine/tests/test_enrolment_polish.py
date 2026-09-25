@@ -22,8 +22,12 @@ from test_secure_pad import vector
 
 
 def modes(monkeypatch, geometry_mode=None, flash_mode=None):
+    """geometry_mode "on" = the nose check runs and enrolment enforces it, which since
+    FIX_PLAN 2A.4 is PAD_GEOMETRY=on plus enrolment's own PAD_ENROL_GEOMETRY=on."""
+    enforce = "on" if geometry_mode == "on" else None
     for env, value in (
         (geometry.MODE_ENV, geometry_mode),
+        (enrolment.ENFORCE_GEOMETRY_ENV, enforce),
         (flash.MODE_ENV, flash_mode),
     ):
         if value is None:

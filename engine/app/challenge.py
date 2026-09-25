@@ -1,10 +1,10 @@
 import copy
-import os
 import secrets
 import threading
 import time
 from dataclasses import dataclass
 
+from app import flags
 from app.constants import CHALLENGE_EXPIRY_MS
 
 NONCE_BYTES = 16
@@ -74,8 +74,12 @@ _issued: dict[str, dict] = {}
 
 
 def selected_policy() -> str:
-    name = os.environ.get(POLICY_ENV, "").strip()
-    return name if name in SINGLE_TURN_POLICIES else POLICY_HEAD_SEQUENCE
+    return flags.choice(
+        POLICY_ENV,
+        (POLICY_HEAD_SEQUENCE, *SINGLE_TURN_POLICIES),
+        POLICY_HEAD_SEQUENCE,
+        case_sensitive=True,
+    )
 
 
 def issuable_actions() -> tuple[str, ...]:

@@ -206,6 +206,10 @@ How it works:
 | `PAD_GEOMETRY` | `off`, `log`, `on` | `off` | 2 |
 | `PAD_ENSEMBLE` | `minifas`, `minifas+aenet:log`, `minifas+aenet` | `minifas` | 3 |
 | `FLASH_CHECK` | `off`, `log`, `on` | `off` | 4 |
+| `PAD_ENROL_GEOMETRY` | `off`, `on` | `off` | 5 |
+
+`PAD_GEOMETRY=on` behaves as `log` everywhere. Enrolment enforces the nose check only with `PAD_ENROL_GEOMETRY=on`, and only while `PAD_GEOMETRY` runs the check (`log` or `on`); before FIX_PLAN 2A.4 enrolment read `PAD_GEOMETRY=on` itself as enforcing. Every flag is read by `engine/app/flags.py`: an invalid value logs one warning and gives the default.
+
 Rollback: unset the flag and restart the engine.
 
 ### 6.3 Failure messages: helpful for honest people, useless to attackers

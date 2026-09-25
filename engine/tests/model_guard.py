@@ -1,13 +1,14 @@
-import os
 from pathlib import Path
 
 import pytest
+
+from app import flags
 
 MODELS_DIR = Path(__file__).resolve().parents[1] / "models"
 DET_MODEL = MODELS_DIR / "det_500m.onnx"
 EMB_MODEL = MODELS_DIR / "w600k_r50.onnx"
 
-STRICT = os.environ.get("FACETECH_REQUIRE_MODELS") == "1"
+STRICT = flags.choice("FACETECH_REQUIRE_MODELS", ("0", "1"), "0") == "1"
 
 # Policy migration replaced 34 heuristic-only endpoint tests; 10 retained
 # detector/recognizer tests plus 2 explicit real-PAD tests must run.

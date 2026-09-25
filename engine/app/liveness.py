@@ -1,5 +1,4 @@
 import hashlib
-import os
 import statistics
 from dataclasses import dataclass
 
@@ -7,6 +6,7 @@ import cv2
 import numpy as np
 
 from app import challenge as challenge_mod
+from app import flags
 from app.anti_spoof import SINGLE_POLICY_VERSION
 from app.detect import ALIGN_SIZE, decode_jpeg
 from app.vendor import face_align
@@ -89,11 +89,8 @@ MAX_SCAN_SPAN_MS = 30_000
 
 ENFORCE_ENV = "LIVENESS_ENFORCE"
 
-_OFF_VALUES = frozenset({"0", "false", "no", "off"})
-
-
 def enforcement_enabled() -> bool:
-    return os.environ.get(ENFORCE_ENV, "1").strip().lower() not in _OFF_VALUES
+    return flags.enabled(ENFORCE_ENV, True)
 
 
 @dataclass(frozen=True)

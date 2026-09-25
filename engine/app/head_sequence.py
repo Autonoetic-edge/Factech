@@ -5,9 +5,9 @@ Translation and uniform scaling do not change it. Perspective screen tilting,
 video playback and injected frames remain possible; mandatory PAD is separate.
 """
 
-import os
-
 import numpy as np
+
+from app import flags
 
 INTERVAL_MS = 1400
 REACTION_MS = 1600
@@ -141,8 +141,9 @@ TRY_AGAIN = "try_again"
 
 def selected_policy() -> str:
     """The configured head-gate version. Anything but the opt-in name is frozen."""
-    name = os.environ.get(POLICY_ENV, "").strip()
-    return POLICY_V3_GUIDED if name == POLICY_V3_GUIDED else POLICY_V2_SLOW
+    return flags.choice(
+        POLICY_ENV, (POLICY_V2_SLOW, POLICY_V3_GUIDED), POLICY_V2_SLOW, case_sensitive=True
+    )
 
 
 def validate_for(frames, detections, params, policy=None):

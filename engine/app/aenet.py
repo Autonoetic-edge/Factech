@@ -17,7 +17,6 @@ missing or mismatched model gives `unavailable` in the trace, never an error res
 
 import hashlib
 import json
-import os
 import threading
 import time
 
@@ -25,7 +24,7 @@ import cv2
 import numpy as np
 import onnxruntime as ort
 
-from app import anti_spoof, liveness
+from app import anti_spoof, flags, liveness
 
 MODE_ENV = "PAD_ENSEMBLE"
 MINIFAS = "minifas"
@@ -61,8 +60,7 @@ _lock = threading.Lock()
 
 
 def mode() -> str:
-    value = os.environ.get(MODE_ENV, "").strip().lower()
-    return value if value in {LOG, ON} else MINIFAS
+    return flags.choice(MODE_ENV, (MINIFAS, LOG, ON), MINIFAS)
 
 
 def crop(image, bbox, scale, size):

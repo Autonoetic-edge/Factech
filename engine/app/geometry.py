@@ -9,12 +9,10 @@ Pure function over keypoints and timestamps. It returns a record for the trace a
 a verdict; PAD_GEOMETRY=on is not wired to reject yet (it behaves as log).
 """
 
-import os
-
 import cv2
 import numpy as np
 
-from app import liveness
+from app import flags, liveness
 
 MODE_ENV = "PAD_GEOMETRY"
 
@@ -29,8 +27,7 @@ PERCENTILE = 90
 
 
 def mode() -> str:
-    value = os.environ.get(MODE_ENV, "").strip().lower()
-    return "log" if value in {"log", "on"} else "off"
+    return "off" if flags.choice(MODE_ENV, ("off", "log", "on"), "off") == "off" else "log"
 
 
 def _points(detection) -> np.ndarray | None:

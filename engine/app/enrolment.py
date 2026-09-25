@@ -9,13 +9,13 @@ plain records; main.py applies them:
   the AENet ones (aenet.frontal_pool, aenet.crop, aenet.sharpness).
 - A stricter bar: a fake face let in at enrolment unlocks the account for good, so the nose
   check must be conclusive and the glow must be conclusive or the light poor. The
-  "inconclusive" shortcut that verification allows is not accepted. Each part is enforced
-  only when its own flag (PAD_GEOMETRY, FLASH_CHECK) is `on`; otherwise it is only recorded.
+  "inconclusive" shortcut that verification allows is not accepted. Each part is judged
+  only when its check runs (PAD_GEOMETRY / FLASH_CHECK log or on) and enforced only when
+  its enforcing flag is on: PAD_ENROL_GEOMETRY=on for the nose check (PAD_GEOMETRY itself
+  is log-only everywhere, geometry.py), FLASH_CHECK=on for the glow.
 """
 
-import os
-
-from app import aenet, challenge, flash, geometry
+from app import aenet, challenge, flags, flash, geometry
 
 PHOTO_POLICIES = (challenge.POLICY_SINGLE_TURN_V1, challenge.POLICY_SINGLE_TURN_GLOW_V1)
 FRONTAL_CANDIDATES = 3
@@ -23,6 +23,9 @@ CROP_SCALE = 1.0
 CROP_SIZE = 112
 
 GEOMETRY = "pad_enrol_geometry"
+# Enrolment's own switch for enforcing the nose check. PAD_GEOMETRY keeps one meaning,
+# the one geometry.py documents: off, or run and log (`on` = `log`).
+ENFORCE_GEOMETRY_ENV = "PAD_ENROL_GEOMETRY"
 FLASH = "pad_enrol_flash"
 
 
@@ -55,10 +58,11 @@ def photo(frames, tracked, settle_ms, decode) -> dict:
 
 
 def geometry_mode() -> str:
-    """off | log | on. geometry.mode() folds `on` into `log` (nothing rejects there);
-    only enrolment treats `on` as enforcing."""
-    value = os.environ.get(geometry.MODE_ENV, "").strip().lower()
-    return value if value in {"log", "on"} else "off"
+    """off | log | on for the enrolment nose check: off while PAD_GEOMETRY is off (the check
+    does not run), else `on` only when PAD_ENROL_GEOMETRY=on, else `log`."""
+    if geometry.mode() == "off":
+        return "off"
+    return "on" if flags.enabled(ENFORCE_GEOMETRY_ENV, False) else "log"
 
 
 def bar(geometry_record: dict | None, flash_record: dict | None) -> dict | None:

@@ -1,5 +1,4 @@
 import json
-import os
 import re
 import time
 from contextlib import asynccontextmanager
@@ -18,6 +17,7 @@ from app import (
     challenge,
     enrolment,
     errors,
+    flags,
     flash,
     geometry,
     liveness,
@@ -170,7 +170,7 @@ async def decision_trace(request: Request, call_next):
     finally:
         trace.reset(token)
     _tag(response, request_id)
-    evaluation = os.environ.get("FACETECH_DIAGNOSTIC_HEADER") == "1"
+    evaluation = flags.choice("FACETECH_DIAGNOSTIC_HEADER", ("0", "1"), "0") == "1"
     decision = (
         t.line(response.status_code) if evaluation else t.emit(response.status_code)
     )

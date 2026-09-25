@@ -18,11 +18,12 @@ FLASH_CHECK: `off` (default, or any unknown value) never runs this module's chec
 refuses anyone.
 """
 
-import os
 import secrets
 
 import cv2
 import numpy as np
+
+from app import flags
 
 MODE_ENV = "FLASH_CHECK"
 OFF = "off"
@@ -71,8 +72,7 @@ DECIMALS = 4
 
 
 def mode() -> str:
-    value = os.environ.get(MODE_ENV, "").strip().lower()
-    return value if value in {LOG, ON} else OFF
+    return flags.choice(MODE_ENV, (OFF, LOG, ON), OFF)
 
 
 def _pick(choices):
