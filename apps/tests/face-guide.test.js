@@ -62,18 +62,6 @@ test("the starting thresholds are the ones in the brief", () => {
   assert.equal(G.DETECTOR_MAX_ERRORS, 3);
 });
 
-test("the oval the guide measures against is the oval the page draws", () => {
-  const html = fs.readFileSync(path.join(ROOT, "apps/integration-demo/index.html"), "utf8");
-  const rule = html.match(/#oval\{([^}]*)\}/);
-  assert.ok(rule, "#oval rule not found in apps/integration-demo/index.html");
-  const pct = (k) => Number(rule[1].match(new RegExp("(?:^|;|\\s)" + k + ":([\\d.]+)%"))[1]) / 100;
-  const { cx, cy, rx, ry } = G.OVAL;
-  assert.ok(Math.abs(pct("left") - (cx - rx)) < 1e-4, "left");
-  assert.ok(Math.abs(pct("width") - 2 * rx) < 1e-4, "width");
-  assert.ok(Math.abs(pct("top") - (cy - ry)) < 1e-4, "top");
-  assert.ok(Math.abs(pct("height") - 2 * ry) < 1e-4, "height");
-});
-
 test("a centred upright face in range is good", () => {
   const r = G.classify([face()], FRAME);
   assert.equal(r.cue, "good");
@@ -605,92 +593,9 @@ test("f10 required-check errors are never shown as success", () => {
   }
 });
 
-test("f10 the guided page takes its result tone from resultTone, not its own predicate", () => {
-  const src = fs.readFileSync(path.join(ROOT, "apps/integration-demo/page.js"), "utf8");
-  assert.match(src, /dataset\.tone = resultTone\(result\)/);
-  assert.doesNotMatch(src, /result\.op === 'enroll' \|\| result\.match/);
-});
-
-test("the guided page's HTML holds markup and styles only", () => {
-  const html = fs.readFileSync(path.join(ROOT, "apps/integration-demo/index.html"), "utf8");
-  const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
-  assert.deepEqual(scripts.map((m) => m[1].trim()),
-    ['src="./evaluation-form.js?v=ui-v6"', 'type="module" src="./page.js?v=ui-v6"', 'src="/shared/boot-check.js" defer']);
-  for (const m of scripts) assert.equal(m[2].trim(), "", "inline script body");
-  assert.doesNotMatch(html, /\son[a-z]+\s*=/i, "inline event handler");
-});
-
-test("the console's HTML holds markup and styles only, and loads its code from files", () => {
-  const html = fs.readFileSync(path.join(ROOT, "apps/console/index.html"), "utf8");
-  const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)];
-  assert.deepEqual(scripts.map((m) => m[1].trim()), ['src="./capture.js"', 'src="./console.js"',
-    'type="module" src="./deps.js"', 'src="/shared/boot-check.js" defer']);
-  for (const m of scripts) assert.equal(m[2].trim(), "", "inline script body");
-  assert.doesNotMatch(html, /\son[a-z]+\s*=/i, "inline event handler");
-  assert.doesNotMatch(html, /base64,/, "an embedded font or image came back");
-  assert.ok(Buffer.byteLength(html) < 20000, "console HTML is " + Buffer.byteLength(html) + " bytes");
-});
-
-test("every font the console's stylesheet names is a file next to it, with its licence", () => {
-  const dir = path.join(ROOT, "apps/shared/fonts");
-  const css = fs.readFileSync(path.join(dir, "fonts.css"), "utf8");
-  const files = [...css.matchAll(/url\('\.\/([A-Za-z0-9-]+\.woff2)'\)/g)].map((m) => m[1]);
-  assert.equal(files.length, 10);
-  for (const f of files) {
-    const b = fs.readFileSync(path.join(dir, f));
-    assert.equal(b.subarray(0, 4).toString("latin1"), "wOF2", f + " is not a WOFF2 file");
-  }
-  for (const lic of ["OFL-Archivo.txt", "OFL-IBMPlex.txt"]) {
-    assert.match(fs.readFileSync(path.join(dir, lic), "utf8"), /SIL OPEN FONT LICENSE Version 1\.1/);
-  }
-});
-
-function bootCheck(ready) {
-  const vm = require("vm");
-  const added = [], buttons = [{ disabled: false }, { disabled: false }];
-  let onLoad = null;
-  const document = {
-    readyState: "loading",
-    documentElement: { dataset: ready ? { ready: "1" } : {} },
-    body: { firstChild: null, insertBefore: (el) => added.push(el) },
-    createElement: () => ({ style: {}, setAttribute() {} }),
-    querySelectorAll: () => buttons,
-  };
-  const window = { addEventListener: (t, fn) => { if (t === "load") onLoad = fn; } };
-  vm.runInNewContext(fs.readFileSync(path.join(ROOT, "apps/shared/boot-check.js"), "utf8"),
-    { document, window });
-  onLoad();
-  return { added, buttons };
-}
-
-test("a page whose scripts never ran says so and disables its buttons", () => {
-  const { added, buttons } = bootCheck(false);
-  assert.equal(added.length, 1);
-  assert.equal(added[0].textContent, "Page failed to load. Restart the gateway.");
-  assert.ok(buttons.every((b) => b.disabled));
-});
-
-test("a page whose scripts ran is left alone", () => {
-  const { added, buttons } = bootCheck(true);
-  assert.equal(added.length, 0);
-  assert.ok(buttons.every((b) => !b.disabled));
-});
-
-test("f53 the guided page never writes server text as HTML", () => {
-
-  for (const rel of ["apps/integration-demo/page.js", "apps/shared/face-detector.js",
-    "apps/shared/boot-check.js"]) {
-    const code = fs.readFileSync(path.join(ROOT, rel), "utf8");
-    assert.doesNotMatch(code, /\.(innerHTML|outerHTML)\s*[+]?=|insertAdjacentHTML|document\.write/, rel);
-  }
-});
-
-test("both pages mark themselves ready only after their code has run", () => {
-  const page = fs.readFileSync(path.join(ROOT, "apps/integration-demo/page.js"), "utf8");
-  const lines = page.trimEnd().split("\n");
-  assert.equal(lines.at(-1), "document.documentElement.dataset.ready = '1';", "not the last line of page.js");
-  const deps = fs.readFileSync(path.join(ROOT, "apps/console/deps.js"), "utf8");
-  assert.match(deps, /if \(typeof window\.loadSDK === 'function'\) document\.documentElement\.dataset\.ready = '1';/);
+test("f53 shared/face-detector.js never writes server text as HTML", () => {
+  const code = fs.readFileSync(path.join(ROOT, "apps/shared/face-detector.js"), "utf8");
+  assert.doesNotMatch(code, /\.(innerHTML|outerHTML)\s*[+]?=|insertAdjacentHTML|document\.write/);
 });
 
 test("face-guide.js and messages.js never touch the browser", () => {

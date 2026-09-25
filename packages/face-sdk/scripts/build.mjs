@@ -27,8 +27,6 @@ async function bundle(outfile, min, entry = 'src/index.ts') {
 const built = [await bundle('dist/index.js', false)];
 if (minify) built.push(await bundle('dist/index.min.js', true));
 
-built.push(await bundle('dist/internal.js', false, 'src/internal.ts'));
-
 for (const b of built) {
   console.log(`${b.outfile}  ${(b.size / 1024).toFixed(1)} KiB`);
   if (b.external.length) {
